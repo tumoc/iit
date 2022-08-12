@@ -1,0 +1,906 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Adults" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="ArrivalTime" xml:space="preserve">
+    <value>Arrival Time</value>
+  </data>
+  <data name="ArrivalWithFlight" xml:space="preserve">
+    <value>Arrival With Flight</value>
+  </data>
+  <data name="BookingTour" xml:space="preserve">
+    <value>Booking Tour</value>
+  </data>
+  <data name="BookNow" xml:space="preserve">
+    <value>Book Now</value>
+  </data>
+  <data name="CheckIn" xml:space="preserve">
+    <value>Check In</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+  <data name="child" xml:space="preserve">
+    <value>Child</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Departure" xml:space="preserve">
+    <value>Departure</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="bookingroom" xml:space="preserve">
+    <value>BookNow</value>
+  </data>
+  <data name="Igree" xml:space="preserve">
+    <value>I read and agree with the  &lt;a href="javascript:void(0)" onclick="ShowCondition()"&gt;terms &amp; conditions &lt;/a&gt; of the </value>
+  </data>
+  <data name="MakeAReservation" xml:space="preserve">
+    <value>Make A Reservation</value>
+  </data>
+  <data name="MaxPeople" xml:space="preserve">
+    <value>Number &amp; People</value>
+  </data>
+  <data name="NameRooms" xml:space="preserve">
+    <value>Number Rooms</value>
+  </data>
+  <data name="OrtherRequest" xml:space="preserve">
+    <value>Orther Request</value>
+  </data>
+  <data name="OtherArticles" xml:space="preserve">
+    <value>Other Articles</value>
+  </data>
+  <data name="OtherRooms" xml:space="preserve">
+    <value>Other Rooms</value>
+  </data>
+  <data name="OtherTours" xml:space="preserve">
+    <value>Other Tours</value>
+  </data>
+  <data name="PriceNight" xml:space="preserve">
+    <value>Price Night</value>
+  </data>
+  <data name="ReadMore" xml:space="preserve">
+    <value>Read More</value>
+  </data>
+  <data name="RequiredFields" xml:space="preserve">
+    <value>Required Fields</value>
+  </data>
+  <data name="SearchAvailability" xml:space="preserve">
+    <value>Search Availability</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Smoking" xml:space="preserve">
+    <value>Smoking</value>
+  </data>
+  <data name="Tel" xml:space="preserve">
+    <value>Tel</value>
+  </data>
+  <data name="VIEWRATES" xml:space="preserve">
+    <value>VIEW RATES FOR ALL ROOMS HERE</value>
+  </data>
+  <data name="YourInformation" xml:space="preserve">
+    <value>Your Information</value>
+  </data>
+  <data name="InfoRoom" xml:space="preserve">
+    <value>Info Room</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Mr" xml:space="preserve">
+    <value>Mr</value>
+  </data>
+  <data name="Mrs" xml:space="preserve">
+    <value>Mrs</value>
+  </data>
+  <data name="Ms" xml:space="preserve">
+    <value>Ms</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="SelectCountry" xml:space="preserve">
+    <value>Select Country</value>
+  </data>
+  <data name="TeamsConditions" xml:space="preserve">
+    <value>Teams &amp; Conditions</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="FollowUs" xml:space="preserve">
+    <value>Follow Us</value>
+  </data>
+  <data name="PowerBy" xml:space="preserve">
+    <value>power by</value>
+  </data>
+  <data name="BookTour" xml:space="preserve">
+    <value>Book Tour</value>
+  </data>
+  <data name="OtherServices" xml:space="preserve">
+    <value>Other Services</value>
+  </data>
+  <data name="HotelRoom" xml:space="preserve">
+    <value>Hotel Room</value>
+  </data>
+  <data name="LATESTNEWS" xml:space="preserve">
+    <value>LATEST NEWS</value>
+  </data>
+  <data name="LEARNMORE" xml:space="preserve">
+    <value>LEARN MORE</value>
+  </data>
+  <data name="OURADDRESS" xml:space="preserve">
+    <value>OUR ADDRESS</value>
+  </data>
+  <data name="OurGallery" xml:space="preserve">
+    <value>Our Gallery</value>
+  </data>
+  <data name="QUICKLINKS" xml:space="preserve">
+    <value>QUICK LINKS</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="SubscribeOurNewsletter" xml:space="preserve">
+    <value>Subscribe Our Newsletter</value>
+  </data>
+  <data name="ViewNow" xml:space="preserve">
+    <value>View Now</value>
+  </data>
+  <data name="BookingNow" xml:space="preserve">
+    <value>Booking Now</value>
+  </data>
+  <data name="RelatedArticle" xml:space="preserve">
+    <value>Related Article</value>
+  </data>
+  <data name="RoomArticle" xml:space="preserve">
+    <value>Room Article</value>
+  </data>
+  <data name="Tourrelated" xml:space="preserve">
+    <value>Tour Related</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="StartFrom" xml:space="preserve">
+    <value>Start From :</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>/Day</value>
+  </data>
+  <data name="BestPriceGuaranted" xml:space="preserve">
+    <value>Best Price Guaranted</value>
+  </data>
+  <data name="CheckAvailability" xml:space="preserve">
+    <value>Check Availability</value>
+  </data>
+  <data name="Adult" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="ArrivalDate" xml:space="preserve">
+    <value>Arrival Date</value>
+  </data>
+  <data name="ClientFeedback" xml:space="preserve">
+    <value>ClientFeedback</value>
+  </data>
+  <data name="DepartureDate" xml:space="preserve">
+    <value>DepartureDate</value>
+  </data>
+  <data name="Messeger" xml:space="preserve">
+    <value>Messeger</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="OurEvents" xml:space="preserve">
+    <value>Our Events</value>
+  </data>
+  <data name="OurService" xml:space="preserve">
+    <value>Our Service</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Clickhereformoredetails" xml:space="preserve">
+    <value>Click here for more details</value>
+  </data>
+  <data name="Seeallevent" xml:space="preserve">
+    <value>See all event</value>
+  </data>
+  <data name="Seeallnews" xml:space="preserve">
+    <value>See all news</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Come to us you will receive the best services and incentives</value>
+  </data>
+  <data name="hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="Ser" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="Service1" xml:space="preserve">
+    <value>Two cable</value>
+  </data>
+  <data name="Service10" xml:space="preserve">
+    <value>Make room: two times per day</value>
+  </data>
+  <data name="Service11" xml:space="preserve">
+    <value>VIP check-in as requested</value>
+  </data>
+  <data name="Service12" xml:space="preserve">
+    <value>Daily two complimentary bottled drinking water</value>
+  </data>
+  <data name="Service13" xml:space="preserve">
+    <value>Daily complimentary shoeshine service</value>
+  </data>
+  <data name="Service14" xml:space="preserve">
+    <value>Daily complimentary coffee &amp; tea</value>
+  </data>
+  <data name="Service15" xml:space="preserve">
+    <value>Culture magazine in English</value>
+  </data>
+  <data name="Service16" xml:space="preserve">
+    <value>Laundry/ Pressing services</value>
+  </data>
+  <data name="Service17" xml:space="preserve">
+    <value>Office services</value>
+  </data>
+  <data name="Service18" xml:space="preserve">
+    <value>Room services</value>
+  </data>
+  <data name="Service2" xml:space="preserve">
+    <value>Bed</value>
+  </data>
+  <data name="Service3" xml:space="preserve">
+    <value>Mini bar</value>
+  </data>
+  <data name="Service4" xml:space="preserve">
+    <value>Shower</value>
+  </data>
+  <data name="Service5" xml:space="preserve">
+    <value>Hair dryer</value>
+  </data>
+  <data name="Service6" xml:space="preserve">
+    <value>Automatic locking system</value>
+  </data>
+  <data name="Service7" xml:space="preserve">
+    <value>Hot water</value>
+  </data>
+  <data name="Service8" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="Service9" xml:space="preserve">
+    <value>Free Wifi</value>
+  </data>
+  <data name="Utilities" xml:space="preserve">
+    <value>Utilities</value>
+  </data>
+  <data name="alertErrorCaptcha" xml:space="preserve">
+    <value>wrong captchar code</value>
+  </data>
+  <data name="Captcha" xml:space="preserve">
+    <value>Captcha</value>
+  </data>
+  <data name="Rooms" xml:space="preserve">
+    <value>Rooms</value>
+  </data>
+  <data name="step1" xml:space="preserve">
+    <value>Step 1: Check</value>
+  </data>
+  <data name="step2" xml:space="preserve">
+    <value>Step 3: Customer info</value>
+  </data>
+  <data name="step3" xml:space="preserve">
+    <value>Step 2: Selet a room</value>
+  </data>
+  <data name="ngayden" xml:space="preserve">
+    <value>Arrival Date</value>
+  </data>
+  <data name="ngaydi" xml:space="preserve">
+    <value>Departure date</value>
+  </data>
+  <data name="findthebest" xml:space="preserve">
+    <value>FIND THE BEST RATE</value>
+  </data>
+  <data name="Book" xml:space="preserve">
+    <value>BOOK ROOM</value>
+  </data>
+  <data name="FEATURED" xml:space="preserve">
+    <value>FEATURED TOURS </value>
+  </data>
+  <data name="teltephonebooking" xml:space="preserve">
+    <value>Telephone bookings </value>
+  </data>
+  <data name="bestrateguarantee" xml:space="preserve">
+    <value>Best Rate Guarantee </value>
+  </data>
+  <data name="legalpolicy" xml:space="preserve">
+    <value>Legal Policy </value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About Us </value>
+  </data>
+  <data name="overview" xml:space="preserve">
+    <value>Overview </value>
+  </data>
+  <data name="location" xml:space="preserve">
+    <value>Location &amp; Map</value>
+  </data>
+  <data name="hotelfacilites" xml:space="preserve">
+    <value>Hotel Facilities </value>
+  </data>
+  <data name="photogallery" xml:space="preserve">
+    <value>Photo Gallery</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact Us </value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message </value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject </value>
+  </data>
+  <data name="bookcontact" xml:space="preserve">
+    <value>ROOM &amp; RATE </value>
+  </data>
+  <data name="Sendemail" xml:space="preserve">
+    <value>SEND EMAIL </value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>Night</value>
+  </data>
+  <data name="Viewdetails" xml:space="preserve">
+    <value>VIEW DETAILS</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="specialpackages" xml:space="preserve">
+    <value>SPECIAL PACKAGES</value>
+  </data>
+  <data name="ourservices" xml:space="preserve">
+    <value>OUR SERVICES</value>
+  </data>
+  <data name="roomsuites" xml:space="preserve">
+    <value>ROOM &amp; SUITES </value>
+  </data>
+  <data name="Phonggia" xml:space="preserve">
+    <value>ROOM &amp; RATE</value>
+  </data>
+  <data name="BirthDay" xml:space="preserve">
+    <value>BirthDay</value>
+  </data>
+  <data name="ArrivalFlight" xml:space="preserve">
+    <value>Arrival Flight</value>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>Request</value>
+  </data>
+  <data name="Tour" xml:space="preserve">
+    <value>Tour</value>
+  </data>
+  <data name="A MAGIC PLACE" xml:space="preserve">
+    <value>A MAGIC PLACE</value>
+  </data>
+  <data name="About Hotel Xenia" xml:space="preserve">
+    <value>About Hotel Xenia</value>
+  </data>
+  <data name="air conditional" xml:space="preserve">
+    <value>air conditional</value>
+  </data>
+  <data name="AMAZING EXPERIENCES" xml:space="preserve">
+    <value>AMAZING EXPERIENCES</value>
+  </data>
+  <data name="Arrival Flight" xml:space="preserve">
+    <value>Arrival Flight</value>
+  </data>
+  <data name="Articles &amp; News about our Resort and our activities!" xml:space="preserve">
+    <value>Articles &amp; News about our Resort and our activities!</value>
+  </data>
+  <data name="bathtub" xml:space="preserve">
+    <value>bathtub</value>
+  </data>
+  <data name="book a trip" xml:space="preserve">
+    <value>book a trip</value>
+  </data>
+  <data name="Book now" xml:space="preserve">
+    <value>Book now</value>
+  </data>
+  <data name="CAREFULLY CRAFTED SETS OF RELAXATION" xml:space="preserve">
+    <value>CAREFULLY CRAFTED SETS OF RELAXATION</value>
+  </data>
+  <data name="categories" xml:space="preserve">
+    <value>categories</value>
+  </data>
+  <data name="coffe maker" xml:space="preserve">
+    <value>coffe maker</value>
+  </data>
+  <data name="ENJOY A LUXURY EXPERIENCE" xml:space="preserve">
+    <value>ENJOY A LUXURY EXPERIENCE</value>
+  </data>
+  <data name="EXOTIC FOOD TASTES" xml:space="preserve">
+    <value>EXOTIC FOOD TASTES</value>
+  </data>
+  <data name="EXPLORE THE NATURAL BEAUTY" xml:space="preserve">
+    <value>EXPLORE THE NATURAL BEAUTY</value>
+  </data>
+  <data name="FAMILY SUITE" xml:space="preserve">
+    <value>FAMILY SUITE</value>
+  </data>
+  <data name="FINEST FOOD HOUSE" xml:space="preserve">
+    <value>FINEST FOOD HOUSE</value>
+  </data>
+  <data name="FREE SPORTS FOR ALL" xml:space="preserve">
+    <value>FREE SPORTS FOR ALL</value>
+  </data>
+  <data name="FROM SPORTS TO SIGHTSEEING, WE HAVE IT ALL" xml:space="preserve">
+    <value>FROM SPORTS TO SIGHTSEEING, WE HAVE IT ALL</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="get 15% off today" xml:space="preserve">
+    <value>get 15% off today</value>
+  </data>
+  <data name="get derections" xml:space="preserve">
+    <value>get derections</value>
+  </data>
+  <data name="Get in touch for a booking or a greeting" xml:space="preserve">
+    <value>Get in touch for a booking or a greeting</value>
+  </data>
+  <data name="go" xml:space="preserve">
+    <value>go</value>
+  </data>
+  <data name="gourmet" xml:space="preserve">
+    <value>gourmet</value>
+  </data>
+  <data name="gym" xml:space="preserve">
+    <value>gym</value>
+  </data>
+  <data name="hair dryer" xml:space="preserve">
+    <value>hair dryer</value>
+  </data>
+  <data name="HAVE A ROOM? YOU HAVE A SEAT!" xml:space="preserve">
+    <value>HAVE A ROOM? YOU HAVE A SEAT!</value>
+  </data>
+  <data name="INDOOR" xml:space="preserve">
+    <value>INDOOR</value>
+  </data>
+  <data name="LATEST POSTS" xml:space="preserve">
+    <value>LATEST POSTS</value>
+  </data>
+  <data name="LOVELY PEOPLE" xml:space="preserve">
+    <value>LOVELY PEOPLE</value>
+  </data>
+  <data name="more room" xml:space="preserve">
+    <value>more room</value>
+  </data>
+  <data name="more spa" xml:space="preserve">
+    <value>more spa</value>
+  </data>
+  <data name="MOUNTAIN TRIP" xml:space="preserve">
+    <value>MOUNTAIN TRIP</value>
+  </data>
+  <data name="ONE OF THE BEST PLACES TO RELAX &amp; ENJOY" xml:space="preserve">
+    <value>ONE OF THE BEST PLACES TO RELAX &amp; ENJOY</value>
+  </data>
+  <data name="ONE OF THE BEST PLACES TO TASTE.. ANYTHING" xml:space="preserve">
+    <value>ONE OF THE BEST PLACES TO TASTE.. ANYTHING</value>
+  </data>
+  <data name="ORIGINAL AND TRANDITIONAL ITALIAN FOOD" xml:space="preserve">
+    <value>ORIGINAL AND TRANDITIONAL ITALIAN FOOD</value>
+  </data>
+  <data name="our location" xml:space="preserve">
+    <value>our location</value>
+  </data>
+  <data name="OUTDOOR" xml:space="preserve">
+    <value>OUTDOOR</value>
+  </data>
+  <data name="Published on" xml:space="preserve">
+    <value>Published on</value>
+  </data>
+  <data name="read more" xml:space="preserve">
+    <value>read more</value>
+  </data>
+  <data name="RECENT POSTS" xml:space="preserve">
+    <value>RECENT POSTS</value>
+  </data>
+  <data name="RECOMMENDED ON" xml:space="preserve">
+    <value>RECOMMENDED ON</value>
+  </data>
+  <data name="RELAX &amp; REJUVENATE" xml:space="preserve">
+    <value>RELAX &amp; REJUVENATE</value>
+  </data>
+  <data name="restaurant" xml:space="preserve">
+    <value>restaurant</value>
+  </data>
+  <data name="room detail" xml:space="preserve">
+    <value>room detail</value>
+  </data>
+  <data name="room service" xml:space="preserve">
+    <value>room service</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="session" xml:space="preserve">
+    <value>session</value>
+  </data>
+  <data name="SPA CENTER PACKAGES" xml:space="preserve">
+    <value>SPA CENTER PACKAGES</value>
+  </data>
+  <data name="spa salon" xml:space="preserve">
+    <value>spa salon</value>
+  </data>
+  <data name="SPECIAL OFFER" xml:space="preserve">
+    <value>SPECIAL OFFER</value>
+  </data>
+  <data name="SPORTS &amp; ACTIVITIES" xml:space="preserve">
+    <value>SPORTS &amp; ACTIVITIES</value>
+  </data>
+  <data name="TESTIMONIALS" xml:space="preserve">
+    <value>TESTIMONIALS</value>
+  </data>
+  <data name="THROUGHOUT DECEMBER" xml:space="preserve">
+    <value>THROUGHOUT DECEMBER</value>
+  </data>
+  <data name="TONS OF ACTIVITIES" xml:space="preserve">
+    <value>TONS OF ACTIVITIES</value>
+  </data>
+  <data name="TREATMENTS" xml:space="preserve">
+    <value>TREATMENTS</value>
+  </data>
+  <data name="wellcome" xml:space="preserve">
+    <value>wellcome</value>
+  </data>
+  <data name="Widescreen TV" xml:space="preserve">
+    <value>Widescreen TV</value>
+  </data>
+  <data name="XENIA LOCATION" xml:space="preserve">
+    <value>XENIA LOCATION</value>
+  </data>
+  <data name="XENIA RESTAURANT" xml:space="preserve">
+    <value>XENIA RESTAURANT</value>
+  </data>
+  <data name="XENIA WORLDWIDE" xml:space="preserve">
+    <value>XENIA WORLDWIDE</value>
+  </data>
+  <data name="XENIA'S ACTIVITIES" xml:space="preserve">
+    <value>XENIA'S ACTIVITIES</value>
+  </data>
+  <data name="XENIA'S BLOG" xml:space="preserve">
+    <value>XENIA'S BLOG</value>
+  </data>
+  <data name="XENIA'S BLOG details" xml:space="preserve">
+    <value>XENIA'S BLOG details</value>
+  </data>
+  <data name="XENIA'S RESTAURANT" xml:space="preserve">
+    <value>XENIA'S RESTAURANT</value>
+  </data>
+  <data name="XENIA'S SPA" xml:space="preserve">
+    <value>XENIA'S SPA</value>
+  </data>
+  <data name="PARKING" xml:space="preserve">
+    <value>PARKING</value>
+  </data>
+  <data name="telephone" xml:space="preserve">
+    <value>telephone</value>
+  </data>
+  <data name="Made in" xml:space="preserve">
+    <value>Made in</value>
+  </data>
+  <data name="Book rooms" xml:space="preserve">
+    <value>Book rooms</value>
+  </data>
+  <data name="Choose from a wide range of" xml:space="preserve">
+    <value>Choose from a wide range of</value>
+  </data>
+  <data name="Explore new experience with Hotale" xml:space="preserve">
+    <value>Explore new experience with Hotale</value>
+  </data>
+  <data name="follow us on instagram" xml:space="preserve">
+    <value>follow us on instagram</value>
+  </data>
+  <data name="grid style" xml:space="preserve">
+    <value>grid style</value>
+  </data>
+  <data name="guests" xml:space="preserve">
+    <value>guests</value>
+  </data>
+  <data name="hotel address" xml:space="preserve">
+    <value>hotel address</value>
+  </data>
+  <data name="hotel facilities" xml:space="preserve">
+    <value>hotel facilities</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="luxury rooms" xml:space="preserve">
+    <value>luxury rooms</value>
+  </data>
+  <data name="more about us" xml:space="preserve">
+    <value>more about us</value>
+  </data>
+  <data name="news &amp; offer" xml:space="preserve">
+    <value>news &amp; offer</value>
+  </data>
+  <data name="newsletter" xml:space="preserve">
+    <value>newsletter</value>
+  </data>
+  <data name="owl rooms" xml:space="preserve">
+    <value>owl rooms</value>
+  </data>
+  <data name="sale off" xml:space="preserve">
+    <value>sale off</value>
+  </data>
+  <data name="stars" xml:space="preserve">
+    <value>stars</value>
+  </data>
+  <data name="Subscribe the newsletter to get updated to news and promotions" xml:space="preserve">
+    <value>Subscribe the newsletter to get updated to news and promotions</value>
+  </data>
+  <data name="testimonial" xml:space="preserve">
+    <value>testimonial</value>
+  </data>
+  <data name="view all rooms" xml:space="preserve">
+    <value>view all rooms</value>
+  </data>
+  <data name="Visit Our Famous Facilities" xml:space="preserve">
+    <value>Visit Our Famous Facilities</value>
+  </data>
+  <data name="with space" xml:space="preserve">
+    <value>with space</value>
+  </data>
+  <data name="your email address" xml:space="preserve">
+    <value>your email address</value>
+  </data>
+  <data name="A wonderful serenity has taken possession of my entire soul, like these." xml:space="preserve">
+    <value>A wonderful serenity has taken possession of my entire soul, like these.</value>
+  </data>
+  <data name="and we will get back to you." xml:space="preserve">
+    <value>and we will get back to you.</value>
+  </data>
+  <data name="Bed" xml:space="preserve">
+    <value>Bed</value>
+  </data>
+  <data name="Check Availability" xml:space="preserve">
+    <value>Check Availability</value>
+  </data>
+  <data name="comment" xml:space="preserve">
+    <value>comment</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="enquiry" xml:space="preserve">
+    <value>enquiry</value>
+  </data>
+  <data name="Facilities" xml:space="preserve">
+    <value>Facilities</value>
+  </data>
+  <data name="Get Intouch" xml:space="preserve">
+    <value>Get Intouch</value>
+  </data>
+  <data name="hotel amenities" xml:space="preserve">
+    <value>hotel amenities</value>
+  </data>
+  <data name="hotel rules" xml:space="preserve">
+    <value>hotel rules</value>
+  </data>
+  <data name="I agree with Terms of Service and Privacy Statement" xml:space="preserve">
+    <value>I agree with Terms of Service and Privacy Statement</value>
+  </data>
+  <data name="Leave a Reply" xml:space="preserve">
+    <value>Leave a Reply</value>
+  </data>
+  <data name="Leave us your info" xml:space="preserve">
+    <value>Leave us your info</value>
+  </data>
+  <data name="max guest" xml:space="preserve">
+    <value>max guest</value>
+  </data>
+  <data name="more rooms" xml:space="preserve">
+    <value>more rooms</value>
+  </data>
+  <data name="post category" xml:space="preserve">
+    <value>post category</value>
+  </data>
+  <data name="post comment" xml:space="preserve">
+    <value>post comment</value>
+  </data>
+  <data name="Recent Articles" xml:space="preserve">
+    <value>Recent Articles</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="room amenities" xml:space="preserve">
+    <value>room amenities</value>
+  </data>
+  <data name="room details" xml:space="preserve">
+    <value>room details</value>
+  </data>
+  <data name="room space" xml:space="preserve">
+    <value>room space</value>
+  </data>
+  <data name="room view" xml:space="preserve">
+    <value>room view</value>
+  </data>
+  <data name="Save my name, email, and website in this browser for the next time I comment" xml:space="preserve">
+    <value>Save my name, email, and website in this browser for the next time I comment</value>
+  </data>
+  <data name="search rooms" xml:space="preserve">
+    <value>search rooms</value>
+  </data>
+  <data name="share" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="Sort By" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="sqm" xml:space="preserve">
+    <value>sqm</value>
+  </data>
+  <data name="submid enquiry" xml:space="preserve">
+    <value>submid enquiry</value>
+  </data>
+  <data name="view on google map" xml:space="preserve">
+    <value>view on google map</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="Written By" xml:space="preserve">
+    <value>Written By</value>
+  </data>
+  <data name="your enquiry" xml:space="preserve">
+    <value>your enquiry</value>
+  </data>
+  <data name="Orther Service" xml:space="preserve">
+    <value>Orther Service</value>
+  </data>
+</root>

@@ -1,0 +1,58 @@
+﻿@model TeamplateHotel.Areas.Administrator.EntityModel.EQuestion
+@using TeamplateHotel.Areas.Administrator.Controllers
+@using ProjectLibrary.Database
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+    List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<div class="span12">
+    <div class="widget ">
+        <div class="widget-header">
+            <i class=" icon-plus-sign"></i>
+            <h3>@ViewBag.Title</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+            @Html.ValidationSummary(true)
+            @using (Html.BeginForm("Create", "Question", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="control-group">
+                    <label class="control-label" for="Title">Câu hỏi<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Title, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Title)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Content">Câu trả lời<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.Content)</span>
+                        </p>
+                        @Html.TextAreaFor(c => c.Content, new { @class = "full-ckeditor span4" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Trạng thái hiển thị</label>
+                    <div class="controls">
+                        <label class="radio-inline"> <input type="radio" name="Status" value="True" checked="checked"> có</label>
+                        <label class="radio-inline"> <input type="radio" name="Status" value="false"> Không</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Hiển thị trang chủ</label>
+                    <div class="controls">
+                        <label class="radio-inline"> <input type="radio" name="Home" value="True" checked="checked"> có</label>
+                        <label class="radio-inline"> <input type="radio" name="Home" value="false"> Không</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="submit" value="Submit" id="submit" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Question")" class="btn">Cancel</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

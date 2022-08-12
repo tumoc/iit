@@ -1,0 +1,102 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@model IEnumerable<Room>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Article article = ViewBag.ArticleByRoomRate;
+    var lan = Request.Cookies["LanguageID"].Value;
+    int i = 1;
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+}
+<style>
+    .coverimg {
+        width: 403px;
+        height: 307px;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<main class="main">
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="banner-title">
+                        @menu.MetaTitle
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rooms pt-100">
+        <div class="bg"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2 class="subtitle add-font">
+                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "owl rooms")
+                </h2>
+                <div class="sectitle">
+                    @Html.Raw(menu.Description)
+                </div>
+            </div>
+            <div class="row rooms-grid">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4 rooms-item">
+                        <div class="inner">
+                            <figure class="image">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                    <div class="coverimg">
+                                        <img src="@item.Image" alt="">
+                                    </div>
+                                </a>
+                                <div class="price">
+                                    <span class="price-head">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
+                                    <span class="price-value">$@item.Price</span>
+                                    <span class="price-tail">/ @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
+                                </div>
+                                <div class="room-ribbon">
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "sale off") @item.PriceNet%
+                                </div>
+                            </figure>
+                            <div class="content">
+                                <h3 class="room-title">
+                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                        @item.Title
+                                    </a>
+                                </h3>
+                                <div class="infor-wrap">
+                                    <div class="infor-item">
+                                        <i class="fa-solid fa-bed"></i>
+                                        <span>
+                                            @item.Numofbed @item.Typebed
+                                        </span>
+                                    </div>
+                                    <div class="infor-item">
+                                        <i class="fa-solid fa-users"></i>
+                                        <span>
+                                            @item.MaxPeople @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "guests")
+                                        </span>
+                                    </div>
+                                </div>
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="book-now">
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "read more") <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                </div>
+            <!-- <div class="view-all-rooms">
+                <a href="./rooms.html">view all rooms <i class="fa-solid fa-chevron-right"></i></a>
+            </div> -->
+        </div>
+    </section>
+</main>
+

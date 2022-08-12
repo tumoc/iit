@@ -1,0 +1,300 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@model TeamplateHotel.Models.DetailArticle
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Article> articles = CommentController.RecentArticles(menu.ID);
+    List<ShowObject> listCategory = CommentController.listCategory(Request.Cookies["LanguageID"].Value);
+    string i = "";
+    Hotel detailHotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+}
+<style>
+    .line-2 {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        / number of lines to show / line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+</style>
+<main class="main">
+
+    <section class="banner">
+        <div class="banner-main">
+
+            <div class="banner-hide">
+                <div class="banner-img full-height">
+                    <img src="~/Assets/images/home-spa.jpg" alt="">
+                </div>
+                <div class="banner-content">
+                    <div class="container">
+                        <h1 class="title">
+                            @Model.Article.Title
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-details pd-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="blog-content">
+                        <div class="thumd">
+                            <img src="@Model.Article.Image" alt="">
+                        </div>
+                        <h1 class="post-title">
+                            @Model.Article.Title
+                        </h1>
+                        <p class="lead">
+                            @Html.Raw(Model.Article.Description)!
+                        </p>
+                        <div class="meta">
+                            <span class="post-date">
+                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Published on")
+                                @if (Request.Cookies["LanguageID"].Value == "vi")
+                                {
+                                    <span>
+                                        @Model.Article.Datetime.GetValueOrDefault().ToString("d")
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                    @{
+                                        switch (Model.Article.Datetime.Value.Month)
+                                        {
+                                            case 1:
+                                                i = "January";
+                                                break;
+                                            case 2:
+                                                i = "February";
+                                                break;
+                                            case 3:
+                                                i = "March";
+                                                break;
+                                            case 4:
+                                                i = "April";
+                                                break;
+                                            case 5:
+                                                i = "May";
+                                                break;
+                                            case 6:
+                                                i = "June";
+                                                break;
+                                            case 7:
+                                                i = "July";
+                                                break;
+                                            case 8:
+                                                i = "August";
+                                                break;
+                                            case 9:
+                                                i = "September";
+                                                break;
+                                            case 10:
+                                                i = "October";
+                                                break;
+                                            case 11:
+                                                i = "November";
+                                                break;
+                                            case 12:
+                                                i = "December";
+                                                break;
+                                        }
+                                    }
+                                    @i @Model.Article.Datetime.GetValueOrDefault().Day.ToString(),
+                                    @Model.Article.Datetime.GetValueOrDefault().Year.ToString()
+                                    </span>
+                                }
+                                
+                            </span>
+                            <span class="category">
+                                On
+                                <span>
+                                    <a href="">Accommodation</a>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="blog-single-content">
+                            @Html.Raw(Model.Article.Content)
+                        </div>
+                    </div>
+                    @*<div class="next-prev pd-100">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 left">
+                                    <a href="">
+                                        <i class="fa-solid fa-arrow-left-long"></i>
+                                        <span>previus </span>
+                                    </a>
+                                </div>
+                                <div class="col-md-6 right">
+                                    <a href="">
+                                        <span>next </span>
+                                        <i class="fa-solid fa-arrow-right-long"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+                <div class="col-md-4">
+                    <div class="sidebar">
+                        <aside class="widget widget-about">
+                            <h4> @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "About Hotel Xenia") </h4>
+                            @if (Request.Cookies["LanguageID"].Value == "en")
+                            {
+                                <p>
+                                    Either you look for a luxurious experience or a remarkable on the go experience, Xenia Resort is the place to visit and spend the time at. We offer quality services.
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    Dù bạn đang tìm kiếm một trải nghiệm sang trọng hay một trải nghiệm thú vị khi di chuyển, thì Xenia Resort là nơi bạn nên ghé thăm và dành thời gian. Chúng tôi cung cấp các dịch vụ chất lượng.
+                                </p>
+                            }
+                            
+                            <ul class="infor">
+                                <li>
+                                    <i class="fa-solid fa-phone"></i>
+                                    <span>
+                                        <a href="tel:+@detailHotel.Tel">@detailHotel.Tel</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <span>
+                                        <a href="mailto:@detailHotel.Email">
+                                            @detailHotel.Email
+                                        </a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-location-arrow"></i>
+                                    <span>
+                                        <a href="">@detailHotel.Address</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </aside>
+                        <aside class="widget widget-post">
+                            <h4>
+                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "RECENT POSTS")
+                            </h4>
+                            <div class="blog-widget">
+                                @foreach (var item in articles.Take(3))
+                                {
+                                    <div class="blog-widget__item">
+
+                                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="thumd">
+                                            <img src="@item.Image" alt="">
+                                        </a>
+
+                                        <div class="desc">
+                                            <h5>
+                                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                    @item.Title
+                                                </a>
+                                            </h5>
+                                            <small>
+                                                @{
+                                                    switch (Model.Article.Datetime.Value.Month)
+                                                    {
+                                                        case 1:
+                                                            i = "Jan";
+                                                            break;
+                                                        case 2:
+                                                            i = "Feb";
+                                                            break;
+                                                        case 3:
+                                                            i = "Mar";
+                                                            break;
+                                                        case 4:
+                                                            i = "Apr";
+                                                            break;
+                                                        case 5:
+                                                            i = "May";
+                                                            break;
+                                                        case 6:
+                                                            i = "Jun";
+                                                            break;
+                                                        case 7:
+                                                            i = "Jul";
+                                                            break;
+                                                        case 8:
+                                                            i = "Aug";
+                                                            break;
+                                                        case 9:
+                                                            i = "Sep";
+                                                            break;
+                                                        case 10:
+                                                            i = "Oct";
+                                                            break;
+                                                        case 11:
+                                                            i = "Nov";
+                                                            break;
+                                                        case 12:
+                                                            i = "Dec";
+                                                            break;
+                                                    }
+                                                }
+                                                @i @Model.Article.Datetime.GetValueOrDefault().Day.ToString()
+                                                , @Model.Article.Datetime.GetValueOrDefault().Year.ToString()
+                                            </small>
+                                            <small class="line-2">
+                                                @Html.Raw(item.Description)
+                                            </small>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </aside>
+                        @*<aside class="widget widget-category">
+                            <h4>
+                                categories
+                            </h4>
+                            <ul class="cate-list">
+                                <li class="cate-item">
+                                    <a href="">POOL & SWIM</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="">SERVICES</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="">spa</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="">wokkout</a>
+                                </li>
+                            </ul>
+                        </aside>*@
+                        @*<aside class="widget widget-tag">
+                            <h4>
+                                tags
+                            </h4>
+                            <div class="tag-cloud">
+                                <a href="" class="tag-link">booking</a>
+                                <a href="" class="tag-link">hotel</a>
+                                <a href="" class="tag-link">luxury</a>
+                                <a href="" class="tag-link">room</a>
+                                <a href="" class="tag-link">service</a>
+                                <a href="" class="tag-link">tv</a>
+                                <a href="" class="tag-link">wifi</a>
+                            </div>
+                        </aside>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

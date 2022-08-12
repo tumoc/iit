@@ -1,0 +1,86 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models;
+@model IEnumerable<Room>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Article article = ViewBag.ArticleByRoomRate;
+    var lan = Request.Cookies["LanguageID"].Value;
+    int i = 1;
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<ShowObject> amenities= new List<ShowObject>();
+}
+<main class="main">
+
+    <section class="banner">
+        <div class="banner-main">
+
+            <div class="banner-hide">
+                <div class="banner-img">
+                    @foreach (var item in sliders.OrderBy(a => a.Index))
+                    {
+                        <img src="@item.Image" alt="">
+                    }
+                </div>
+                <div class="banner-content">
+                    <div class="container">
+                        <h1 class="title">
+                            @menu.Title
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="rooms">
+        <div class="rooms-grid pd-100">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-6">
+                            <div class="inner">
+                                <div class="image">
+                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                        <img src="@item.Image" alt="">
+                                    </a>
+                                </div>
+                                <div class="infor">
+                                    <h3>
+                                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                            @item.Title
+                                        </a>
+                                    </h3>
+                                    <ul class="room-amenities">
+                                        @{ 
+                                            amenities = CommentController.GetRoomAmetities(item.ID);
+
+                                        }
+                                        @foreach(var items in amenities){ 
+                                            <li>
+                                                <img src="@items.Image" alt="" style="height:40px;width:40px; margin:auto">
+                                            </li>
+                                        }
+                                    </ul>
+                                    <p>@Html.Raw(item.Description)</p>
+                                    <p class="booking-price">
+                                        <span class="prica-form">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
+                                            <span class="prive-value">$@item.Price/@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
+                                    </p>
+                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn btn-link">
+                                        @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "read more")
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>
+

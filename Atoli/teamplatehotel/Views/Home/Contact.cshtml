@@ -1,0 +1,134 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
+}
+<link href="~/assets/css/contact.css" rel="stylesheet" />
+@Html.Partial("header")
+@Html.Partial("Slider/Banner")
+<!--main contact-->
+<div class="contact">
+    <div class="main__contact__form">
+        <div class="contact__left">
+            <h2>Let's Start to Give Us a Message and Contact With Us</h2>
+            <div class="contact__left__img">
+                <img src="./assets/img/contact-img1.jpg" alt="">
+            </div>
+        </div>
+        <div class="contact__right">
+            <form action="Contact/SubmitContact" method="post" id="form" class="form-contact">
+                <div>
+                    <input type="text" name="Gender" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mr")/@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mrs")*">
+                </div>
+                <div>
+                    <input type="text" name="FullName" placeholder="FullName*">
+                </div>
+                <div>
+                    <input type="text" name="Tel" placeholder="Phone*">
+                </div>
+                <div>
+                    <input type="text" name="Country" placeholder="Your Country*">
+                </div>
+                <div style="width:100%">
+                    <input type="email" name="Email" id="" placeholder="Email*">
+                </div>
+                <div class="t__area">
+                    <textarea name="Request" id="" cols="30" rows="10" placeholder="Your message"></textarea>
+                </div>
+                <div class="accept__contact">
+                    <input type="checkbox" name="check" id="">
+                    <span>Accept <a href="">Terms & Conditions</a> And <a href="">Privacy Policy.</a></span>
+                </div>
+                <div class="btn__contact">
+                    <button id="submit-form" type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="contact__info">
+        <div class="contact__info__left">
+            <h2>Contacts Info</h2>
+            <p>We are one of the best agency and we can easily make a contract us anytime on the below details.</p>
+            <div class="contact__location">
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-house"></i>
+                        <div class="location__des">
+                            <span>@hotel.Address</span>
+                        </div>
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <div class="location__des">
+                            <a href="">@hotel.Tel</a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <div class="location__des">
+                            <span>@hotel.Email</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact__info__right">
+            <img src="@menu.Image" alt="">
+        </div>
+    </div>
+</div>
+<!--end main contact-->
+<!--map-->
+<div class="contact__map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.7965136297416!2d105.77232411440762!3d21.040826492743385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454c90a66a4fd%3A0x1c9a2fe43fae27dd!2zMTQ3IFAuIE1haSBE4buLY2gsIE1haSBE4buLY2gsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1657876486567!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+<!--end map-->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#form').validate({ // initialize the plugin
+                rules: {
+                    'Gender': {
+                        required: true
+                    },
+                    'FullName': {
+                        required: true,
+                        minlength: 5
+                    },
+                    'Tel': {
+                        required: true,
+                        minlength: 10,
+                        maxlength: 10
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'Country': {
+                        required: true
+                    },
+                    'check': {
+                        required: true
+                    }
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+}
+

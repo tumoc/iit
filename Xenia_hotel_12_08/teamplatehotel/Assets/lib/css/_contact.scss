@@ -1,0 +1,125 @@
+section.contact-infor {
+    .map {
+        iframe {
+            width: 100%;
+            height: 400px;
+        }
+    }
+    .infor-location {
+        .content-element {
+            text-align: center;
+            max-width: 780px;
+            margin: auto;
+        }
+        .inner {
+            margin: 24px 0;
+            text-align: center;
+            .image {
+                display: block;
+                margin-bottom: 24px;
+            }
+            .content {
+                h4 {
+                    margin-top: 0;
+                    margin-bottom: 24px;
+                }
+                p {
+                    font-size: 16px;
+                    b {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
+
+section.contact-form {
+    background: white;
+    .contact-form__main {
+        max-width: 780px;
+        margin: auto;
+        .form-group {
+            .form-control {
+                box-shadow: none;
+                background-color: #fdfdfd;
+                border: 1px solid rgba(17, 17, 24, 0.2) !important;
+                border-radius: 0px;
+                color: #111118;
+                font-size: 16px;
+                font-weight: normal;
+                height: auto;
+                margin-bottom: 24px;
+                line-height: 1.5;
+                padding: 16px 24px;
+                transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
+                width: 100%;
+                &::placeholder {
+                    text-transform: uppercase;
+                }
+            }
+        }
+        .form-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+section.form-subcribe {
+    background: url('../../images/newsletter-banner-1.jpg') no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    &::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .content {
+        padding: 100px 0;
+        text-align: center;
+        color: white;
+        position: relative;
+        .form-subcribe__main {
+            display: flex;
+            justify-content: center;
+        }
+        .form-group {
+            max-width: 380px;
+            min-width: 320px;
+            position: relative;
+            margin-bottom: 0;
+            .form-control {
+                box-shadow: none;
+                background-color: #fdfdfd;
+                border: 1px solid rgba(17, 17, 24, 0.2) !important;
+                border-radius: 0px;
+                color: #111118;
+                font-size: 16px;
+                font-weight: normal;
+                height: auto;
+                line-height: 1.5;
+                width: 100%;
+                padding: 16px 24px;
+                transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
+                padding-right: 80px;
+                &::placeholder {
+                    text-transform: uppercase;
+                }
+            }
+            span {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                padding: 18px;
+            }
+        }
+    }
+}

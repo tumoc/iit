@@ -1,0 +1,120 @@
+﻿@model TeamplateHotel.Areas.Administrator.EntityModel.EUsefullink
+@using TeamplateHotel.Areas.Administrator.Controllers
+@using ProjectLibrary.Database
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+    List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<div class="span12">
+    <div class="widget ">
+        <div class="widget-header">
+            <i class=" icon-plus-sign"></i>
+            <h3>@ViewBag.Title</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+            @Html.ValidationSummary(true)
+            @using (Html.BeginForm("Create", "Usefullink", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="control-group">
+                    <label class="control-label" for="Title">Tiêu đề bài viết<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Name, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Name)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(c => c.Alias, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Alias, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Alias)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Icon</label>
+                    <div class="controls">
+                        <input type="radio" id="html" name="fav_language" class="radio-inline" value="true" onchange="show()">
+                        <label for="html">Có</label>
+                        <input type="radio" id="html" name="fav_language" class="radio-inline" value="true" onchange="hide()" checked>
+                        <label for="html">Không</label>
+                    </div>
+                </div>
+                <div class="control-group" id="listIcon" style="display:none">
+                    <div class="control-group" id="listHotel">
+                        <label class="control-label" for="Alias">Chuyên mục<span class="asterisk">*</span></label>
+                        <div class="controls">
+                            @Html.DropDownListFor(p => p.Alias, new SelectList(ViewBag.ListMenu, "Value", "Text"), new { @class = "span3" })
+                            @Html.ValidationMessageFor(p => p.Alias)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Title">Link<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Link, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Link)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Title">Trạng thái hiển thị</label>
+                    <div class="controls">
+                        <label class="radio-inline"> <input type="radio" name="Status" value="True" checked="checked"> có</label>
+                        <label class="radio-inline"> <input type="radio" name="Status" value="false"> Không</label>
+                    </div>
+                </div>
+
+                <div class="control-group" style="margin-top: 40px">
+                    @Html.LabelFor(c => c.Description, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextAreaFor(c => c.Description, new { @class = "basic-ckeditor" })
+                    </div>
+                </div>
+
+
+                <div class="form-actions">
+                    <input type="submit" value="Submit" id="submit" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Usefullink")" class="btn">Cancel</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    function show() {
+        document.getElementById('listIcon').style.display = "block";
+    }
+    function hide() {
+        document.getElementById('listIcon').style.display = "none";
+    }
+</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bindUl();
+            AutoAlias("Title", "Alias");
+            CreateCkEditor();
+        });
+        //tien ich
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                var data = '';
+                if ($('#Amenities').val() != null) {
+                    var selected = $('#Amenities').val() + "";
+                    const s = selected.split(",");
+                    for (var i = 0; i < s.length; i++) {
+                        var Id = '<input id = "EAmenityItems_' + i + '__Id" name = "EAmenityItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+                        data = '<li>' + Id + '</li>';
+                        $('.allAmenity').append(data);
+                    }
+                }
+            })
+        });
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>    
+

@@ -1,0 +1,420 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@model IEnumerable<ProjectLibrary.Database.Article>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    string i = "";
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<Article> articles = CommentController.GetArticles(menu.ID);
+    List<Article> articles2 = CommentController.GetAllArticles(Request.Cookies["LanguageID"].Value);
+    List<Article> RecentArticles = CommentController.RecentArticles(menu.ID);
+    int temp;
+    Menu menu2 = new Menu();
+}
+<style>
+    .coverimg {
+        width: 837px;
+        height: 379px;
+    }
+    .coverimage {
+        width: 60px;
+        height: 60px;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<main class="main">
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="title">
+                        @menu.MetaTitle
+                    </h1>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="blogs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="list-page">
+                        @if (menu.Alias == "blogs" || menu.Alias == "bai-viet")
+                        {
+                            foreach (var item in articles2)
+                            {
+                                <div class="list-page__item">
+                                    <div class="thumd">
+                                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                            <div class="coverimg">
+                                                <img src="@item.Image" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="desc-head">
+                                            <h3 class="blog-title">
+                                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                    @item.Title
+                                                </a>
+                                            </h3>
+                                            <div class="infor-wrap">
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-clock"></i>
+                                                    @if (Request.Cookies["LanguageID"].Value == "vi")
+                                                    {
+                                                        <span class="blog-date">
+                                                            @item.Datetime.GetValueOrDefault().ToString("d")
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>
+                                                            @switch (item.Datetime.GetValueOrDefault().Month)
+                                                            {
+                                                                case 1:
+                                                                    i = "January";
+                                                                    break;
+                                                                case 2:
+                                                                    i = "February";
+                                                                    break;
+                                                                case 3:
+                                                                    i = "March";
+                                                                    break;
+                                                                case 4:
+                                                                    i = "April";
+                                                                    break;
+                                                                case 5:
+                                                                    i = "May";
+                                                                    break;
+                                                                case 6:
+                                                                    i = "June";
+                                                                    break;
+                                                                case 7:
+                                                                    i = "July";
+                                                                    break;
+                                                                case 8:
+                                                                    i = "August";
+                                                                    break;
+                                                                case 9:
+                                                                    i = "September";
+                                                                    break;
+                                                                case 10:
+                                                                    i = "October";
+                                                                    break;
+                                                                case 11:
+                                                                    i = "November";
+                                                                    break;
+                                                                case 12:
+                                                                    i = "December";
+                                                                    break;
+                                                            }
+                                                            @i @item.Datetime.GetValueOrDefault().Day.ToString(),
+                                                            @item.Datetime.GetValueOrDefault().Year.ToString()
+                                                        </span>
+
+                                                    }
+                                                </span>
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-newspaper"></i>
+                                                    @item.Authur
+                                                </span>
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-folder"></i>
+                                                    @{
+                                                        menu2 = CommentController.GetMenuArticles(@item.MenuID);
+                                                    }
+                                                    <a href="/@menu2.Alias">@menu2.Title </a>
+                                                </span>
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-comment"></i>
+                                                    @{
+                                                        temp = CommentController.countcmt(item.ID, Request.Cookies["LanguageID"].Value);
+                                                    }
+                                                    <a href="">@temp @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "comment")</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="desc-cont">
+                                            <p>
+                                                @Html.Raw(item.Description)
+                                            </p>
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="book-link">
+                                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "read more")
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var item in articles)
+                            {
+                                <div class="list-page__item">
+                                    <div class="thumd">
+                                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                            <div class="coverimg">
+                                                <img src="@item.Image" alt="">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="desc">
+                                        <div class="desc-head">
+                                            <h3 class="blog-title">
+                                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                    @item.Title
+                                                </a>
+                                            </h3>
+                                            <div class="infor-wrap">
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-clock"></i>
+                                                    @if (Request.Cookies["LanguageID"].Value == "vi")
+                                                    {
+                                                        <span class="blog-date">
+                                                            @item.Datetime.GetValueOrDefault().ToString("d")
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>
+                                                            @switch (item.Datetime.GetValueOrDefault().Month)
+                                                            {
+                                                                case 1:
+                                                                    i = "January";
+                                                                    break;
+                                                                case 2:
+                                                                    i = "February";
+                                                                    break;
+                                                                case 3:
+                                                                    i = "March";
+                                                                    break;
+                                                                case 4:
+                                                                    i = "April";
+                                                                    break;
+                                                                case 5:
+                                                                    i = "May";
+                                                                    break;
+                                                                case 6:
+                                                                    i = "June";
+                                                                    break;
+                                                                case 7:
+                                                                    i = "July";
+                                                                    break;
+                                                                case 8:
+                                                                    i = "August";
+                                                                    break;
+                                                                case 9:
+                                                                    i = "September";
+                                                                    break;
+                                                                case 10:
+                                                                    i = "October";
+                                                                    break;
+                                                                case 11:
+                                                                    i = "November";
+                                                                    break;
+                                                                case 12:
+                                                                    i = "December";
+                                                                    break;
+                                                            }
+                                                            @i @item.Datetime.GetValueOrDefault().Day.ToString(),
+                                                            @item.Datetime.GetValueOrDefault().Year.ToString()
+                                                        </span>
+
+                                                    }
+                                                </span>
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-newspaper"></i>
+                                                    @item.Authur
+                                                </span>
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-folder"></i>
+                                                    @{
+                                                        menu2 = CommentController.GetMenuArticles(@item.MenuID);
+                                                    }
+                                                    <a href="/@menu2.Alias">@menu2.Title </a>
+                                                </span>
+                                                <span class="infor-wrap__content">
+                                                    <i class="fa-regular fa-comment"></i>
+                                                    @{
+                                                        temp = CommentController.countcmt(item.ID, Request.Cookies["LanguageID"].Value);
+                                                    }
+                                                    <a href="">@temp @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "comment")</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="desc-cont">
+                                            <p>
+                                                @Html.Raw(item.Description)
+                                            </p>
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="book-link">
+                                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "read more")
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="widget widget-recent">
+                            <h1 class="widget-title">
+                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Recent Articles")
+                            </h1>
+                            <div class="recent-list">
+                                @foreach (var item in RecentArticles.Take(4))
+                                {
+                                    <div class="recent-list__item">
+                                        <div class="thumd">
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                <div class="coverimage">
+                                                    <img src="@item.Image" alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="post-infor">
+                                                <span>
+                                                        @if (Request.Cookies["LanguageID"].Value == "vi")
+                                                        {
+                                                            <span class="blog-date">
+                                                                @item.Datetime.GetValueOrDefault().ToString("d")
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>
+                                                                @switch (item.Datetime.GetValueOrDefault().Month)
+                                                                {
+                                                                    case 1:
+                                                                        i = "January";
+                                                                        break;
+                                                                    case 2:
+                                                                        i = "February";
+                                                                        break;
+                                                                    case 3:
+                                                                        i = "March";
+                                                                        break;
+                                                                    case 4:
+                                                                        i = "April";
+                                                                        break;
+                                                                    case 5:
+                                                                        i = "May";
+                                                                        break;
+                                                                    case 6:
+                                                                        i = "June";
+                                                                        break;
+                                                                    case 7:
+                                                                        i = "July";
+                                                                        break;
+                                                                    case 8:
+                                                                        i = "August";
+                                                                        break;
+                                                                    case 9:
+                                                                        i = "September";
+                                                                        break;
+                                                                    case 10:
+                                                                        i = "October";
+                                                                        break;
+                                                                    case 11:
+                                                                        i = "November";
+                                                                        break;
+                                                                    case 12:
+                                                                        i = "December";
+                                                                        break;
+                                                                }
+                                                                @i @item.Datetime.GetValueOrDefault().Day.ToString(),
+                                                                @item.Datetime.GetValueOrDefault().Year.ToString()
+                                                            </span>
+
+                                                        }
+                                                </span>
+                                            </div>
+                                            <div class="post-title">
+                                                <a href="">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @*<div class="widget widget-tags">
+                            <h1 class="widget-title">
+                                tag cloud
+                            </h1>
+                            <div class="tags-cloud">
+                                <a href="" class="tags-cloud-link">
+                                    article
+                                </a>
+                                <a href="" class="tags-cloud-link">
+                                    asia
+                                </a>
+                                <a href="" class="tags-cloud-link">
+                                    hotel
+                                </a>
+                                <a href="" class="tags-cloud-link">
+                                    nature
+                                </a>
+                                <a href="" class="tags-cloud-link">
+                                    resort
+                                </a>
+                                <a href="" class="tags-cloud-link">
+                                    spa
+                                </a>
+                            </div>
+                        </div>*@
+                    <div class="widget widget-category">
+                        <h1 class="widget-title">
+                            @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "post category")
+                        </h1>
+                        @if (Request.Cookies["LanguageID"].Value == "en")
+                        {
+                            <ul>
+                                <li class="cate-item">
+                                    <a href="/blogs">blog</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/planning">planning</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/tips">tips</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul>
+                                <li class="cate-item">
+                                    <a href="/bai-viet">blog</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/ke-hoach">kế hoạch</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/meo-hay">mẹo hay</a>
+                                </li>
+                            </ul>
+                        }
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

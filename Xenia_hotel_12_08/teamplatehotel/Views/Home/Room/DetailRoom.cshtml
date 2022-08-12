@@ -1,0 +1,222 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@using TeamplateHotel.Models;
+@model TeamplateHotel.Models.DetailRoom
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Service> server = CommentController.GetServices(menu.ID);
+    List<Room> room = CommentController.GetRooms(menu.ID);
+    List<Tour> tour = CommentController.GetTours(menu.ID);
+    List<Article> articles = CommentController.GetCustomerArticles(menu.ID);
+    List<ShowObject> amenities = CommentController.GetRoomAmetities(Model.Room.ID);
+    List<Advertising> qc = CommentController.GetAdvertisings(Request.Cookies["LanguageID"].Value);
+    decimal price;
+}
+<main class="main">
+
+    <section class="banner">
+        <div class="banner-main">
+
+            <div class="banner-hide">
+                <div class="banner-img">
+                    <img src="@Model.Room.Image" alt="">
+                </div>
+                <div class="banner-content">
+                    <div class="container">
+                        <h1 class="title">
+                            @Model.Room.Title
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="room-details pt-100">
+        <div class="container">
+            <div class="details-room-img owl-carousel owl-theme">
+                @foreach (var item in Model.RoomGalleries)
+                {
+                    <div class="item">
+                        <div class="item-inner">
+                            <div class="room-img">
+                                <img src="@item.ImageLarge" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="room-amenities__details owl-carousel owl-theme">
+                @foreach (var item in amenities)
+                {
+                    <div class="item">
+                        <div class="item-inner">
+                            <div class="amenities-icon">
+                                <img src="@item.Image" alt="" style="height:60px;width:60px; margin:auto">
+                            </div>
+                            <span>
+                                @item.Title
+                            </span>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="room-single">
+                        <div class="room-single_title">
+                            <h1>
+                                @Model.Room.Title
+                            </h1>
+                        </div>
+                        <p class="room-single_subtitle">
+                            @Model.Room.Title
+                        </p>
+                        <p class="room-single_persons">
+                            @Model.Room.MaxPeople @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Adults")
+                        </p>
+                        <p class="room-single_price">
+                            @if (Model.Room.PriceNet != 0)
+                            {
+                                <span class="price-title">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
+                                <span class="prive-value">$@Model.Room.Price /@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
+                            }
+                            else
+                            {
+                                <span class="price-title" style="text-decoration: line-through">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
+                                <span class="prive-value" style="text-decoration: line-through">$@Model.Room.Price /@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
+                                <span class="price-value">
+                                    @{
+                                        price = (decimal)Model.Room.Price * (1 - (decimal)Model.Room.PriceNet / 100);
+                                    }
+
+                                    $@price / @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")
+                                </span>
+                            }
+
+                        </p>
+                        <div class="content">
+                            <div class="infor">
+                                @Html.Raw(Model.Room.Content)
+                            </div>
+
+                            <div class="testi">
+                                @foreach (var item in articles.Take(3))
+                                {
+                                    <div class="testi-item">
+                                        <div class="inner">
+                                            <div class="row">
+                                                <div class="col-xs-3 col-sm-2">
+                                                    <div class="image">
+                                                        <img src="@item.Image" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-9 col-sm-10">
+                                                    <div class="desc">
+                                                        <h4>
+                                                            @item.Title
+                                                        </h4>
+                                                        <p class="text-editor">
+                                                            @Html.Raw(item.Content)
+                                                        </p>
+                                                        <p class="text-editor">@Html.Raw(item.Description)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    @*<div class="next-prev pd-100">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 left">
+                                        <a href="">
+                                            <i class="fa-solid fa-arrow-left-long"></i>
+                                            <span>previus room</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6 right">
+                                        <a href="">
+                                            <span>next room</span>
+                                            <i class="fa-solid fa-arrow-right-long"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar pd-100">
+                        <aside class="widget widget-booking">
+                            <div class="widget-content">
+                                <p class="price-title">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</p>
+                                <p class="price-value">
+                                    <span class="prive-value">$@Model.Room.Price</span>/@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
+                                </p>
+                                <form action="/booking">
+                                    <div class="form-group">
+                                        <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "CheckIn")</label>
+                                        <input type="text" class="form-control" name="checkInDate" id="date1" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "CheckOut")</label>
+                                        <input type="text" class="form-control" name="checkOutDate" id="date2" required>
+                                    </div>
+                                    <div class="form-btn">
+                                        <input type="submit" value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "request")" class="btn btn-gray" />
+                                    </div>
+                                </form>
+                            </div>
+                        </aside>
+                        <aside class="widget widget-menu">
+                            <div class="widget-content">
+                                <h4>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "more room")</h4>
+                                <ul class="menu-room">
+                                    @foreach (var item in room)
+                                    {
+                                        <li>
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </aside>
+                        @if (qc.Any())
+                        {
+                            foreach (var item in qc.Take(1))
+                            {
+                                <aside class="widget widget-bookoffer">
+                                    <div class="widget-content" style="background: url(@item.Image) no-repeat">
+                                        <div class="section-title ">
+                                            <p>@item.Title</p>
+                                        </div>
+                                        <form action="/booking">
+                                            <input type="submit" class="btn btn-white" value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Book now")" />
+                                        </form>
+                                    </div>
+                                </aside>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</main>

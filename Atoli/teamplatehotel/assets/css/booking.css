@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: open sans, sans-serif;
+}
+
+.booking-main {
+    padding-top: 80px;
+}
+
+#book_room {
+    font-size: 15px;
+}
+
+    #book_room .form-control {
+        height: 34px;
+    }
+
+    #book_room [name="Request"] {
+        height: auto;
+    }
+
+.book-img {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+    .book-img::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.151);
+        z-index: 1;
+    }
+
+.room-slected {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    z-index: 5;
+}
+
+    .room-slected span {
+        display: inline-block;
+        color: #fff;
+        background-color: #1490ac;
+        font-size: 15px;
+        text-transform: uppercase;
+        padding: 5px 15px;
+        border-radius: 3px;
+    }
+
+.book-img img {
+    height: 246px;
+    border-radius: 5px;
+}
+
+.book_info-left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 15px;
+    border-radius: 5px;
+    background-color: #14404a;
+    position: relative;
+    z-index: 1;
+}
+
+.group-left {
+    width: 48%;
+    text-align: center;
+    background-color: #1490ac;
+    color: #fff;
+    padding: 15px 0px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.b-info-title {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.b-info-number {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .b-info-number select {
+        background: #1490ac;
+        color: #fff;
+        font-size: 22px;
+        width: 80px;
+        font-weight: 500;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+
+[name="CheckIn"] {
+    opacity: 0;
+    position: absolute;
+    bottom: 10px;
+}
+
+[name="CheckOut"] {
+    opacity: 0;
+    position: absolute;
+    bottom: 10px;
+}
+
+.b-number {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.b-date {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.arow-select {
+    font-size: 18px;
+    margin-left: 6px;
+}
+
+.hidden-arow {
+    -o-appearance: none;
+    -ms-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.change-info {
+    text-transform: uppercase;
+    cursor: pointer;
+    display: block;
+    background-color: #1490ac;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.5s ease;
+}
+
+    .change-info:hover {
+        color: #fff;
+        background: linear-gradient(#27d7ff, #0bc4ee, #00bae4, #00bae4);
+        transition: all 0.5s ease;
+    }
+
+.book-right {
+    padding: 0 30px;
+}
+
+#book_room label {
+    font-weight: 500;
+}
+
+span.required {
+    color: red;
+}
+
+.submit-btn {
+    background-color: #1490ac;
+    color: #fff;
+    font-weight: 500;
+}
+
+    .submit-btn:hover {
+        color: #fff;
+        background-color: #14404a;
+    }
+
+.change-form_wp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1490ac;
+    z-index: 10;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.change-form {
+    position: relative;
+    z-index: 20;
+    display: inline-flex;
+    flex-wrap: wrap;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+    .change-form .form-group {
+        width: 50%;
+        padding: 0 10px;
+    }
+
+    .change-form label {
+        color: #fff;
+        font-weight: 500;
+    }
+
+.change-btn {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}

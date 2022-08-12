@@ -1,0 +1,23 @@
+﻿@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+}
+
+<!-- Internal Page Header -->
+@Html.Partial("header")
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <article class="post">
+                <h2>Messages</h2>
+                <strong>@Html.Raw(TempData["Message"])</strong>
+            </article>
+        </div>
+    </div>
+</div>
+
+
+
+

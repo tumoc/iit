@@ -1,0 +1,220 @@
+﻿@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@model ProjectLibrary.Database.BookTour
+@{
+    ViewBag.Title = "Book tour";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+}
+
+<link href="~/Plugins/Validate/jquery-validation-1.13.1/jquery-validation.css" rel="stylesheet" />
+<script src="~/Plugins/Validate/jquery-validation-1.13.1/jquery.validate.min.js"></script>
+<script src="~/Plugins/Validate/jquery-validation-1.13.1/additional-methods.min.js"></script>
+
+
+<!-- Internal Page Header -->
+@Html.Partial("Slider/Banner")
+<!-- End of Internal Page Header -->
+<main class="main">
+    <section class="banner">
+        <div class="banner-main">
+
+            <div class="banner-hide">
+                <div class="banner-img full-height">
+                    <img src="~/Assets/images/slide_n_2_o.jpg" alt="">
+                </div>
+                <div class="banner-content">
+                    <div class="container">
+                        <h1 class="title">
+                            Booking Tour
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<section id="content" class="twelve columns">
+    <div class="container" id="ts-portfolio">
+        <div class="row">
+            <form action="/BookTour/SendBooking" id="book-tour" method="post" class="form-horizontal">
+                <h3 class="required">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "YourInformation") (* @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "RequiredFields"))</h3>
+                @Html.HiddenFor(a => a.ID)
+                <div class="form-group">
+                    <label for="InfoBooking" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Tour")<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(a => a.InfoBooking, new SelectList(ViewBag.optionTour, "value", "text"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Departure" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Departure")<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control four" id="Departure" name="Departure">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Gender" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Gender")<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        <select name="Gender" id="Gender" class="form-control">
+                            <option value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mr")">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mr")</option>
+                            <option value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Ms")">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Ms")</option>
+                            <option value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mrs")">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mrs")</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="FullName" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "FullName")<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control four" id="FullName" name="FullName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Tel" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Tel")</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control four" id="Tel" name="Tel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Email" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Email")<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control four" id="Email" name="Email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Address" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Address")</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control four" id="Address" name="Address">
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <label for="Adult" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Adult")</label>
+                    <div class="col-sm-10">
+                        <select name="Adult">
+                            <option value="0">select adult</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Child" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Child")</label>
+                    <div class="col-sm-10">
+                        <select name="Child">
+                            <option value="0">select child</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Child" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Vegetarian")</label>
+                    <div class="col-sm-10">
+                        <label class="radio-inline"> <input type="radio" name="Vegetarian" value="True" checked="checked"> có</label>
+                        <label class="radio-inline"> <input type="radio" name="Vegetarian" value="false"> Không</label>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label for="Country" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Country")<span class="required">*</span></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control four" id="Country" name="Country">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Content" class="col-sm-2 control-label">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Request")</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="OrtherRequest" name="Request" style="height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="Content" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-10">
+                        <input style="height: 42px; margin-top: 15px; width: 90px; color:black" type="submit" name="Send" value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Send")" id="Send" class="btn btn-primary">
+                    </div>
+                </div>
+
+            </form>
+
+
+
+        </div>
+    </div>
+</section>
+
+<script>
+    $("#wraploadding").hide();
+    function LoadingSendEmail() {
+        $("#wraploadding").show();
+        $("#wraploadding").css("width", $(window).width());
+        $("#wraploadding").css("height", $(window).height());
+        $("#imgloadding").css("top", ($(window).height() / 2) - 80);
+    }
+
+    $(function () {
+        $("#Departure").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            minDate: new Date()
+        });
+    });
+
+
+    //validate
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+    $("#book-tour").validate({
+        rules: {
+            'Departure': {
+                required: true,
+                date: true
+            },
+            'Gender': {
+                required: true,
+            },
+            'FullName': {
+                required: true,
+            },
+            'Country': {
+                required: true,
+            },
+            'Email': {
+                required: true,
+                email: true
+            },
+        },
+        messages: {
+            'Departure': "Please enter Departure(MM/DD/YYYY)",
+            'Gender': "Please select Gender",
+            'FullName': "Please enter First Name",
+            'Country': "Please select Country",
+            'Email': "Please enter Email Adress",
+
+        },
+        submitHandler: function (form) {
+            form.submit();
+            LoadingSendEmail();
+        }
+    });
+</script>

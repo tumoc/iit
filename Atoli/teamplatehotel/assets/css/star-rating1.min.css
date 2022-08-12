@@ -1,0 +1,18 @@
+/*!
+ * bootstrap-star-rating1 v4.0.2
+ * http://plugins.krajee.com/star-rating
+ *
+ * Author: Kartik Visweswaran
+ * Copyright: 2013 - 2017, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD 3-Clause
+ * https://github.com/kartik-v/bootstrap-star-rating/blob/master/LICENSE.md
+ */
+.rating1-loading{
+    width: 25px;
+    height: 25px;
+    font-size: 0;
+    color: #fff;
+    background: url(../img/loading.gif) top left no-repeat;
+    border: none
+}.rating1-container .rating1-stars{position:relative;cursor:pointer;vertical-align:middle;display:inline-block;overflow:hidden;white-space:nowrap}.rating1-container .rating1-input{position:absolute;cursor:pointer;width:100%;height:1px;bottom:0;left:0;font-size:1px;border:none;background:0 0;padding:0;margin:0}.rating1-disabled .rating1-input,.rating1-disabled .rating1-stars{cursor:not-allowed}.rating1-container .star{display:inline-block;margin:0 1px;text-align:center}.rating1-container .empty-stars{color:#aaa}.rating1-container .filled-stars{position:absolute;left:0;top:0;margin:auto;color:#fde16d;white-space:nowrap;overflow:hidden;-webkit-text-stroke:1px #777;text-shadow:1px 1px #999}.rating1-rtl{float:right}.rating1-animate .filled-stars{transition:width .25s ease;-o-transition:width .25s ease;-moz-transition:width .25s ease;-webkit-transition:width .25s ease}.rating1-rtl .filled-stars{left:auto;right:0;-moz-transform:matrix(-1,0,0,1,0,0) translate3d(0,0,0);-webkit-transform:matrix(-1,0,0,1,0,0) translate3d(0,0,0);-o-transform:matrix(-1,0,0,1,0,0) translate3d(0,0,0);transform:matrix(-1,0,0,1,0,0) translate3d(0,0,0)}.rating1-rtl.is-star .filled-stars{right:.06em}.rating1-rtl.is-heart .empty-stars{margin-right:.07em}.rating1-lg{font-size:3.91em}.rating1-md{font-size:3.13em}.rating1-sm{font-size:2.5em}.rating1-xs{font-size:1em}.rating1-xl{font-size:4.89em}.rating1-container .clear-rating1{color:#aaa;cursor:not-allowed;display:inline-block;vertical-align:middle;font-size:60%;padding-right:5px}.clear-rating1-active{cursor:pointer!important}.clear-rating1-active:hover{color:#843534}.rating1-container .caption{color:#999;display:inline-block;vertical-align:middle;font-size:60%;margin-top:-.6em;margin-left:5px;margin-right:0}.rating1-rtl .caption{margin-right:5px;margin-left:0}@media print{.rating1-container .clear-rating1{display:none}}

@@ -1,0 +1,42 @@
+.mm-menu {
+    display: block;
+    @media (max-width: 400px) {
+        max-width: 300px;
+    }
+}
+
+.mm-menu--opened .mm-panel--noanimation {
+    background-color: #333239;
+}
+
+.mm-navbar,
+.mm-panel--opened {
+    background-color: #333239;
+}
+
+.mm-btn--next:after,
+.mm-btn--prev:before {
+    border-color: white;
+}
+
+.mm-menu a,
+.mm-menu a:active,
+.mm-menu a:hover,
+.mm-menu a:link,
+.mm-menu a:visited {
+    text-decoration: none;
+    color: white;
+    text-transform: capitalize;
+}
+
+// .mm-navbar {
+//     height: 90px;
+// }
+// .mm-navbar__title {
+//     background: url('../../images/logo.webp') no-repeat;
+//     background-position: center center;
+//     // background-size: cover;
+//     span {
+//         display: none;
+//     }
+// }

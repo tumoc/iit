@@ -1,0 +1,203 @@
+﻿@model TeamplateHotel.Areas.Administrator.EntityModel.EArticle
+@using TeamplateHotel.Areas.Administrator.Controllers
+@using ProjectLibrary.Database
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+    List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+    List<int> ints = CommentController.ListArticleAmenityID(Model.ID);
+}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<div class="span12">
+    <div class="widget ">
+        <div class="widget-header">
+            <i class=" icon-plus-sign"></i>
+            <h3>@ViewBag.Title</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+            @Html.ValidationSummary(true)
+            @using (Html.BeginForm("Update", "Article", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(a => a.ID)
+                <div class="control-group" id="listHotel">
+                    <label class="control-label" for="MenuID">Chuyên mục bài viết<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.DropDownListFor(p => p.MenuID, new SelectList(ViewBag.ListMenu, "Value", "Text"), new { @class = "span3" })
+                        @Html.ValidationMessageFor(p => p.MenuID)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Title">Tiêu đề bài viết<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Title, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Title)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(c => c.Alias, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Alias, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Alias)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(c => c.Image, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Image, new { @class = "span4 inputbox upload" })
+                        @Html.ValidationMessageFor(c => c.Image)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Icon</label>
+                    <div class="controls">
+                        <input type="radio" id="html" name="fav_language" class="radio-inline" value="true" onchange="show()">
+                        <label for="html">Có</label>
+                        <input type="radio" id="html" name="fav_language" class="radio-inline" value="true" onchange="hide()" checked>
+                        <label for="html">Không</label>
+                    </div>
+                </div>
+                <div class="control-group" id="listIcon" style="display:none">
+                    <div class="controls">
+                        <select class="js-example-basic-multiple" name="Amenities" id="Amenities" multiple="multiple">
+                            @foreach (var item in amenities)
+                            {
+                                if (ints.Contains(item.ID))
+                                {
+                                    <option value="@item.ID" selected>@item.Title</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID">@item.Title</option>
+                                }
+                            }
+                        </select>
+                        <ul class="allAmenity">
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Authur">Tác giả<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Authur, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Authur)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Title">Link<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Link, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Link)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Title">Trạng thái hiển thị</label>
+                    <div class="controls">
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Status, "true")  Có</label>
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Status, "false") Không</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Bài viết giới thiệu</label>
+                    <div class="controls">
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Home, "true")  Có</label>
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Home, "false") Không</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Bài viết khách hàng</label>
+                    <div class="controls">
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Customer, "true")  Có</label>
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Customer, "false") Không</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Bài viết hot</label>
+                    <div class="controls">
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Hot, "true")  Có</label>
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Hot, "false") Không</label>
+                    </div>
+                </div>
+                <div class="control-group" style="margin-top: 40px">
+                    @Html.LabelFor(c => c.Description, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextAreaFor(c => c.Description, new { @class = "basic-ckeditor" })
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Content">Mô tả chi tiết<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.Content)</span>
+                        </p>
+
+                        @Html.TextAreaFor(c => c.Content, new { @class = "full-ckeditor" })
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Submit" id="submit" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Article")" class="btn">Cancel</a>
+                </div>
+
+                <div class="control-seo">
+                    <h3 class="mg-h">Tối ưu hoá công cụ tìm kiếm(Seo)</h3>
+                    <div class="control-group">
+                        @Html.LabelFor(c => c.MetaTitle)
+                        @Html.TextBoxFor(c => c.MetaTitle, new { @class = "span4" })
+                        @Html.ValidationMessageFor(p => p.MetaTitle)
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(c => c.MetaDescription)
+                        <div class="jtable-input jtable-text-input">
+                            @Html.TextAreaFor(c => c.MetaDescription, new { @class = "span4 meta-seo" })
+                            @Html.ValidationMessageFor(p => p.MetaDescription)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    function show() {
+        document.getElementById('listIcon').style.display = "block";
+    }
+    function hide() {
+        document.getElementById('listIcon').style.display = "none";
+    }
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        bindUl();
+        AutoAlias("Title", "Alias");
+        CreateCkEditor();
+    });
+    //tien ich
+    $(document).ready(function () {
+        $('#submit').click(function () {
+            var data = '';
+            if ($('#Amenities').val() != null) {
+                var selected = $('#Amenities').val() + "";
+                const s = selected.split(",");
+                for (var i = 0; i < s.length; i++) {
+                    var Id = '<input id = "EAmenityItems_' + i + '__Id" name = "EAmenityItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+                    data = '<li>' + Id + '</li>';
+                    $('.allAmenity').append(data);
+                }
+            }
+        })
+    });
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>

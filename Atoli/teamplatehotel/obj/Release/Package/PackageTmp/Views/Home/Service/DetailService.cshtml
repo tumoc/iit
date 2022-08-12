@@ -1,0 +1,143 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@model TeamplateHotel.Models.DetailArticle
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Article> Ortherarticles = CommentController.RecentArticlesOrther(menu.ID, Model.Article.ID);
+    List<ShowObject> listCategory = CommentController.listCategory(Request.Cookies["LanguageID"].Value);
+    Article previouspost = CommentController.PreviousArticle(menu.ID, Model.Article.ID);
+    string i = "";
+
+}
+<style>
+    .coverimage {
+        width: 60px;
+        height: 60px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<main class="main">
+    <section class="banner br-0">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="title">
+                        @Model.Article.Title
+                    </h1>
+                    <!-- <span class="banner-caption">
+                        Caption Aligned Here
+                    </span> -->
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <section class="blogs blog-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="details-content">
+                        <img src="@Model.Article.Image" alt="">
+                    </div>
+                    <article class="details-content">
+                        @Html.Raw(Model.Article.Content)
+                    </article>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="widget widget-recent">
+                            <h1 class="widget-title">
+                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Orther Service")
+                            </h1>
+                            <div class="recent-list">
+                                @foreach (var item in Ortherarticles.Take(4))
+                                {
+                                    <div class="recent-list__item">
+                                        <div class="thumd">
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                <div class="coverimage">
+                                                    <img src="@item.Image" alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="post-infor">
+                                                @if (Request.Cookies["LanguageID"].Value == "vi")
+                                                {
+                                                    <span class="blog-date">
+                                                        @item.Datetime.GetValueOrDefault().ToString("d")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        @switch (item.Datetime.GetValueOrDefault().Month)
+                                                        {
+                                                            case 1:
+                                                                i = "January";
+                                                                break;
+                                                            case 2:
+                                                                i = "February";
+                                                                break;
+                                                            case 3:
+                                                                i = "March";
+                                                                break;
+                                                            case 4:
+                                                                i = "April";
+                                                                break;
+                                                            case 5:
+                                                                i = "May";
+                                                                break;
+                                                            case 6:
+                                                                i = "June";
+                                                                break;
+                                                            case 7:
+                                                                i = "July";
+                                                                break;
+                                                            case 8:
+                                                                i = "August";
+                                                                break;
+                                                            case 9:
+                                                                i = "September";
+                                                                break;
+                                                            case 10:
+                                                                i = "October";
+                                                                break;
+                                                            case 11:
+                                                                i = "November";
+                                                                break;
+                                                            case 12:
+                                                                i = "December";
+                                                                break;
+                                                        }
+                                                        @i @item.Datetime.GetValueOrDefault().Day.ToString(),
+                                                        @item.Datetime.GetValueOrDefault().Year.ToString()
+                                                    </span>
+
+                                                }
+                                            </div>
+                                            <div class="post-title">
+                                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

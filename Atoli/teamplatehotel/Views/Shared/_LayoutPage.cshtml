@@ -1,0 +1,172 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Config
+@using TeamplateHotel.Models
+@{
+    Hotel detailHotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    List<Language> languages = CommentController.GetLanguages();
+    List<Menu> menufooter = CommentController.GetSecondMenus(Request.Cookies["LanguageID"].Value);
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="~/assets/css/star-rating.min.css" rel="stylesheet" />
+    <link href="~/assets/css/star-rating.css" rel="stylesheet" />
+    <link href="~/assets/css/star-rating1.css" rel="stylesheet" />
+    <link href="~/assets/css/star-rating1.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/carousel/owl.carousel.css">
+    <link rel="stylesheet" href="~/assets/carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/carousel/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Mulish:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;1,500&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400&family=Roboto+Slab:wght@600;900&family=Roboto:wght@100&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Mulish:ital,wght@0,200;0,400;0,500;0,600;0,700;0,800;1,500&family=Noto+Sans:wght@100;200;300;400;500;600;700;800&family=Noto+Serif:wght@400;700&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400&family=Roboto+Slab:wght@600;900&family=Roboto:wght@100&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"
+          integrity="sha512-okE4owXD0kfXzgVXBzCDIiSSlpXn3tJbNodngsTnIYPJWjuYhtJ+qMoc0+WUwLHeOwns0wm57Ka903FqQKM1sA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    @RenderBody()
+    <!--footer-->
+    <footer>
+        <div class="main__footer">
+            <div class="location__footer">
+                <img src="./assets/img/footer-logo.png" alt="">
+                <p>
+                    Aenean finibus convallis nisl sit amet hendrerit. Etiam blandit velit non lorem mattis, non ultrices eros bibendum .
+                </p>
+                <ul>
+                    <li><i class="fa-solid fa-house"></i><a href="">@detailHotel.Address</a></li>
+                    <li><i class="fa-solid fa-phone"></i><a href="">@detailHotel.Tel</a></li>
+                    <li><i class="fa-solid fa-envelope"></i><a href="">@detailHotel.Email</a></li>
+                </ul>
+            </div>
+            @if (menufooter.Any())
+            {
+            <div class="footer__links">
+                <h3>Useful Links</h3>
+                <ul>
+                    @foreach(var item in menufooter.OrderBy(a => a.Index).Take(6)) {
+                        if (item.Type == SystemMenuType.OutSite)
+                        {
+                            <li><a href="@item.Link"><i class="fa-solid fa-caret-right"></i> @item.Title</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/@item.Alias"><i class="fa-solid fa-caret-right"></i> @item.Title</a></li>
+                        }      
+                     }
+                </ul>
+            </div>
+
+            <div class="useful__links">
+                <h3>Links</h3>
+                <ul>
+                    @foreach (var item in menufooter.OrderBy(a => a.Index).Skip(6).Take(6))
+                    {
+                        if (item.Type == SystemMenuType.OutSite)
+                        {
+                            <li><a href="@item.Link"><i class="fa-solid fa-caret-right"></i> @item.Title</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/@item.Alias"><i class="fa-solid fa-caret-right"></i> @item.Title</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+            }
+            <div class="newsletter">
+                <h3>Newsletter</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempor eget ante fringilla rutrum aenean sed venenatis.
+                </p>
+                <form method="post" action="/Subscribe/Send" class="form-newsletter" id="subscribe-form">
+                    <input type="text" name="Email" placeholder="Your Email*">
+                    <button type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="end__footer">
+            <div class="copyright">
+                <p>
+                    Copyright 2022 @detailHotel.Name. All Rights Reserved
+                </p>
+            </div>
+            <ul>
+                <li><a href=""><i class="fa-brands fa-facebook-f"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-pinterest-p"></i></a></li>
+                <li><a href=""><i class="fa-brands fa-youtube"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+    <!--end footer-->
+    <button class="back-to-top btn-active">
+        <i class="fa-solid fa-angles-up"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
+            integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+            integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    @*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>*@
+    <script src="~/Plugins/Validate/jquery-validation-1.13.1/jquery.validate.min.js"></script>
+    <script src="~/assets/carousel/owl.carousel.js"></script>
+    <script src="~/assets/carousel/owl.carousel.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/star-rating.js"></script>
+    <script src="~/assets/js/star-rating.min.js"></script>
+    <script src="~/assets/js/star-rating1.js"></script>
+    <script src="~/assets/js/star-rating1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#subscribe-form').validate({ // initialize the plugin
+                rules: {
+                    'Email': {
+                        required: true,
+                        email: true,
+                    },
+                },
+                messages: {
+                    'Email': "Please enter Email"
+                },
+                submitHandler: function () {
+                    $.post($('#subscribe-form').attr("action"), $('#subscribe-form').serialize())
+                        .done(function (data) {
+                        if (data.success == true) {
+                            alert(data.Message);
+                            $('#subscribe-form')[0].reset();
+                        } else {
+                            alert(data.Message);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

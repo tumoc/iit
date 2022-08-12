@@ -1,0 +1,41 @@
+﻿@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@{
+    ViewBag.Title = "Messages";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+}
+
+<!-- Internal Page Header -->
+<main class="main">
+    <section class="banner">
+        <div class="banner-main">
+
+            <div class="banner-hide">
+                <div class="banner-img full-height">
+                    <img src="~/Assets/images/room-1.jpg" alt="">
+                </div>
+                <div class="banner-content">
+                    <div class="container">
+                        <h1 class="title">
+                            Booking Tour
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="des-article">
+                <br />
+                @Html.Raw(ViewBag.Messages);
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

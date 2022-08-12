@@ -1,0 +1,64 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@{
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+}
+<style>
+    .bg__banner__about {
+        /*background-image: url('../img/banner-about.jpg');*/
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 400px;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 2.5%;
+        z-index: 1;
+    }
+
+        .bg__banner__about::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1b2132;
+            opacity: .5;
+            z-index: -1;
+        }
+    .path__about {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+    }
+
+        .path__about a, .path__about p {
+            font-size: 18px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .path__about i {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+</style>
+<div class="bg__banner__about">
+    <div class="banner__content">
+        <div class="path__about">
+            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+            <p>@menu.Title</p>
+        </div>
+        <h3>@menu.Title</h3>
+    </div>
+</div>

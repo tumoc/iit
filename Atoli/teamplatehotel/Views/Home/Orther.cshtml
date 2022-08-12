@@ -1,0 +1,42 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@model TeamplateHotel.Models.DetailArticle
+@{
+    ViewBag.Title = "Orther";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Article article = CommentController.GetArticles(menu.ID).FirstOrDefault();
+
+
+}
+@Html.Partial("header")
+<link href="~/assets/css/about.css" rel="stylesheet" />
+@if (article != null)
+{
+    <div class="bg__banner__about">
+        <div class="banner__content">
+            <div class="path__about">
+                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                <p>@article.Title</p>
+            </div>
+            <h3>@article.Title</h3>
+        </div>
+    </div>
+    <!--blog detail-->
+    <div class="blog__detail">
+        <div class="main__blog__detail">
+            <div class="blog__detail__left">
+                <div class="heading__left__content">
+                    <h2>@article.Title</h2>
+                </div>
+                <div class="blog__detail__des">
+                    @Html.Raw(article.Content)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

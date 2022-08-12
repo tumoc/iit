@@ -1,0 +1,92 @@
+﻿﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@model TeamplateHotel.Models.DetailSpa
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Service> server = CommentController.GetServices(menu.ID);
+    List<Spa> spa = CommentController.GetSpas(menu.ID);
+    List<Tour> tour = CommentController.GetTours(menu.ID);
+    List<Article> articles = CommentController.GetCustomerArticles(menu.ID);
+}
+<main class="main">
+
+    <section class="banner">
+        <div class="banner-main">
+
+            <div class="banner-hide">
+                <div class="banner-img">
+                    <img src="~/Assets/images/home-spa.jpg" alt="">
+                </div>
+                <div class="banner-content">
+                    <div class="container">
+                        <h1 class="title">
+                            @Model.Spa.Title
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="room-details pt-100">
+        <div class="container">
+            <div class="details-room-img owl-carousel owl-theme">
+                <div class="item">
+                    <div class="item-inner">
+                        <div class="room-img">
+                            <img src="@Model.Spa.Image" alt="">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="room-single">
+                        <div class="room-single_title">
+                            <h1 style="padding-top:50px">
+                                @Model.Spa.Title
+                            </h1>
+                        </div>
+                        <p class="room-single_subtitle">
+                            @Model.Spa.Title
+                        </p>
+                        <p class="room-single_price">
+                            <span class="price-title">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
+                            <span class="prive-value">$@Model.Spa.Price</span>
+                            <span class="unit">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "session")</span>
+                        </p>
+                        <div class="content">
+                            <div class="infor">
+                                @Html.Raw(Model.Spa.Content)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar pd-100">
+                        <aside class="widget widget-menu">
+                            <div class="widget-content">
+                                <h4>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "more spa")</h4>
+                                <ul class="menu-room">
+                                    @foreach (var item in spa)
+                                    {
+                                        <li>
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

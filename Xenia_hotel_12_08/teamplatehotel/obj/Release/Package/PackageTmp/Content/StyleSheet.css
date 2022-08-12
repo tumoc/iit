@@ -1,0 +1,35 @@
+﻿.room-detail .check-room-form {
+    padding: 10px 10px 30px;
+}
+.header_right .btn-group .btn-default, .header_right .btn-group .btn-default:hover, .header_right .btn-group .btn-default:active, .header_right .btn-group .btn-default:focus {
+    color: #ccc;
+    background-color: transparent;
+    border-color: transparent;
+    text-decoration: none;
+    outline: none;
+}
+.header_right .btn-group .dropdown-menu {
+    background-color: #0b0a09;
+}
+.header_right .btn-group .dropdown-menu a {
+    color: #fff;
+}
+    .header_right .btn-group .dropdown-menu a:hover {
+        color: #000;
+        background-color: #FEB301;
+    }
+.nivo-directionNav i{
+    font-size:40px;
+}
+.panel-info{
+    overflow:hidden;
+}
+.img-conten img{
+    margin-bottom:20px;
+}
+.section-sub-banner {
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

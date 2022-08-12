@@ -1,0 +1,80 @@
+section.activities {
+    .activities-infor {
+        padding-top: 50px;
+        .thumd {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                max-width: 100%;
+            }
+        }
+        .desc {
+            .section-title {
+                text-align: left;
+            }
+        }
+        @media(max-width:767px) {
+            padding-top: 0;
+        }
+    }
+    .package {
+        background: url('../../images/SnA-packages-banner-1.jpg') no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        &::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .content {
+            padding: 50px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            .text {
+                max-width: 780px;
+                margin: 25px auto;
+            }
+        }
+    }
+}
+
+section.activities-post {
+    .post-infor {
+        &__item {
+            .row {
+                align-items: center;
+            }
+            .desc {
+                text-align: left;
+                .section-title {
+                    text-align: left;
+                }
+            }
+            .thumd {
+                padding: 25px 15px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            &:nth-child(even) {
+                .desc {
+                    order: 2;
+                }
+            }
+            @media(max-width:767px) {
+                &:nth-child(even) {
+                    .desc {
+                        order: initial;
+                    }
+                }
+            }
+        }
+    }
+}
