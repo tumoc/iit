@@ -9,6 +9,7 @@
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
     Menu menu = ViewBag.Menu ?? new Menu();
     Article article = CommentController.GetArticles(menu.ID).FirstOrDefault();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
 
 
 }
@@ -16,27 +17,30 @@
 <link href="~/assets/css/about.css" rel="stylesheet" />
 @if (article != null)
 {
-    <div class="bg__banner__about">
-        <div class="banner__content">
-            <div class="path__about">
-                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-                <p>@article.Title</p>
-            </div>
-            <h3>@article.Title</h3>
-        </div>
-    </div>
-    <!--blog detail-->
-    <div class="blog__detail">
-        <div class="main__blog__detail">
-            <div class="blog__detail__left">
-                <div class="heading__left__content">
-                    <h2>@article.Title</h2>
+    foreach (var item in sliders.Take(1))
+    {
+        <div class="bg__banner__about" style="background-image: url('@item.Image')">
+            <div class="banner__content">
+                <div class="path__about">
+                    <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                    <p>@article.Title</p>
                 </div>
-                <div class="blog__detail__des">
-                    @Html.Raw(article.Content)
-                </div>
+                <h3>@article.Title</h3>
             </div>
         </div>
-    </div>
-}
+    }
+        <!--blog detail-->
+        <div class="blog__detail">
+            <div class="main__blog__detail">
+                <div class="blog__detail__left">
+                    <div class="heading__left__content">
+                        <h2>@article.Title</h2>
+                    </div>
+                    <div class="blog__detail__des">
+                        @Html.Raw(article.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
