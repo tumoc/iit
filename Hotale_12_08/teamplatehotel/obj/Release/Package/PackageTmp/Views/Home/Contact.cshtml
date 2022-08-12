@@ -1,0 +1,180 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
+}
+
+<main class="main">
+    <section class="banner banner-contact">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="banner-title">
+                        @menu.MetaTitle
+                    </h1>
+                    <span class="banner-caption">
+                        @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Get Intouch")   
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="infor-location">
+        <div class="container">
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="inner">
+                            <div class="icon">
+                                <div class="icon-wrap">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                            </div>
+                            <div class="title">
+                                <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Phone")</h3>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "A wonderful serenity has taken possession of my entire soul, like these.")
+                                </p>
+                            </div>
+                            <div class="link">
+                                <a href="tel:@hotel.Tel">+@hotel.Tel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="inner">
+                            <div class="icon">
+                                <div class="icon-wrap">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="title">
+                                <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Email")</h3>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "A wonderful serenity has taken possession of my entire soul, like these.")
+                                </p>
+                            </div>
+                            <div class="link">
+                                <a href="mailto:@hotel.Email">@hotel.Email</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="inner">
+                            <div class="icon">
+                                <div class="icon-wrap">
+                                    <i class="fa-solid fa-location-arrow"></i>
+                                </div>
+                            </div>
+                            <div class="title">
+                                <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "location")</h3>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    @hotel.Address
+                                </p>
+                            </div>
+                            <div class="link">
+                                <a href="tel:+029320393">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "view on google map")</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-form">
+        <div class="container">
+            <div class="contact-inner">
+                <div class="contact-head">
+                    <h3>
+                        @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Leave us your info")
+                    </h3>
+                    <span>
+                        @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "and we will get back to you.")
+                    </span>
+                </div>
+
+                <form method="post" action="Contact/SubmitContact" id="contactForm" name="contactForm" class="form-contact">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="Gender" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mr")/@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mrs")*">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="FullName" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "FullName")*">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" name="Email" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Email")*">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" name="Country" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Country")*">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <textarea name="Request" cols="40" rows="10" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Message")*"></textarea>
+                        </div>
+                        <div class="col-md-12 form-btn">
+                            <input type="submit" class="book-link" value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Send")">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="map">
+        <div class="map-inner">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.79651362976!2d105.77232411472485!3d21.040826492742674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454c90a66a4fd%3A0x1c9a2fe43fae27dd!2zMTQ3IFAuIE1haSBE4buLY2gsIE1haSBE4buLY2gsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1656381560960!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#contactForm').validate({ // initialize the plugin
+                rules: {
+                    Gender: {
+                        required: true
+                    },
+                    FullName: {
+                        required: true,
+                        minlength: 5
+                    },
+                    Email: {
+                        required: true,
+                        email: true
+                    },
+                    Country: {
+                        required: true
+                    }
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

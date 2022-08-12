@@ -1,0 +1,338 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@model TeamplateHotel.Models.DetailArticle
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Article> Ortherarticles = CommentController.RecentArticlesOrther(menu.ID, Model.Article.ID);
+    List<ShowObject> listCategory = CommentController.listCategory(Request.Cookies["LanguageID"].Value);
+    Article previouspost = CommentController.PreviousArticle(menu.ID, Model.Article.ID);
+    string i = "";
+
+}
+<style>
+    .coverimage {
+        width: 60px;
+        height: 60px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<main class="main">
+    <section class="banner br-0">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="title">
+                        @Model.Article.Title
+                    </h1>
+                    <!-- <span class="banner-caption">
+                        Caption Aligned Here
+                    </span> -->
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="blogs blog-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <article class="details-content">
+                        @Html.Raw(Model.Article.Content)
+                    </article>
+                    @if (previouspost != null)
+                    {
+                        <div class="nav-blogs">
+                            <span class="single-left">
+                                <span class="text">Previous Post</span>
+                                <a href="/@previouspost.MenuAlias/@previouspost.ID/@previouspost.Alias">
+                                    @previouspost.Title
+                                </a>
+                            </span>
+                        </div>
+                    }
+                    <div class="single-meta">
+                        <div class="author-tags">
+                            @*<i class="fa-solid fa-tag"></i>
+                            <a href="">Nature</a>
+                            <a href="">Tips</a>*@
+                        </div>
+                        <div class="social-share">
+                            <span class="list-share">
+                                <a href="">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa-brands fa-pinterest-p"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa-brands fa-twitter"></i>
+                                </a>
+                                <a href="">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
+                            </span>
+                            <span class="share-count">
+                                <span class="core-divider"></span>
+                                <span class="core-count">0</span>
+                                <span class="core-suffix">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "share")</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="single-author">
+                        <div class="author-wrap">
+                            <div class="author-avatar">
+                                <img src="~/Asset/images/avar-blog2.jpeg" alt="">
+                            </div>
+                            <div class="content-wrap">
+                                <div class="author-caption">
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Written By")
+                                </div>
+                                <h4 class="author-title">
+                                    <a href="">
+                                        @Model.Article.Authur
+                                    </a>
+                                </h4>
+                                <div class="author-desc">
+                                    @Html.Raw(Model.Article.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <h4 id="reply-title" class="comment-reply-title ">
+                            @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Leave a Reply")
+                        </h4>
+                        <form method="post" action="/Cment2/Send" id="submitform" class="comment-form">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="ArticleID" hidden value="@Model.Article.ID">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <textarea name="Comment" id="" cols="45" rows="8" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "comment")*"></textarea>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="Name" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "FullName")*">
+                                </div>
+
+                                <div class="col-md-6 form-group">
+                                    <input type="text" name="Email" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Email")*">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" name="Website" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Website")*">
+                                </div>
+                                <div class="col-md-12 cookie-form">
+                                    <input type="checkbox" name="ckbox" id="ckbox" required>
+                                    <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Save my name, email, and website in this browser for the next time I comment").</label>
+                                </div>
+                                <div class="col-md-12 form-btn">
+                                    <input type="submit" class="book-link" value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "post comment")" />
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="widget widget-recent">
+                            <h1 class="widget-title">
+                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Recent Articles")
+                            </h1>
+                            <div class="recent-list">
+                                @foreach (var item in Ortherarticles.Take(4))
+                                {
+                                    <div class="recent-list__item">
+                                        <div class="thumd">
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                <div class="coverimage">
+                                                    <img src="@item.Image" alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="desc">
+                                            <div class="post-infor">
+                                                @if (Request.Cookies["LanguageID"].Value == "vi")
+                                                {
+                                                    <span class="blog-date">
+                                                        @item.Datetime.GetValueOrDefault().ToString("d")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        @switch (item.Datetime.GetValueOrDefault().Month)
+                                                        {
+                                                            case 1:
+                                                                i = "January";
+                                                                break;
+                                                            case 2:
+                                                                i = "February";
+                                                                break;
+                                                            case 3:
+                                                                i = "March";
+                                                                break;
+                                                            case 4:
+                                                                i = "April";
+                                                                break;
+                                                            case 5:
+                                                                i = "May";
+                                                                break;
+                                                            case 6:
+                                                                i = "June";
+                                                                break;
+                                                            case 7:
+                                                                i = "July";
+                                                                break;
+                                                            case 8:
+                                                                i = "August";
+                                                                break;
+                                                            case 9:
+                                                                i = "September";
+                                                                break;
+                                                            case 10:
+                                                                i = "October";
+                                                                break;
+                                                            case 11:
+                                                                i = "November";
+                                                                break;
+                                                            case 12:
+                                                                i = "December";
+                                                                break;
+                                                        }
+                                                        @i @item.Datetime.GetValueOrDefault().Day.ToString(),
+                                                        @item.Datetime.GetValueOrDefault().Year.ToString()
+                                                    </span>
+
+                                                }
+                                            </div>
+                                            <div class="post-title">
+                                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                    @item.Title
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @*<div class="widget widget-tags">
+                                <h1 class="widget-title">
+                                    tag cloud
+                                </h1>
+                                <div class="tags-cloud">
+                                    <a href="" class="tags-cloud-link">
+                                        article
+                                    </a>
+                                    <a href="" class="tags-cloud-link">
+                                        asia
+                                    </a>
+                                    <a href="" class="tags-cloud-link">
+                                        hotel
+                                    </a>
+                                    <a href="" class="tags-cloud-link">
+                                        nature
+                                    </a>
+                                    <a href="" class="tags-cloud-link">
+                                        resort
+                                    </a>
+                                    <a href="" class="tags-cloud-link">
+                                        spa
+                                    </a>
+                                </div>
+                            </div>*@
+                    <div class="widget widget-category">
+                        <h1 class="widget-title">
+                            @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "post category")
+                        </h1>
+                        @if (Request.Cookies["LanguageID"].Value == "en")
+                        {
+                            <ul>
+                                <li class="cate-item">
+                                    <a href="/blogs">blog</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/planning">planning</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/tips">tips</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul>
+                                <li class="cate-item">
+                                    <a href="/bai-viet">blog</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/ke-hoach">kế hoạch</a>
+                                </li>
+                                <li class="cate-item">
+                                    <a href="/meo-hay">mẹo hay</a>
+                                </li>
+                            </ul>
+                        }
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#submitform').validate({ // initialize the plugin
+                rules: {
+                    Name: {
+                        required: true,
+                    },
+                    Comment: {
+                        required: true,
+                    },
+                    Email: {
+                        required: true,
+                        email: true,
+                    },
+                    Website: {
+                        required: true,
+                    },
+                },
+                submitHandler: function (form) {
+                    $.post($(form).attr("action"), $(form).serialize())
+                        .done(function () {
+                            alert("Post Comment Successed");
+                            $('#submitform')[0].reset();
+                        });
+                    //$.post($(form).attr("action"), $(form).serialize())
+                    //    .done(function (data) {
+                    //        if (data.Result == "Success") {
+                    //            toastr.success(data.Message);
+                    //            $(form)[0].reset()
+                    //        } else {
+                    //            toastr.error(data.Message);
+                    //        }
+                    //    })
+                    //    .fail(function (error) {
+                    //        toastr.error(error);
+                    //    });
+                }
+            });
+        });
+    </script>
+}

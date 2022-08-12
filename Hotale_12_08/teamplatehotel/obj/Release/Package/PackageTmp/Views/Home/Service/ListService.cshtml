@@ -1,0 +1,169 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<Article> articles = CommentController.GetArticles(menu.ID);
+    //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
+}
+
+<main class="main">
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="banner-title">
+                        @menu.MetaTitle
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="service  pd-100">
+        <div class="bg-service"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2 class="subtitle add-font">
+                    @Html.Raw(menu.MetaDescription)
+                </h2>
+                <div class="sectitle">
+                    @Html.Raw(menu.Description)
+                </div>
+            </div>
+            <div class="service-wrap">
+                @foreach (var item in articles)
+                {
+                    <div class="service-wrap__item mb-0">
+                        <div class="row">
+                            <div class="col-lg-7 column-image">
+                                <figure class="image">
+                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                        <img src="@item.Image" alt="">
+                                    </a>
+                                    
+                                </figure>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="desc">
+                                    <h3 class="service-title">
+                                        @item.Title
+                                    </h3>
+                                    <p>
+                                        @Html.Raw(item.Description)
+                                    </p>
+                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="link-detail">
+                                        learn more <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    @*<section class="about2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 desc">
+                    <div class="desc-content">
+                        <div class="desc-content__header">
+                            <p>
+                                <span class="desc-number">
+                                    5
+                                </span>
+                                <span class="desc-name">
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "stars")
+                                </span>
+                                <span class="desc-number">
+                                    25
+                                </span>
+                                <span class="desc-name">
+                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Rooms")
+                                </span>
+                            </p>
+                        </div>
+                        <div class="desc-content__text">
+                            <p>
+                                @Html.Raw(hotel.MetaDescription)
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>*@
+
+    <section class="choose-room">
+        <div class="container">
+            <div class="choose-room__content">
+                <h3 class="title">
+                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Choose from a wide range of")</br>
+                    <span style="font-weight: 700;">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "luxury rooms")</span>
+                </h3>
+                <a href="/booking" class="btn-bookroom">
+                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "BookNow")
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="list-logo">
+        <div class="container">
+            <div class="row grid-logo">
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo1.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo2.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo3.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo4.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo5.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo6.png" alt="">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+
+

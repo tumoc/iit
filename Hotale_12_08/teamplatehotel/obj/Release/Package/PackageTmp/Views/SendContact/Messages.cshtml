@@ -1,0 +1,30 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+}
+
+<!-- Internal Page Header -->
+<main>
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="title">
+                        Well come
+                    </h1>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <p style="line-height:50px; font-size:50px;margin-left:100px">
+        @Html.Raw(ViewBag.Messages)
+    </p>
+</main>
+
+
+
+

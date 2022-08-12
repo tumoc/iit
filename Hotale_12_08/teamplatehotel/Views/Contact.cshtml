@@ -1,0 +1,206 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
+}
+
+<main class="main">
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="banner-title">
+                        about us
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="service  pd-100">
+        <div class="bg-service"></div>
+        <div class="container">
+            <div class="section-title">
+                <h2 class="subtitle add-font">
+                    Visit Our Famous Facilities
+                </h2>
+                <div class="sectitle">
+                    A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.
+                </div>
+            </div>
+            <div class="service-wrap">
+                <div class="service-wrap__item">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <figure class="image">
+                                <img src="~/Asset/images/chef-cook.jpg" alt="">
+                            </figure>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="desc">
+                                <h3 class="service-title">
+                                    3 Michelin Stars Restaurant, Vézère
+                                </h3>
+                                <p>
+                                    A brasserie inspired by French cuisine, a fresh and modern place to visit and enjoy dishes always handmade of the best ingredients of the season.
+                                </p>
+                                <a href="" class="link-detail">
+                                    learn more <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-wrap__item">
+                    <div class="row">
+                        <div class="col-lg-7 column-image">
+                            <figure class="image">
+                                <img src="~/Asset/images/bar.jpg" alt="">
+                            </figure>
+                        </div>
+                        <div class="col-lg-5 column-desc">
+                            <div class="desc">
+                                <h3 class="service-title">
+                                    The Penthouse Bar, An iconic american bar
+                                </h3>
+                                <p>
+                                    The cozy bar area accompanying the Penthouse is a classic cocktail bar at it’s finest. Our experienced bartenders are here to offer you both the classic bewerages and the newest global trends.
+                                </p>
+                                <a href="./service-details.html" class="link-detail">
+                                    learn more <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-wrap__item mb-0">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <figure class="image">
+                                <img src="~/Asset/images/spa.jpg" alt="">
+                            </figure>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="desc">
+                                <h3 class="service-title">
+                                    The Spa. Refresh Yourself
+                                </h3>
+                                <p>
+                                    Whether you are in search of a well-appointed gym or a pampering moment on the massage table and inside the warm saunas, you can always find a place for yourself at our spa.
+                                </p>
+                                <a href="" class="link-detail">
+                                    learn more <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 desc">
+                    <div class="desc-content">
+                        <div class="desc-content__header">
+                            <p>
+                                <span class="desc-number">
+                                    5
+                                </span>
+                                <span class="desc-name">
+                                    stars
+                                </span>
+                                <span class="desc-number">
+                                    25
+                                </span>
+                                <span class="desc-name">
+                                    rooms
+                                </span>
+                            </p>
+                        </div>
+                        <div class="desc-content__text">
+                            <p>
+                                Our hotel is located in the heart of the New Forrest. A five stars lifestyle surrounded by the forest.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="choose-room">
+        <div class="container">
+            <div class="choose-room__content">
+                <h3 class="title">
+                    Choose from a wide range of
+                    <span style="font-weight: 700;">luxury rooms</span>
+                </h3>
+                <a href="" class="btn-bookroom">
+                    book now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="list-logo">
+        <div class="container">
+            <div class="row grid-logo">
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo1.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo2.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo3.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo4.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo5.png" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-2 grid-logo__item">
+                    <figure class="image">
+                        <img src="~/Asset/images/logo6.png" alt="">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+
+

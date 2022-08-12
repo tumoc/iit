@@ -1,0 +1,54 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Models
+@using ProjectLibrary.Database
+@model IEnumerable<Gallery>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Menu> menus = CommentController.GetMainMenus(Request.Cookies["LanguageID"].Value);
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<Gallery> galleries = CommentController.Gallery(Request.Cookies["LanguageID"].Value);
+
+}
+<main class="main">
+    <section class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-title">
+                    <h1 class="banner-title">
+                        @menu.MetaTitle
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-grid">
+        <div class="section-title">
+            <h3 class="subtitle">
+                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "grid style")
+            </h3>
+            <div class="sectitle">
+                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "with space")
+            </div>
+        </div>
+        <div class="row grid-list-gallery">
+            @foreach (var item in galleries)
+            {
+                <div class="col-md-3">
+                    <figure class="image">
+
+                        <a href="@item.LargeImage" data-fancybox="gallery">
+                            <img src="@item.LargeImage" alt="">
+                            <div class="overlay-zoom">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+            }
+            </div>
+    </section>
+</main>
