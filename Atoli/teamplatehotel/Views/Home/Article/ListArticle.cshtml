@@ -13,28 +13,31 @@
     List<Article> articles2 = CommentController.GetAllArticles(Request.Cookies["LanguageID"].Value);
     List<Article> RecentArticles = CommentController.RecentArticles(menu.ID);
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
-    int temp ;
+    int temp;
 }
 <link href="~/assets/css/listBlog.css" rel="stylesheet" />
 @Html.Partial("header")
 <link href="~/assets/css/page.css" rel="stylesheet" />
-<div class="banner__list__blog">
-    <div class="list__blog__content">
-        <div class="path__list__blog">
-            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-            <p>@menu.Title</p>
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__list__blog" style="background-image: url('@item.Image')">
+        <div class="list__blog__content">
+            <div class="path__list__blog">
+                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                <p>@menu.Title</p>
+            </div>
+            <h3>@menu.Title</h3>
         </div>
-        <h3>@menu.Title</h3>
     </div>
-</div>
-<!--blog-->                                
-<div class="blog">
-    <div class="heading__blog">
-        <p>@menu.Title</p>
-        <h2>Our Latest Blogs to the Intranational Journal at a Glance</h2>
-    </div>
-    <div class="main__blog">
-        @foreach(var item in Model.OrderByDescending(a=>a.Datetime).ToList())
+}
+    <!--blog-->
+    <div class="blog">
+        <div class="heading__blog">
+            <p>@menu.Title</p>
+            <h2>Our Latest Blogs to the Intranational Journal at a Glance</h2>
+        </div>
+        <div class="main__blog">
+            @foreach (var item in Model.OrderByDescending(a => a.Datetime).ToList())
             {
                 <div class="list__blog">
                     <div class="image__blog">
@@ -52,24 +55,24 @@
                     </div>
                 </div>
             }
-        
+
+        </div>
     </div>
-</div>
-<!--end blog-->
-<!--page number-->
-<div>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-        new PagedListRenderOptions()
-        {
-        LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
-        })
-</div>
-<div class="page__number__blog">
-    <ul>
-        <li><a href=""><i class="fa-solid fa-angles-left"></i></a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
-    </ul>
-</div>
-<!--end page number-->
+    <!--end blog-->
+    <!--page number-->
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions()
+            {
+            LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
+            })
+    </div>
+    <div class="page__number__blog">
+        <ul>
+            <li><a href=""><i class="fa-solid fa-angles-left"></i></a></li>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
+        </ul>
+    </div>
+    <!--end page number-->

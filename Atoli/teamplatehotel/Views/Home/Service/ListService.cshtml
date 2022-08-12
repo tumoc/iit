@@ -9,54 +9,58 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
     Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
 }
 <link href="~/assets/css/services.css" rel="stylesheet" />
 @Html.Partial("header")
 <link href="~/assets/css/page.css" rel="stylesheet" />
-<div class="banner__services">
-    <div class="services__content">
-        <div class="path__services">
-            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-            <p>@menu.Title</p>
-        </div>
-        <h3>@menu.Title</h3>
-    </div>
-</div>
-<!--services-->
-<div class="services">
-    <div class="heading__services">
-        <p>@menu.Title</p>
-        <h2>Our Resort Services and All Other Details</h2>
-    </div>
-    <div class="main__services">
-        @foreach (var item in Model)
-        {
-            <div class="list__services">
-                <img src="@item.Image" />
-                <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="title__services">@item.Title</a>
-                <p>
-                    @Html.Raw(item.Description)
-                </p>
-                <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn__get__service">Get Service</a>
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__services" style="background-image: url('@item.Image')">
+        <div class="services__content">
+            <div class="path__services">
+                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                <p>@menu.Title</p>
             </div>
-        }
+            <h3>@menu.Title</h3>
+        </div>
     </div>
-</div>
-<!--end services-->
-<!--number page-->
-<div>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-        new PagedListRenderOptions()
-        {
-        LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
-        })
-</div>
-<div class="number__page">
-    <ul>
-        <li><a href=""><i class="fa-solid fa-angles-left"></i></a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
-    </ul>
-</div>
-<!--end number page-->
+}
+    <!--services-->
+    <div class="services">
+        <div class="heading__services">
+            <p>@menu.Title</p>
+            <h2>Our Resort Services and All Other Details</h2>
+        </div>
+        <div class="main__services">
+            @foreach (var item in Model)
+            {
+                <div class="list__services">
+                    <img src="@item.Image" />
+                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="title__services">@item.Title</a>
+                    <p>
+                        @Html.Raw(item.Description)
+                    </p>
+                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn__get__service">Get Service</a>
+                </div>
+            }
+        </div>
+    </div>
+    <!--end services-->
+    <!--number page-->
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions()
+            {
+            LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
+            })
+    </div>
+    <div class="number__page">
+        <ul>
+            <li><a href=""><i class="fa-solid fa-angles-left"></i></a></li>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
+        </ul>
+    </div>
+    <!--end number page-->

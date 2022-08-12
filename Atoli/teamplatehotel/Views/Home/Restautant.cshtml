@@ -7,7 +7,6 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
     Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
     Menu menu = ViewBag.Menu ?? new Menu();
-    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
     List<ListMenu> listMenus = CommentController.GetListMenus(Request.Cookies["LanguageID"].Value);
     //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
 }

@@ -16,302 +16,308 @@
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
     decimal price, pricepremium;
     double rating;
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
 }
 <link href="~/assets/css/roomDetail.css" rel="stylesheet" />
 @Html.Partial("header")
-<div class="banner__room__detail">
-    <div class="room__detail__content">
-        <div class="path__room__detail">
-            <a href="/">@home.Title<i class="fa-solid fa-chevron-right"></i></a>
-            <p>@Model.Room.Title</p>
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__room__detail" style="background-image: url('@item.Image')">
+        <div class="room__detail__content">
+            <div class="path__room__detail">
+                <a href="/">@home.Title<i class="fa-solid fa-chevron-right"></i></a>
+                <p>@Model.Room.Title</p>
+            </div>
+            <h3>@Model.Room.Title</h3>
         </div>
-        <h3>@Model.Room.Title</h3>
     </div>
-</div>
-<!--main room detail-->
-<div class="room__detail">
-    <div class="main__room__detail">
-        <div class="room__detail__left">
-            <div class="booking__sheet">
-                <h3>Booking Sheet</h3>
-                <form action="/booking" class="form-booking-sheet">
-                    <input type="text" name="Id" value="@Model.Room.ID" hidden />
-                    <div class="group__form__booking">
-                        <label for="">Check in</label>
-                        <input type="text" name="checkInDate" id="check-in-booking-sheet">
-                    </div>
-                    <div class="group__form__booking">
-                        <label for="">Check out</label>
-                        <input type="text" name="checkOutDate" id="check-out-booking-sheet">
-                    </div>
-                    <div class="group__form__booking">
-                        <label for="">Numbers of Adults</label>
-                        <div class="drop-down">
-                            <input name="Adult" hidden id="Adult" value="01" />
-                            <div class="selected">
-                                <a><span>01</span></a>
-                            </div>
-                            <div class="options">
-                                <ul>
-                                    <li><a>01</a></li>
-                                    <li><a>02</a></li>
-                                    <li><a>03</a></li>
-                                    <li><a>04</a></li>
-                                    <li><a>05</a></li>
-                                    <li><a>06</a></li>
-                                    <li><a>07</a></li>
-                                    <li><a>08</a></li>
-                                    <li><a>09</a></li>
-                                    <li><a>10</a></li>
-                                </ul>
-                            </div>
+}
+    <!--main room detail-->
+    <div class="room__detail">
+        <div class="main__room__detail">
+            <div class="room__detail__left">
+                <div class="booking__sheet">
+                    <h3>Booking Sheet</h3>
+                    <form action="/booking" class="form-booking-sheet">
+                        <input type="text" name="Id" value="@Model.Room.ID" hidden />
+                        <div class="group__form__booking">
+                            <label for="">Check in</label>
+                            <input type="text" name="checkInDate" id="check-in-booking-sheet">
                         </div>
-                        @*<div class="choose__person__number">
-
-                                <div class="person__number__booking__sheet">
-                                    <p>01</p>
-                                    <i class="fa-solid fa-chevron-down"></i>
+                        <div class="group__form__booking">
+                            <label for="">Check out</label>
+                            <input type="text" name="checkOutDate" id="check-out-booking-sheet">
+                        </div>
+                        <div class="group__form__booking">
+                            <label for="">Numbers of Adults</label>
+                            <div class="drop-down">
+                                <input name="Adult" hidden id="Adult" value="01" />
+                                <div class="selected">
+                                    <a><span>01</span></a>
                                 </div>
-                                <ul class="dropdown__person">
-                                    <li>01</li>
-                                    <li>02</li>
-                                    <li>03</li>
-                                    <li>04</li>
-                                    <li>05</li>
-                                </ul>
-                            </div>*@
-
-                    </div>
-                    <div class="group__form__booking">
-                        <label for="">Numbers of Childs</label>
-                        <div class="drop-down1">
-                            <input name="Child" hidden id="Child" value="00" />
-                            <div class="selected">
-                                <a><span>00</span></a>
+                                <div class="options">
+                                    <ul>
+                                        <li><a>01</a></li>
+                                        <li><a>02</a></li>
+                                        <li><a>03</a></li>
+                                        <li><a>04</a></li>
+                                        <li><a>05</a></li>
+                                        <li><a>06</a></li>
+                                        <li><a>07</a></li>
+                                        <li><a>08</a></li>
+                                        <li><a>09</a></li>
+                                        <li><a>10</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <div class="options">
-                                <ul>
-                                    <li><a>00</a></li>
-                                    <li><a>01</a></li>
-                                    <li><a>02</a></li>
-                                    <li><a>03</a></li>
-                                    <li><a>04</a></li>
-                                    <li><a>05</a></li>
-                                    <li><a>06</a></li>
-                                    <li><a>07</a></li>
-                                    <li><a>08</a></li>
-                                    <li><a>09</a></li>
-                                </ul>
+                            @*<div class="choose__person__number">
+
+                                    <div class="person__number__booking__sheet">
+                                        <p>01</p>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                    <ul class="dropdown__person">
+                                        <li>01</li>
+                                        <li>02</li>
+                                        <li>03</li>
+                                        <li>04</li>
+                                        <li>05</li>
+                                    </ul>
+                                </div>*@
+
+                        </div>
+                        <div class="group__form__booking">
+                            <label for="">Numbers of Childs</label>
+                            <div class="drop-down1">
+                                <input name="Child" hidden id="Child" value="00" />
+                                <div class="selected">
+                                    <a><span>00</span></a>
+                                </div>
+                                <div class="options">
+                                    <ul>
+                                        <li><a>00</a></li>
+                                        <li><a>01</a></li>
+                                        <li><a>02</a></li>
+                                        <li><a>03</a></li>
+                                        <li><a>04</a></li>
+                                        <li><a>05</a></li>
+                                        <li><a>06</a></li>
+                                        <li><a>07</a></li>
+                                        <li><a>08</a></li>
+                                        <li><a>09</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        <div class="group__form__booking">
+                            <button type="submit">Book Now</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="side__bar__plan">
+                    <div class="basic">
+                        <h3>Basic Plan Facilities</h3>
+                        <ul>
+                            @foreach (var item in basics)
+                            {
+                                <li><a href="">@item.Title</a></li>
+                            }
+
+                        </ul>
                     </div>
-                    <div class="group__form__booking">
-                        <button type="submit">Book Now</button>
+                    <div class="premium">
+                        <h3>Premium Plan Facilities</h3>
+                        <ul>
+                            @foreach (var item in basics)
+                            {
+                                <li><a href="">@item.Title</a></li>
+                            }
+                            @foreach (var item in premiums)
+                            {
+                                <li><a href="">@item.Title</a></li>
+                            }
+                        </ul>
                     </div>
-                </form>
+                </div>
+
             </div>
 
-            <div class="side__bar__plan">
-                <div class="basic">
-                    <h3>Basic Plan Facilities</h3>
-                    <ul>
-                        @foreach (var item in basics)
-                        {
-                            <li><a href="">@item.Title</a></li>
-                        }
-
-                    </ul>
-                </div>
-                <div class="premium">
-                    <h3>Premium Plan Facilities</h3>
-                    <ul>
-                        @foreach (var item in basics)
-                        {
-                            <li><a href="">@item.Title</a></li>
-                        }
-                        @foreach (var item in premiums)
-                        {
-                            <li><a href="">@item.Title</a></li>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="room__detail__right">
-            <div class="image__room__detail owl-carousel owl-theme">
-                <div class="list__img__room__detail">
-                    <img src="@Model.Room.Image" alt="">
-                </div>
-                @foreach (var item in Model.RoomGalleries)
-                {
+            <div class="room__detail__right">
+                <div class="image__room__detail owl-carousel owl-theme">
                     <div class="list__img__room__detail">
-                        <img src="@item.ImageLarge" alt="">
+                        <img src="@Model.Room.Image" alt="">
                     </div>
-                }
-            </div>
-
-            <div class="room__detail__des">
-                <div class="heading__detail__content">
-                    <h2>@Model.Room.Title @if (Model.Room.PriceNet != null)
-                    {<span style="color:red">(-@Model.Room.PriceNet%)</span>}</h2>
-                    @if (Model.Room.PriceNet != null)
+                    @foreach (var item in Model.RoomGalleries)
                     {
-                        {
-                            price = Model.Room.Price * (1 - (decimal)Model.Room.PriceNet / 100);
-                            pricepremium = Model.Room.PricePremium * (1 - (decimal)Model.Room.PriceNet / 100);
-                        }
-                        <ul>
-                            <li><span style="text-decoration: line-through">Basic : $@Model.Room.Price/Night</span> <br /><span style="color:red">Basic : $@price/Night</span></li>
-                            <li><span style="text-decoration: line-through">Premium : $@Model.Room.PricePremium/Night</span> <br /><span style="color:red">Premium : $@pricepremium/Night</span></li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <ul>
-                            <li>Basic : $@Model.Room.Price/Night</li>
-                            <li>Premium : $@Model.Room.PricePremium/Night</li>
-                        </ul>
+                        <div class="list__img__room__detail">
+                            <img src="@item.ImageLarge" alt="">
+                        </div>
                     }
                 </div>
-                @Html.Raw(Model.Room.Content)
-            <div class="detail__review">
-                <h2>Clients Review and Retting's</h2>
-                <div class="review__rating">
-                    <h3>Your retting:</h3>
-                </div>
-                
-                <form action="/Rating/Send" method="post" id="form" class="form-contact">
-                    <div>
-                        <input type="hidden" name="Star" value="5" class="rating-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" />
-                    </div>
-                    
 
-                    <div><input type="text" name="RoomID" hidden value="@Model.Room.ID" /></div>
-                    <div>
-                        <input type="text" name="Name" placeholder="FullName*">
-                    </div>
-                    <div>
-                        <input type="text" name="Tel" placeholder="Phone*">
-                    </div>
-
-                    <div style="width:100%">
-                        <input type="email" name="Email" id="" placeholder="Email*">
-                    </div>
-                    <div class="t__area">
-                        <textarea name="Content" id="" cols="30" rows="10" placeholder="Your review"></textarea>
-                    </div>
-                    <div class="accept__contact">
-                        <input type="checkbox" name="check" id="">
-                        <span>Save my name, email, and phone in this browser for the next time I review.</span>
-                    </div>
-                    <div class="btn__contact">
-                        <button id="submit-form" type="submit">Submit Review</button>
-                    </div>
-                </form>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end main room detail-->
-<!--our offer-->
-<div class="our__offer">
-    <h2>Our Orther Offer</h2>
-    <div class="main__our__offer">
-        @foreach (var item in rooms.Take(2))
-        {
-            <div class="list__our__offer">
-                <div class="img__our__offer">
-                    <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
-                    
-                </div>
-
-                <div class="offer__content">
-                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="room__offer__name">@item.Title</a>
-                    <div class="rating__offer">
-                        <span>@item.Price / Per Night</span>
-                        @if (CommentController.Rating(item.ID) != 0)
+                <div class="room__detail__des">
+                    <div class="heading__detail__content">
+                        <h2>
+                            @Model.Room.Title @if (Model.Room.PriceNet != null)
+                        {<span style="color:red">(-@Model.Room.PriceNet%)</span>}
+                        </h2>
+                        @if (Model.Room.PriceNet != null)
                         {
-                            { rating = @Math.Round(@CommentController.Rating(item.ID), 1); }
+                            {
+                                price = Model.Room.Price * (1 - (decimal)Model.Room.PriceNet / 100);
+                                pricepremium = Model.Room.PricePremium * (1 - (decimal)Model.Room.PriceNet / 100);
+                            }
                             <ul>
-                                <li>@rating</li>
-                                <li><input type="hidden" readonly value="@StringHelper.DoubleToString(rating)" class="rating1-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" /></li>
+                                <li><span style="text-decoration: line-through">Basic : $@Model.Room.Price/Night</span> <br /><span style="color:red">Basic : $@price/Night</span></li>
+                                <li><span style="text-decoration: line-through">Premium : $@Model.Room.PricePremium/Night</span> <br /><span style="color:red">Premium : $@pricepremium/Night</span></li>
                             </ul>
                         }
                         else
                         {
                             <ul>
-                                <li>No review</li>
+                                <li>Basic : $@Model.Room.Price/Night</li>
+                                <li>Premium : $@Model.Room.PricePremium/Night</li>
                             </ul>
                         }
                     </div>
-                    <p>
-                        @Html.Raw(item.Description)
-                    </p>
+                    @Html.Raw(Model.Room.Content)
+                    <div class="detail__review">
+                        <h2>Clients Review and Retting's</h2>
+                        <div class="review__rating">
+                            <h3>Your retting:</h3>
+                        </div>
 
-                    <ul class="offer__info">
-                        <li><i class="fa-solid fa-user"></i> @item.MaxPeople Person</li>
-                        <li><i class="fa-solid fa-expand"></i> @item.Roomspace m2 / @Math.Round((double)item.Roomspace* 10.76391) ft2 </li>
-                        <li><i class="fa-solid fa-eye"></i> @item.Roomview</li>
-                        <li><i class="fa-solid fa-bed"></i> @item.Numofbed @item.Typebed </li>
-                    </ul>
-                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn__book__offer">Read more</a>
+                        <form action="/Rating/Send" method="post" id="form" class="form-contact">
+                            <div>
+                                <input type="hidden" name="Star" value="5" class="rating-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" />
+                            </div>
+
+
+                            <div><input type="text" name="RoomID" hidden value="@Model.Room.ID" /></div>
+                            <div>
+                                <input type="text" name="Name" placeholder="FullName*">
+                            </div>
+                            <div>
+                                <input type="text" name="Tel" placeholder="Phone*">
+                            </div>
+
+                            <div style="width:100%">
+                                <input type="email" name="Email" id="" placeholder="Email*">
+                            </div>
+                            <div class="t__area">
+                                <textarea name="Content" id="" cols="30" rows="10" placeholder="Your review"></textarea>
+                            </div>
+                            <div class="accept__contact">
+                                <input type="checkbox" name="check" id="">
+                                <span>Save my name, email, and phone in this browser for the next time I review.</span>
+                            </div>
+                            <div class="btn__contact">
+                                <button id="submit-form" type="submit">Submit Review</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        }
+        </div>
     </div>
-</div>
-<!--end our offer-->
-@section Scripts{
-    <script type="text/javascript">
-        
-        $(document).ready(function () {
-            $('input.rating-loading').rating({
-                size: 'sm',
-                filledStar: '<i class="fa-solid fa-star"></i>',
-                emptyStar: '<i class="fa fa-star"></i>'
-            });
-            $('input.rating1-loading').rating1({
-                size: 'sm',
-                filledStar: '<i class="fa-solid fa-star"></i>',
-                emptyStar: '<i class="fa fa-star"></i>'
-            });
-            $('#form').validate({ // initialize the plugin
-                rules: {
-                    'Name': {
-                        required: true,
-                        minlength: 5
-                    },
-                    'Tel': {
-                        required: true,
-                        minlength: 10,
-                        maxlength: 10
-                    },
-                    'Email': {
-                        required: true,
-                        email: true
-                    },
-                    'check': {
-                        required: true
-                    }
-                },
-                submitHandler: function (form) {
-                    $.post($(form).attr("action"), $(form).serialize())
-                        .done(function (data) {
-                            if (data.success == true) {
-                                alert("Rating Successed!");
-                                $(form)[0].reset()
-                            } else {
-                                alert(data.Message);
+    <!--end main room detail-->
+    <!--our offer-->
+    <div class="our__offer">
+        <h2>Our Orther Offer</h2>
+        <div class="main__our__offer">
+            @foreach (var item in rooms.Take(2))
+            {
+                <div class="list__our__offer">
+                    <div class="img__our__offer">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
+
+                    </div>
+
+                    <div class="offer__content">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="room__offer__name">@item.Title</a>
+                        <div class="rating__offer">
+                            <span>@item.Price / Per Night</span>
+                            @if (CommentController.Rating(item.ID) != 0)
+                            {
+                                { rating = @Math.Round(@CommentController.Rating(item.ID), 1); }
+                                <ul>
+                                    <li>@rating</li>
+                                    <li><input type="hidden" readonly value="@StringHelper.DoubleToString(rating)" class="rating1-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" /></li>
+                                </ul>
                             }
-                        })
-                        .fail(function (error) {
-                            alert(error);
-                        });
-                }
+                            else
+                            {
+                                <ul>
+                                    <li>No review</li>
+                                </ul>
+                            }
+                        </div>
+                        <p>
+                            @Html.Raw(item.Description)
+                        </p>
+
+                        <ul class="offer__info">
+                            <li><i class="fa-solid fa-user"></i> @item.MaxPeople Person</li>
+                            <li><i class="fa-solid fa-expand"></i> @item.Roomspace m2 / @Math.Round((double)item.Roomspace * 10.76391) ft2 </li>
+                            <li><i class="fa-solid fa-eye"></i> @item.Roomview</li>
+                            <li><i class="fa-solid fa-bed"></i> @item.Numofbed @item.Typebed </li>
+                        </ul>
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn__book__offer">Read more</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!--end our offer-->
+    @section Scripts{
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('input.rating-loading').rating({
+                    size: 'sm',
+                    filledStar: '<i class="fa-solid fa-star"></i>',
+                    emptyStar: '<i class="fa fa-star"></i>'
+                });
+                $('input.rating1-loading').rating1({
+                    size: 'sm',
+                    filledStar: '<i class="fa-solid fa-star"></i>',
+                    emptyStar: '<i class="fa fa-star"></i>'
+                });
+                $('#form').validate({ // initialize the plugin
+                    rules: {
+                        'Name': {
+                            required: true,
+                            minlength: 5
+                        },
+                        'Tel': {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10
+                        },
+                        'Email': {
+                            required: true,
+                            email: true
+                        },
+                        'check': {
+                            required: true
+                        }
+                    },
+                    submitHandler: function (form) {
+                        $.post($(form).attr("action"), $(form).serialize())
+                            .done(function (data) {
+                                if (data.success == true) {
+                                    alert("Rating Successed!");
+                                    $(form)[0].reset()
+                                } else {
+                                    alert(data.Message);
+                                }
+                            })
+                            .fail(function (error) {
+                                alert(error);
+                            });
+                    }
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

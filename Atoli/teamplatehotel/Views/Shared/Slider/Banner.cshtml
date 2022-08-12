@@ -52,13 +52,22 @@
             font-size: 12px;
             margin-left: 10px;
         }
+    .banner__content h3 {
+        font-size: 40px;
+        font-weight: 700;
+        color: #fff;
+    }
 </style>
-<div class="bg__banner__about">
-    <div class="banner__content">
-        <div class="path__about">
-            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-            <p>@menu.Title</p>
+@foreach(var item in sliders.Take(1))
+    {
+        <div class="bg__banner__about" style="background-image: url('@item.Image')">
+            <div class="banner__content">
+                <div class="path__about">
+                    <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                    <p>@menu.Title</p>
+                </div>
+                <h3>@menu.Title</h3>
+            </div>
         </div>
-        <h3>@menu.Title</h3>
-    </div>
-</div>
+    }
+

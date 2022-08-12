@@ -7,56 +7,60 @@
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
     List<Service> ortherService = CommentController.OrtherService(Model.Service.ID);
-
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
 }
 <link href="~/assets/css/detailServices.css" rel="stylesheet" />
 @Html.Partial("header")
-<div class="banner__detail__service">
-    <div class="detail__services__content">
-        <div class="path__detail__services">
-            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-            <p>@Model.Service.Title</p>
-        </div>
-        <h3>@Model.Service.Title</h3>
-    </div>
-</div>
-<!--main detail services-->
-<div class="detail__services">
-    <div class="main__detail__services">
-        <div class="left__detail__services">
-            <div class="slider__image__services owl-carousel owl-theme">
-                @foreach (var item in Model.ServiceGalleries)
-                {
-                    <div>
-                        <img src="@item.ImageLarge" alt="">
-                    </div>
-                }
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__detail__service" style="background-image: url('@item.Image')">
+        <div class="detail__services__content">
+            <div class="path__detail__services">
+                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                <p>@Model.Service.Title</p>
             </div>
-            <h2>@Model.Service.Title</h2>
-            @Html.Raw(Model.Service.Content)
+            <h3>@Model.Service.Title</h3>
         </div>
-        <div class="right__detail__services">
-            <div class="other__services">
-                <h3>Others Services</h3>
-                <ul>
-                    @foreach(var item in ortherService.Take(5))
+    </div>
+}
+    <!--main detail services-->
+    <div class="detail__services">
+        <div class="main__detail__services">
+            <div class="left__detail__services">
+                <div class="slider__image__services owl-carousel owl-theme">
+                    @foreach (var item in Model.ServiceGalleries)
                     {
-                        <li><a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a></li>
+                        <div>
+                            <img src="@item.ImageLarge" alt="">
+                        </div>
                     }
-                    
-                </ul>
+                </div>
+                <h2>@Model.Service.Title</h2>
+                @Html.Raw(Model.Service.Content)
             </div>
+            <div class="right__detail__services">
+                <div class="other__services">
+                    <h3>Others Services</h3>
+                    <ul>
+                        @foreach (var item in ortherService.Take(5))
+                        {
+                            <li><a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a></li>
+                        }
 
-            @*<div class="download__brochures">
-                <h3>Download brochures</h3>
-                <ul>
-                    <li><a href="">Pdf File (1) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
-                    <li><a href="">Pdf File (2) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
-                    <li><a href="">Pdf File (3) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
-                    <li><a href="">Pdf File (4) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
-                </ul>
-            </div>*@
+                    </ul>
+                </div>
+
+                @*<div class="download__brochures">
+                        <h3>Download brochures</h3>
+                        <ul>
+                            <li><a href="">Pdf File (1) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
+                            <li><a href="">Pdf File (2) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
+                            <li><a href="">Pdf File (3) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
+                            <li><a href="">Pdf File (4) <i class="fa-solid fa-cloud-arrow-down"></i></a></li>
+                        </ul>
+                    </div>*@
+            </div>
         </div>
     </div>
-</div>
-<!--end main detail services-->
+    <!--end main detail services-->

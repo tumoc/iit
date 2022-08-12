@@ -11,171 +11,174 @@
     List<ShowObject> listCategory = CommentController.listCategory(Request.Cookies["LanguageID"].Value);
     Article previouspost = CommentController.PreviousArticle(menu.ID, Model.Article.ID);
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
 
 }
 <link href="~/assets/css/blogDetail.css" rel="stylesheet" />
 @Html.Partial("header")
 
-
-<div class="banner__blog__detail">
-    <div class="blog__detail__content">
-        <div class="path__blog__detail">
-            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-            <p>@Model.Article.Title</p>
-        </div>
-        <h3>@Model.Article.Title</h3>
-    </div>
-</div>
-<!--blog detail-->
-<div class="blog__detail">
-    <div class="main__blog__detail">
-        <div class="blog__detail__left">
-            <div class="heading__left__content">
-                <div class="heading__left__content__img">
-                    <img src="@Model.Article.Image" alt="">
-                </div>
-                <h2>@Model.Article.Title</h2>
-                <ul class="date">
-                    <li><i class="fa-solid fa-user"></i> By @Model.Article.Authur</li>
-                    <li><i class="fa-solid fa-calendar-days"></i> @Model.Article.Datetime.GetValueOrDefault().ToString("dd/MM/yyyy")</li>
-                </ul>
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__blog__detail" style="background-image: url('@item.Image')">
+        <div class="blog__detail__content">
+            <div class="path__blog__detail">
+                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                <p>@Model.Article.Title</p>
             </div>
-
-            <div class="blog__detail__des">
-                @Html.Raw(Model.Article.Content)
-            </div>
-
-            <div class="blog__detail__comment">
-                <h2>Comments</h2>
-                <ul>
-                    @foreach (var item in comments)
-                    {
-                        <li>
-                            <img src="~/assets/img/avatar.png" />
-                            <div class="comment__content">
-                                <div class="heading__comment">
-                                    <h3>@item.Name</h3>
-                                    <a href="">Reply</a>
-                                </div>
-                                <span>@item.CreateDate.ToString("dd/MM/yyyy HH:mm")</span>
-                                <p>
-
-                                    @Html.Raw(item.Comment1)
-
-                                </p>
-                            </div>
-                        </li>
-                    }
-
-                </ul>
-            </div>
-
-
-            <div class="comment__form">
-                <h2>Leave A Comment</h2>
-                <form action="/Cment2/Send" method="post" class="form-comment" id="submitform">
-
-                    <div>
-                        <input type="email" name="Email" id="" placeholder="Your Email">
-                    </div>
-                    <div>
-                        <input type="text" name="Name" placeholder="Your name">
-                    </div>
-
-                    <div>
-                        <input type="text" name="Website" placeholder="Your website">
-                    </div>
-                    <div>
-                        <textarea name="Comment" id="" cols="30" rows="10" placeholder="Your comment"></textarea>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="check" id="">
-                        <span>Save my name, email, and website in this browser for the next time I comment.</span>
-                    </div>
-                    <input type="text" name="ArticleID" hidden value="@Model.Article.ID">
-                    <div>
-                        <button type="submit">Post A Comment</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="blog__detail__right">
-            @*<div class="right__content__search">
-                    <input type="text" placeholder="Search...">
-                    <div class="icon__search">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                </div>*@
-
-            <div class="recent__post__blog">
-                <h3>Recent Posts</h3>
-                <div class="list__recent__post__blog">
-                    @foreach (var item in Ortherarticles.Take(5))
-                    {
-                        <div class="post__item">
-                            <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
-                            <div class="post__iten__content">
-                                <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="title__post">@item.Title</a>
-                                <ul>
-                                    <li><i class="fa-solid fa-user"></i> @item.view.ToString("N0")</li>
-                                    <li><i class="fa-solid fa-message"></i>@CommentController.countcmt(item.ID).ToString("N0")</li>
-                                </ul>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
-
-            @*<div class="blog__detail__tag">
-                    <ul>
-                        <li><a href="">Hotel</a></li>
-                        <li><a href="">Booking</a></li>
-                        <li><a href="">Luxury</a></li>
-                        <li><a href="">Beach</a></li>
-                        <li><a href="">Resorts</a></li>
-                        <li><a href="">Room</a></li>
-                        <li><a href="">Single</a></li>
-                        <li><a href="">Family</a></li>
-                        <li><a href="">Sea View</a></li>
-                    </ul>
-                </div>*@
+            <h3>@Model.Article.Title</h3>
         </div>
     </div>
-</div>
-<!--end blog detail-->
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#submitform').validate({ // initialize the plugin
-                rules: {
-                    Name: {
-                        required: true,
-                    },
-                    Comment: {
-                        required: true,
-                    },
-                    Email: {
-                        required: true,
-                        email: true,
-                    },
-                    Website: {
-                        required: true,
-                    },
-                    check: {
-                        required: true
-                    }
-                },
-                submitHandler: function (form) {
-                    $.post($(form).attr("action"), $(form).serialize())
-                        .done(function () {
-                            alert("Post Comment Successed");
-                            $('#submitform')[0].reset();
-                        });
-                }
-            });
-        });
-    </script>
 }
+    <!--blog detail-->
+    <div class="blog__detail">
+        <div class="main__blog__detail">
+            <div class="blog__detail__left">
+                <div class="heading__left__content">
+                    <div class="heading__left__content__img">
+                        <img src="@Model.Article.Image" alt="">
+                    </div>
+                    <h2>@Model.Article.Title</h2>
+                    <ul class="date">
+                        <li><i class="fa-solid fa-user"></i> By @Model.Article.Authur</li>
+                        <li><i class="fa-solid fa-calendar-days"></i> @Model.Article.Datetime.GetValueOrDefault().ToString("dd/MM/yyyy")</li>
+                    </ul>
+                </div>
+
+                <div class="blog__detail__des">
+                    @Html.Raw(Model.Article.Content)
+                </div>
+
+                <div class="blog__detail__comment">
+                    <h2>Comments</h2>
+                    <ul>
+                        @foreach (var item in comments)
+                        {
+                            <li>
+                                <img src="~/assets/img/avatar.png" />
+                                <div class="comment__content">
+                                    <div class="heading__comment">
+                                        <h3>@item.Name</h3>
+                                        <a href="">Reply</a>
+                                    </div>
+                                    <span>@item.CreateDate.ToString("dd/MM/yyyy HH:mm")</span>
+                                    <p>
+
+                                        @Html.Raw(item.Comment1)
+
+                                    </p>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+
+
+                <div class="comment__form">
+                    <h2>Leave A Comment</h2>
+                    <form action="/Cment2/Send" method="post" class="form-comment" id="submitform">
+
+                        <div>
+                            <input type="email" name="Email" id="" placeholder="Your Email">
+                        </div>
+                        <div>
+                            <input type="text" name="Name" placeholder="Your name">
+                        </div>
+
+                        <div>
+                            <input type="text" name="Website" placeholder="Your website">
+                        </div>
+                        <div>
+                            <textarea name="Comment" id="" cols="30" rows="10" placeholder="Your comment"></textarea>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="check" id="">
+                            <span>Save my name, email, and website in this browser for the next time I comment.</span>
+                        </div>
+                        <input type="text" name="ArticleID" hidden value="@Model.Article.ID">
+                        <div>
+                            <button type="submit">Post A Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="blog__detail__right">
+                @*<div class="right__content__search">
+                        <input type="text" placeholder="Search...">
+                        <div class="icon__search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>*@
+
+                <div class="recent__post__blog">
+                    <h3>Recent Posts</h3>
+                    <div class="list__recent__post__blog">
+                        @foreach (var item in Ortherarticles.Take(5))
+                        {
+                            <div class="post__item">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
+                                <div class="post__iten__content">
+                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="title__post">@item.Title</a>
+                                    <ul>
+                                        <li><i class="fa-solid fa-user"></i> @item.view.ToString("N0")</li>
+                                        <li><i class="fa-solid fa-message"></i>@CommentController.countcmt(item.ID).ToString("N0")</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+                @*<div class="blog__detail__tag">
+                        <ul>
+                            <li><a href="">Hotel</a></li>
+                            <li><a href="">Booking</a></li>
+                            <li><a href="">Luxury</a></li>
+                            <li><a href="">Beach</a></li>
+                            <li><a href="">Resorts</a></li>
+                            <li><a href="">Room</a></li>
+                            <li><a href="">Single</a></li>
+                            <li><a href="">Family</a></li>
+                            <li><a href="">Sea View</a></li>
+                        </ul>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+    <!--end blog detail-->
+    @section Scripts{
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#submitform').validate({ // initialize the plugin
+                    rules: {
+                        Name: {
+                            required: true,
+                        },
+                        Comment: {
+                            required: true,
+                        },
+                        Email: {
+                            required: true,
+                            email: true,
+                        },
+                        Website: {
+                            required: true,
+                        },
+                        check: {
+                            required: true
+                        }
+                    },
+                    submitHandler: function (form) {
+                        $.post($(form).attr("action"), $(form).serialize())
+                            .done(function () {
+                                alert("Post Comment Successed");
+                                $('#submitform')[0].reset();
+                            });
+                    }
+                });
+            });
+        </script>
+    }

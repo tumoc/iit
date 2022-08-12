@@ -11,19 +11,20 @@
     string lan = Request.Cookies["LanguageID"].Value;
     List<SelectListItem> list = ViewBag.OptionNumber;
     List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
-
-
 }
 <link href="~/assets/css/about.css" rel="stylesheet" />
 <link href="~/assets/css/booking.css" rel="stylesheet" />
 @Html.Partial("headerHome")
 <main class="main">
     <section>
-        <div class="bg__banner__about">
-            <div class="banner__content">
-                <h3>Booking Room</h3>
+        @foreach (var item in sliders.Take(1))
+        {
+            <div class="bg__banner__about" style="background-image: url('@item.Image')">
+                <div class="banner__content">
+                    <h3>Booking Room</h3>
+                </div>
             </div>
-        </div>
+        }
     </section>
     <div class="booking-main box">
         <div class="container">

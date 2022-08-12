@@ -14,87 +14,91 @@
     Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
     double rating;
 }
-<link href="~/assets/css/listRoom.css" rel="stylesheet" />    
+<link href="~/assets/css/listRoom.css" rel="stylesheet" />
 @Html.Partial("header")
 <link href="~/assets/css/page.css" rel="stylesheet" />
-<div class="banner__room">
-    <div class="room__content">
-        <div class="path__room">
-            <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
-            <p>@menu.Title</p>
-        </div>
-        <h3>@menu.Title</h3>
-    </div>
-</div>
-<!--main room-->
-<div class="room">
-    <div class="heading__room">
-        <span>@menu.Title</span>
-        <h2>Our Rooms & Rates</h2>
-    </div>
-    <div class="main__room">
-        @foreach (var item in Model)
-        {
-            <div class="list__room">
-                <div class="room__image">
-                    <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
-                </div>
-                <div class="room__info">
-                    <div class="room__rating">
-                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a>
-                        @if (CommentController.Rating(item.ID) != 0)
-                        {
-                            { rating = @Math.Round(@CommentController.Rating(item.ID), 1); }
-                            <ul>
-                                <li>@rating</li>
-                                <li><input type="hidden" readonly value="@StringHelper.DoubleToString(rating)" class="rating1-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" /></li>
-                            </ul>                                 
-                        }
-                        else { 
-                            <ul>
-                                <li>No review</li>
-                            </ul>
-                        }
-                    </div>
-                    <div class="room__price">
-                        <p>$@item.Price<span>/</span> Per Night</p>
-                    </div>
-                </div>
-
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__room" style="background-image: url('@item.Image')">
+        <div class="room__content">
+            <div class="path__room">
+                <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                <p>@menu.Title</p>
             </div>
-        }
-        
+            <h3>@menu.Title</h3>
+        </div>
     </div>
-</div>
-<!--end main room-->
-<!--room page number-->
-<div>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-        new PagedListRenderOptions()
-        {
-        LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
-        })
-</div>
-<div class="room__page__number">
-        
-    <ul>
-        <li><a href=""><i class="fa-solid fa-angles-left"></i></a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
-    </ul>
-</div>
-<!--end room page number-->
-@section Scripts{
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            $('input.rating1-loading').rating1({
-                size: 'sm',
-                filledStar: '<i class="fa-solid fa-star"></i>',
-                emptyStar: '<i class="fa fa-star"></i>'
-            });
-        });
-    </script>
 }
+    <!--main room-->
+    <div class="room">
+        <div class="heading__room">
+            <span>@menu.Title</span>
+            <h2>Our Rooms & Rates</h2>
+        </div>
+        <div class="main__room">
+            @foreach (var item in Model)
+            {
+                <div class="list__room">
+                    <div class="room__image">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
+                    </div>
+                    <div class="room__info">
+                        <div class="room__rating">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a>
+                            @if (CommentController.Rating(item.ID) != 0)
+                            {
+                                { rating = @Math.Round(@CommentController.Rating(item.ID), 1); }
+                                <ul>
+                                    <li>@rating</li>
+                                    <li><input type="hidden" readonly value="@StringHelper.DoubleToString(rating)" class="rating1-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" /></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul>
+                                    <li>No review</li>
+                                </ul>
+                            }
+                        </div>
+                        <div class="room__price">
+                            <p>$@item.Price<span>/</span> Per Night</p>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+    <!--end main room-->
+    <!--room page number-->
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions()
+            {
+            LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
+            })
+    </div>
+    <div class="room__page__number">
+
+        <ul>
+            <li><a href=""><i class="fa-solid fa-angles-left"></i></a></li>
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+            <li><a href=""><i class="fa-solid fa-angles-right"></i></a></li>
+        </ul>
+    </div>
+    <!--end room page number-->
+    @section Scripts{
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('input.rating1-loading').rating1({
+                    size: 'sm',
+                    filledStar: '<i class="fa-solid fa-star"></i>',
+                    emptyStar: '<i class="fa fa-star"></i>'
+                });
+            });
+        </script>
+    }
