@@ -1,0 +1,30 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Models
+@using ProjectLibrary.Database
+@model IEnumerable<Gallery>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Gallery> galleries = CommentController.GetGalleries();
+
+}
+@Html.Partial("Slider/Banner")
+<!--gallery-->
+<section class="gallery-grid mg-100">
+    <div class="container">
+        <div class="gallery-list">
+            @foreach(var item in galleries)
+            {
+                <div class="gallery-item">
+                    <a href="@item.LargeImage" data-fancybox="gallery">
+                        <img src="@item.LargeImage" alt="">
+                    </a>
+                </div>
+            }
+            
+        </div>
+    </div>
+</section>
+<!--end gallery-->

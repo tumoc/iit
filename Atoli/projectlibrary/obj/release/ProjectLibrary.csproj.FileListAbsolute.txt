@@ -188,3 +188,15 @@ C:\Users\Mr.Tu\OneDrive\Máy tính\tai lieu\Hotale\ProjectLibrary\obj\Release\Pr
 C:\Users\Mr.Tu\OneDrive\Máy tính\tai lieu\Hotale\ProjectLibrary\obj\Release\ProjectLibrary.csproj.CopyComplete
 C:\Users\Mr.Tu\OneDrive\Máy tính\tai lieu\Hotale\ProjectLibrary\obj\Release\ProjectLibrary.dll
 C:\Users\Mr.Tu\OneDrive\Máy tính\tai lieu\Hotale\ProjectLibrary\obj\Release\ProjectLibrary.pdb
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\ProjectLibrary.dll.config
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\ProjectLibrary.dll
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\ProjectLibrary.pdb
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\EntityFramework.dll
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\EntityFramework.xml
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\obj\Release\ProjectLibrary.csproj.AssemblyReference.cache
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\obj\Release\ProjectLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\obj\Release\ProjectLibrary.csproj.CopyComplete
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\obj\Release\ProjectLibrary.dll
+C:\Users\Mr.Tu\OneDrive\Máy tính\Atoli\ProjectLibrary\obj\Release\ProjectLibrary.pdb

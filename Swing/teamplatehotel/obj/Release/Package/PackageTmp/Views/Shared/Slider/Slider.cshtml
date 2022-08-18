@@ -1,0 +1,97 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@{
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+}
+<link rel="stylesheet" href="~/Plugins/asset/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Plugins/asset/lib/mmenu/mmenu.css">
+<link rel="stylesheet" href="~/Plugins/asset/lib/css/style.css">
+@*<link href="~/Plugins/slider-nivo/nivo-slider.css" rel="stylesheet" />*@
+<style>
+    @@media screen and (max-width: 767px) {
+        .nivo-caption {
+            font-size: 20px !important;
+            margin-bottom: 0 !important;
+        }
+    }
+
+    .nivo-caption {
+        margin-bottom: 70px;
+        text-align: center;
+        font-size: 65px;
+        width: 100%;
+    }
+</style>
+<section>
+    <div id="slider" class="nivoSlider">
+        @foreach (var item in sliders)
+        {
+            <img src="@item.Image" title="@item.Title" />
+        }
+    </div>
+</section>
+<div class="clearfix"></div>
+<section class="section-check-availability">
+    <div class="container">
+        <div class="check-availability">
+            <div class="row">
+                <div class="col-lg-3">
+                    <h2>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Phonggia")</h2>
+                </div>
+                <div class="col-lg-9">
+                    <form action="https://booking-guarantee.com/Home/SelectDate?" id="check-room" method="get">
+                        <div class="availability-form">
+                            <input type="hidden" name="hotelKey" value="TLP">
+                            <input type="hidden" name="hotelCode" value="TLP">
+                            <input type="hidden" name="lang" value="vi">
+                            <input type="hidden" name="currency" value="VND">
+                            <input name="CheckIn" type="text" id="ctr_search_TxtNgaydi" class="awe-calendar from" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "ArrivalDate")" />
+                            <input name="CheckOut" type="text" id="ctr_search_TxtNgayve" class="awe-calendar to" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "DepartureDate")" />
+                            <select name="Adult" id="ctr_search_DrlNguoilon" class="awe-select">
+                                <option selected="selected" value="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Adult")</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+
+                            </select>
+                            <select name="Child" id="ctr_search_DrlTreem" class="awe-select">
+                                <option selected="selected" value="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "child")</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+
+                            </select>
+                            <div class="vailability-submit">
+                                <button type="submit" id="ctr_search_LinkButton1" class="awe-btn awe-btn-13">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "findthebest")</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+

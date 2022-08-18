@@ -22,7 +22,7 @@ namespace ProjectLibrary.Database
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Atoli")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="atoli_")]
 	public partial class MyDbDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,9 +33,9 @@ namespace ProjectLibrary.Database
     partial void InsertAdvertising(Advertising instance);
     partial void UpdateAdvertising(Advertising instance);
     partial void DeleteAdvertising(Advertising instance);
-    partial void InsertUsefullink(Usefullink instance);
-    partial void UpdateUsefullink(Usefullink instance);
-    partial void DeleteUsefullink(Usefullink instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     partial void InsertAmenity(Amenity instance);
     partial void UpdateAmenity(Amenity instance);
     partial void DeleteAmenity(Amenity instance);
@@ -123,13 +123,13 @@ namespace ProjectLibrary.Database
     partial void InsertSubscribe(Subscribe instance);
     partial void UpdateSubscribe(Subscribe instance);
     partial void DeleteSubscribe(Subscribe instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
+    partial void InsertUsefullink(Usefullink instance);
+    partial void UpdateUsefullink(Usefullink instance);
+    partial void DeleteUsefullink(Usefullink instance);
     #endregion
 		
 		public MyDbDataContext() : 
-				base(global::ProjectLibrary.Properties.Settings.Default.AtoliConnectionString, mappingSource)
+				base(global::ProjectLibrary.Properties.Settings.Default.atoli_ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -166,11 +166,11 @@ namespace ProjectLibrary.Database
 			}
 		}
 		
-		public System.Data.Linq.Table<Usefullink> Usefullinks
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<Usefullink>();
+				return this.GetTable<User>();
 			}
 		}
 		
@@ -406,11 +406,11 @@ namespace ProjectLibrary.Database
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<Usefullink> Usefullinks
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<Usefullink>();
 			}
 		}
 	}
@@ -686,252 +686,187 @@ namespace ProjectLibrary.Database
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usefullink")]
-	public partial class Usefullink : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _ID;
 		
-		private string _LanguageID;
+		private string _UserName;
 		
-		private string _Name;
+		private string _Password;
 		
-		private string _Link;
+		private string _FullName;
 		
-		private string _Description;
+		private string _Email;
 		
-		private int _Index;
+		private string _PasswordOld;
 		
-		private bool _Stauts;
-		
-		private string _Alias;
-		
-		private EntityRef<Language> _Language;
+		private bool _Status;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnLanguageIDChanging(string value);
-    partial void OnLanguageIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnLinkChanging(string value);
-    partial void OnLinkChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnIndexChanging(int value);
-    partial void OnIndexChanged();
-    partial void OnStautsChanging(bool value);
-    partial void OnStautsChanged();
-    partial void OnAliasChanging(string value);
-    partial void OnAliasChanged();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnFullNameChanging(string value);
+    partial void OnFullNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPasswordOldChanging(string value);
+    partial void OnPasswordOldChanged();
+    partial void OnStatusChanging(bool value);
+    partial void OnStatusChanged();
     #endregion
 		
-		public Usefullink()
+		public User()
 		{
-			this._Language = default(EntityRef<Language>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
 		{
 			get
 			{
-				return this._Id;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._ID != value))
 				{
-					this.OnIdChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LanguageID", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string LanguageID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UserName
 		{
 			get
 			{
-				return this._LanguageID;
+				return this._UserName;
 			}
 			set
 			{
-				if ((this._LanguageID != value))
+				if ((this._UserName != value))
 				{
-					if (this._Language.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLanguageIDChanging(value);
+					this.OnUserNameChanging(value);
 					this.SendPropertyChanging();
-					this._LanguageID = value;
-					this.SendPropertyChanged("LanguageID");
-					this.OnLanguageIDChanged();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
+		public string Password
 		{
 			get
 			{
-				return this._Name;
+				return this._Password;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._Password != value))
 				{
-					this.OnNameChanging(value);
+					this.OnPasswordChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Link", DbType="NVarChar(500)")]
-		public string Link
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string FullName
 		{
 			get
 			{
-				return this._Link;
+				return this._FullName;
 			}
 			set
 			{
-				if ((this._Link != value))
+				if ((this._FullName != value))
 				{
-					this.OnLinkChanging(value);
+					this.OnFullNameChanging(value);
 					this.SendPropertyChanging();
-					this._Link = value;
-					this.SendPropertyChanged("Link");
-					this.OnLinkChanged();
+					this._FullName = value;
+					this.SendPropertyChanged("FullName");
+					this.OnFullNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
-		public string Description
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Email
 		{
 			get
 			{
-				return this._Description;
+				return this._Email;
 			}
 			set
 			{
-				if ((this._Description != value))
+				if ((this._Email != value))
 				{
-					this.OnDescriptionChanging(value);
+					this.OnEmailChanging(value);
 					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Index]", Storage="_Index", DbType="Int NOT NULL")]
-		public int Index
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordOld", DbType="NVarChar(250)")]
+		public string PasswordOld
 		{
 			get
 			{
-				return this._Index;
+				return this._PasswordOld;
 			}
 			set
 			{
-				if ((this._Index != value))
+				if ((this._PasswordOld != value))
 				{
-					this.OnIndexChanging(value);
+					this.OnPasswordOldChanging(value);
 					this.SendPropertyChanging();
-					this._Index = value;
-					this.SendPropertyChanged("Index");
-					this.OnIndexChanged();
+					this._PasswordOld = value;
+					this.SendPropertyChanged("PasswordOld");
+					this.OnPasswordOldChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stauts", DbType="Bit NOT NULL")]
-		public bool Stauts
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit NOT NULL")]
+		public bool Status
 		{
 			get
 			{
-				return this._Stauts;
+				return this._Status;
 			}
 			set
 			{
-				if ((this._Stauts != value))
+				if ((this._Status != value))
 				{
-					this.OnStautsChanging(value);
+					this.OnStatusChanging(value);
 					this.SendPropertyChanging();
-					this._Stauts = value;
-					this.SendPropertyChanged("Stauts");
-					this.OnStautsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Alias", DbType="NVarChar(100)")]
-		public string Alias
-		{
-			get
-			{
-				return this._Alias;
-			}
-			set
-			{
-				if ((this._Alias != value))
-				{
-					this.OnAliasChanging(value);
-					this.SendPropertyChanging();
-					this._Alias = value;
-					this.SendPropertyChanged("Alias");
-					this.OnAliasChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Language_Usefullink", Storage="_Language", ThisKey="LanguageID", OtherKey="ID", IsForeignKey=true)]
-		public Language Language
-		{
-			get
-			{
-				return this._Language.Entity;
-			}
-			set
-			{
-				Language previousValue = this._Language.Entity;
-				if (((previousValue != value) 
-							|| (this._Language.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Language.Entity = null;
-						previousValue.Usefullinks.Remove(this);
-					}
-					this._Language.Entity = value;
-					if ((value != null))
-					{
-						value.Usefullinks.Add(this);
-						this._LanguageID = value.ID;
-					}
-					else
-					{
-						this._LanguageID = default(string);
-					}
-					this.SendPropertyChanged("Language");
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}
@@ -3058,7 +2993,7 @@ namespace ProjectLibrary.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tel", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Tel", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Tel
 		{
 			get
@@ -5270,8 +5205,6 @@ namespace ProjectLibrary.Database
 		
 		private EntitySet<Advertising> _Advertisings;
 		
-		private EntitySet<Usefullink> _Usefullinks;
-		
 		private EntitySet<Amenity> _Amenities;
 		
 		private EntitySet<Comment> _Comments;
@@ -5294,6 +5227,8 @@ namespace ProjectLibrary.Database
 		
 		private EntitySet<Slider> _Sliders;
 		
+		private EntitySet<Usefullink> _Usefullinks;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5311,7 +5246,6 @@ namespace ProjectLibrary.Database
 		public Language()
 		{
 			this._Advertisings = new EntitySet<Advertising>(new Action<Advertising>(this.attach_Advertisings), new Action<Advertising>(this.detach_Advertisings));
-			this._Usefullinks = new EntitySet<Usefullink>(new Action<Usefullink>(this.attach_Usefullinks), new Action<Usefullink>(this.detach_Usefullinks));
 			this._Amenities = new EntitySet<Amenity>(new Action<Amenity>(this.attach_Amenities), new Action<Amenity>(this.detach_Amenities));
 			this._Comments = new EntitySet<Comment>(new Action<Comment>(this.attach_Comments), new Action<Comment>(this.detach_Comments));
 			this._Facilities = new EntitySet<Facility>(new Action<Facility>(this.attach_Facilities), new Action<Facility>(this.detach_Facilities));
@@ -5323,6 +5257,7 @@ namespace ProjectLibrary.Database
 			this._Questions = new EntitySet<Question>(new Action<Question>(this.attach_Questions), new Action<Question>(this.detach_Questions));
 			this._Rooms = new EntitySet<Room>(new Action<Room>(this.attach_Rooms), new Action<Room>(this.detach_Rooms));
 			this._Sliders = new EntitySet<Slider>(new Action<Slider>(this.attach_Sliders), new Action<Slider>(this.detach_Sliders));
+			this._Usefullinks = new EntitySet<Usefullink>(new Action<Usefullink>(this.attach_Usefullinks), new Action<Usefullink>(this.detach_Usefullinks));
 			OnCreated();
 		}
 		
@@ -5416,19 +5351,6 @@ namespace ProjectLibrary.Database
 			set
 			{
 				this._Advertisings.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Language_Usefullink", Storage="_Usefullinks", ThisKey="ID", OtherKey="LanguageID")]
-		public EntitySet<Usefullink> Usefullinks
-		{
-			get
-			{
-				return this._Usefullinks;
-			}
-			set
-			{
-				this._Usefullinks.Assign(value);
 			}
 		}
 		
@@ -5575,6 +5497,19 @@ namespace ProjectLibrary.Database
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Language_Usefullink", Storage="_Usefullinks", ThisKey="ID", OtherKey="LanguageID")]
+		public EntitySet<Usefullink> Usefullinks
+		{
+			get
+			{
+				return this._Usefullinks;
+			}
+			set
+			{
+				this._Usefullinks.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -5602,18 +5537,6 @@ namespace ProjectLibrary.Database
 		}
 		
 		private void detach_Advertisings(Advertising entity)
-		{
-			this.SendPropertyChanging();
-			entity.Language = null;
-		}
-		
-		private void attach_Usefullinks(Usefullink entity)
-		{
-			this.SendPropertyChanging();
-			entity.Language = this;
-		}
-		
-		private void detach_Usefullinks(Usefullink entity)
 		{
 			this.SendPropertyChanging();
 			entity.Language = null;
@@ -5746,6 +5669,18 @@ namespace ProjectLibrary.Database
 		}
 		
 		private void detach_Sliders(Slider entity)
+		{
+			this.SendPropertyChanging();
+			entity.Language = null;
+		}
+		
+		private void attach_Usefullinks(Usefullink entity)
+		{
+			this.SendPropertyChanging();
+			entity.Language = this;
+		}
+		
+		private void detach_Usefullinks(Usefullink entity)
 		{
 			this.SendPropertyChanging();
 			entity.Language = null;
@@ -9561,187 +9496,252 @@ namespace ProjectLibrary.Database
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usefullink")]
+	public partial class Usefullink : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private int _Id;
 		
-		private string _UserName;
+		private string _LanguageID;
 		
-		private string _Password;
+		private string _Name;
 		
-		private string _FullName;
+		private string _Link;
 		
-		private string _Email;
+		private string _Description;
 		
-		private string _PasswordOld;
+		private int _Index;
 		
-		private bool _Status;
+		private bool _Stauts;
+		
+		private string _Alias;
+		
+		private EntityRef<Language> _Language;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnFullNameChanging(string value);
-    partial void OnFullNameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnPasswordOldChanging(string value);
-    partial void OnPasswordOldChanged();
-    partial void OnStatusChanging(bool value);
-    partial void OnStatusChanged();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnLanguageIDChanging(string value);
+    partial void OnLanguageIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnLinkChanging(string value);
+    partial void OnLinkChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnIndexChanging(int value);
+    partial void OnIndexChanged();
+    partial void OnStautsChanging(bool value);
+    partial void OnStautsChanged();
+    partial void OnAliasChanging(string value);
+    partial void OnAliasChanged();
     #endregion
 		
-		public User()
+		public Usefullink()
 		{
+			this._Language = default(EntityRef<Language>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
 			get
 			{
-				return this._ID;
+				return this._Id;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._Id != value))
 				{
-					this.OnIDChanging(value);
+					this.OnIdChanging(value);
 					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string UserName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LanguageID", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string LanguageID
 		{
 			get
 			{
-				return this._UserName;
+				return this._LanguageID;
 			}
 			set
 			{
-				if ((this._UserName != value))
+				if ((this._LanguageID != value))
 				{
-					this.OnUserNameChanging(value);
+					if (this._Language.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLanguageIDChanging(value);
 					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
+					this._LanguageID = value;
+					this.SendPropertyChanged("LanguageID");
+					this.OnLanguageIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(250) NOT NULL", CanBeNull=false)]
-		public string Password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string Name
 		{
 			get
 			{
-				return this._Password;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._Password != value))
+				if ((this._Name != value))
 				{
-					this.OnPasswordChanging(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string FullName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Link", DbType="NVarChar(500)")]
+		public string Link
 		{
 			get
 			{
-				return this._FullName;
+				return this._Link;
 			}
 			set
 			{
-				if ((this._FullName != value))
+				if ((this._Link != value))
 				{
-					this.OnFullNameChanging(value);
+					this.OnLinkChanging(value);
 					this.SendPropertyChanging();
-					this._FullName = value;
-					this.SendPropertyChanged("FullName");
-					this.OnFullNameChanged();
+					this._Link = value;
+					this.SendPropertyChanged("Link");
+					this.OnLinkChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Email
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
 		{
 			get
 			{
-				return this._Email;
+				return this._Description;
 			}
 			set
 			{
-				if ((this._Email != value))
+				if ((this._Description != value))
 				{
-					this.OnEmailChanging(value);
+					this.OnDescriptionChanging(value);
 					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordOld", DbType="NVarChar(250)")]
-		public string PasswordOld
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Index]", Storage="_Index", DbType="Int NOT NULL")]
+		public int Index
 		{
 			get
 			{
-				return this._PasswordOld;
+				return this._Index;
 			}
 			set
 			{
-				if ((this._PasswordOld != value))
+				if ((this._Index != value))
 				{
-					this.OnPasswordOldChanging(value);
+					this.OnIndexChanging(value);
 					this.SendPropertyChanging();
-					this._PasswordOld = value;
-					this.SendPropertyChanged("PasswordOld");
-					this.OnPasswordOldChanged();
+					this._Index = value;
+					this.SendPropertyChanged("Index");
+					this.OnIndexChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit NOT NULL")]
-		public bool Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Stauts", DbType="Bit NOT NULL")]
+		public bool Stauts
 		{
 			get
 			{
-				return this._Status;
+				return this._Stauts;
 			}
 			set
 			{
-				if ((this._Status != value))
+				if ((this._Stauts != value))
 				{
-					this.OnStatusChanging(value);
+					this.OnStautsChanging(value);
 					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
+					this._Stauts = value;
+					this.SendPropertyChanged("Stauts");
+					this.OnStautsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Alias", DbType="NVarChar(100)")]
+		public string Alias
+		{
+			get
+			{
+				return this._Alias;
+			}
+			set
+			{
+				if ((this._Alias != value))
+				{
+					this.OnAliasChanging(value);
+					this.SendPropertyChanging();
+					this._Alias = value;
+					this.SendPropertyChanged("Alias");
+					this.OnAliasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Language_Usefullink", Storage="_Language", ThisKey="LanguageID", OtherKey="ID", IsForeignKey=true)]
+		public Language Language
+		{
+			get
+			{
+				return this._Language.Entity;
+			}
+			set
+			{
+				Language previousValue = this._Language.Entity;
+				if (((previousValue != value) 
+							|| (this._Language.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Language.Entity = null;
+						previousValue.Usefullinks.Remove(this);
+					}
+					this._Language.Entity = value;
+					if ((value != null))
+					{
+						value.Usefullinks.Add(this);
+						this._LanguageID = value.ID;
+					}
+					else
+					{
+						this._LanguageID = default(string);
+					}
+					this.SendPropertyChanged("Language");
 				}
 			}
 		}

@@ -1,0 +1,153 @@
+#backtotop {
+    position: fixed;
+    z-index: 1000;
+    background: var(--green-color);
+    width: 45px;
+    height: 45px;
+    line-height: 50px;
+    bottom: 25px;
+    right: 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    display: none;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        background-color: #000;
+    }
+}
+
+#backtotop.show {
+    display: block;
+}
+
+.footer {
+    position: relative;
+    text-align: center;
+    color: #878787;
+    .footer-main {
+        background-color: #242424;
+        .footer-column {
+            text-align: left;
+            font-size: 14px;
+            line-height: 26px;
+            position: relative;
+            display: inline-block;
+            padding: 20px 0;
+            .inner {
+                padding-right: 60px;
+                p {
+                    color: currentColor;
+                    font-size: 15px;
+                    margin-bottom: 20px;
+                    a {
+                        color: currentColor;
+                    }
+                    .tel {
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                    }
+                }
+                .social-links {
+                    display: block;
+                    margin-top: 20px;
+                    li {
+                        display: inline-block;
+                        color: #FFF;
+                        font-size: 16px;
+                        margin-right: 10px;
+                        height: 36px;
+                        width: 36px;
+                        text-align: center;
+                        line-height: 36px;
+                        border: solid 1px #ccc;
+                        display: inline-block;
+                        border-radius: 50%;
+                        transition: all .3s ease-in-out;
+                        a {
+                            color: currentColor;
+                        }
+                        &:hover {
+                            background-color: var(--green-color);
+                            border-color: var(--green-color);
+                        }
+                    }
+                }
+                .footer-title {
+                    color: #FFF;
+                    font-family: 'Merriweather', serif;
+                    font-size: 22px;
+                    font-weight: 400;
+                    margin-bottom: 20px;
+                    position: relative;
+                    text-transform: capitalize;
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        top: 100%;
+                        left: 0;
+                        width: 30px;
+                        height: 1px;
+                        background: var(--green-color);
+                        margin-top: 8px;
+                    }
+                }
+                .form-subscribe {
+                    .form-group {
+                        input {
+                            width: 100%;
+                            background: transparent;
+                            border: 1px solid #444;
+                            padding: 13px;
+                            color: #FFF;
+                            font-size: 14px;
+                            font-weight: 400;
+                            border-radius: 0;
+                            height: 49px;
+                        }
+                    }
+                    .form-btn {
+                        .btn-submid {
+                            display: inline-block;
+                            margin-top: 20px;
+                            font-weight: 400;
+                            font-size: 13px;
+                            letter-spacing: 1px;
+                            padding: 10px 27px;
+                            transition: all ease 0.35s;
+                            border-radius: 0;
+                            border: 1px solid transparent;
+                            background: var(--green-color);
+                            text-transform: uppercase;
+                            color: #fff;
+                            &:hover {
+                                background: transparent;
+                                color: var(--green-color);
+                                border: 1px solid var(--green-color);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        @media(max-width:1200px) {
+            padding: 65px 25px 55px;
+        }
+        @media(max-width:768px) {
+            .footer-column {
+                width: 100%;
+                text-align: center;
+                .inner {
+                    padding: 0;
+                    .footer-title {
+                        &::before {
+                            left: 0;
+                            right: 0;
+                            margin: 8px auto 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

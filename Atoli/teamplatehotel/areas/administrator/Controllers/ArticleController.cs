@@ -297,6 +297,7 @@ namespace TeamplateHotel.Areas.Administrator.Controllers
                         a.Type == SystemMenuType.About ||
                         a.Type == SystemMenuType.Orther ||
                         a.Type == SystemMenuType.Restaurant ||
+                        a.Type == SystemMenuType.Contact ||
                         a.Type == SystemMenuType.Home && a.Location== SystemMenuLocation.MainMenu).ToList();
 
             foreach (Menu menu in menus)

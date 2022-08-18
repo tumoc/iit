@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Atoli" Class="MyDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-89MAENP\SQLEXPRESS;Initial Catalog=Atoli;Integrated Security=True" SettingsObjectName="ProjectLibrary.Properties.Settings" SettingsPropertyName="AtoliConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="atoli_" Class="MyDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=103.226.248.52;Initial Catalog=atoli_;User ID=atoli_" SettingsObjectName="ProjectLibrary.Properties.Settings" SettingsPropertyName="atoli_ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Advertising" Member="Advertisings">
     <Type Name="Advertising">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -13,17 +13,15 @@
       <Association Name="Language_Advertising" Member="Language" ThisKey="LanguageID" OtherKey="ID" Type="Language" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Usefullink" Member="Usefullinks">
-    <Type Name="Usefullink">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="LanguageID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="Link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="[Index]" Member="Index" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Stauts" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="Alias" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Association Name="Language_Usefullink" Member="Language" ThisKey="LanguageID" OtherKey="ID" Type="Language" IsForeignKey="true" />
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordOld" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Amenities" Member="Amenities">
@@ -126,7 +124,7 @@
       <Column Name="Email" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Country" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="Request" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
-      <Column Name="Tel" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Tel" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Employee" Member="Employees">
@@ -239,7 +237,6 @@
       <Column Name="Icon" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="[Default]" Member="Default" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Language_Advertising" Member="Advertisings" ThisKey="ID" OtherKey="LanguageID" Type="Advertising" />
-      <Association Name="Language_Usefullink" Member="Usefullinks" ThisKey="ID" OtherKey="LanguageID" Type="Usefullink" />
       <Association Name="Language_Amenity" Member="Amenities" ThisKey="ID" OtherKey="languageID" Type="Amenity" />
       <Association Name="Language_Comment" Member="Comments" ThisKey="ID" OtherKey="languageID" Type="Comment" />
       <Association Name="Language_Facility" Member="Facilities" ThisKey="ID" OtherKey="LanguageID" Type="Facility" />
@@ -251,6 +248,7 @@
       <Association Name="Language_Question" Member="Questions" ThisKey="ID" OtherKey="LanguageID" Type="Question" />
       <Association Name="Language_Room" Member="Rooms" ThisKey="ID" OtherKey="LanguageID" Type="Room" />
       <Association Name="Language_Slider" Member="Sliders" ThisKey="ID" OtherKey="LanguageID" Type="Slider" />
+      <Association Name="Language_Usefullink" Member="Usefullinks" ThisKey="ID" OtherKey="LanguageID" Type="Usefullink" />
     </Type>
   </Table>
   <Table Name="dbo.ListMenu" Member="ListMenus">
@@ -435,15 +433,17 @@
       <Column Name="Email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.[User]" Member="Users">
-    <Type Name="User">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="PasswordOld" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="Status" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.Usefullink" Member="Usefullinks">
+    <Type Name="Usefullink">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LanguageID" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Link" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="[Index]" Member="Index" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Stauts" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Alias" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="Language_Usefullink" Member="Language" ThisKey="LanguageID" OtherKey="ID" Type="Language" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

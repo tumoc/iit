@@ -1,0 +1,223 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@using PagedList.Mvc
+@using PagedList
+@model TeamplateHotel.Models.DetailArticle
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Comment> comments = CommentController.GetComments(Model.Article.ID);
+    Article after = CommentController.PreviousArticle(menu.ID, Model.Article.ID);
+    Article next = CommentController.NextArticle(menu.ID, Model.Article.ID);
+
+}
+<section class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-nav">
+            <ul class="trail-list">
+                <li class="trail-item">
+                    <a href="/">
+                        <span>home</span>
+                    </a>
+                </li>
+                <li class="trail-item">
+                    <a href="/@menu.Alias">
+                        <span>@menu.Title</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="breadcrumb-title">
+            <h1 class="page-title">
+                @Model.Article.Title
+            </h1>
+
+        </div>
+    </div>
+</section>
+<section class="blogs blog-details pd-100">
+    <div class="container">
+        <article class="blogs-item">
+            <figure class="thumd">
+                <img src="@Model.Article.Image" alt="">
+            </figure>
+            <div class="desc">
+                <div class="entry-header">
+                    <h2 class="entry-title">
+                        @Model.Article.Title
+                    </h2>
+                    <div class="entry-meta">
+                        <span class="post-on">
+                            <i class="fa-regular fa-clock"></i>
+                            <time>@Model.Article.Datetime.GetValueOrDefault().ToString("dd/MM/yyyy")</time>
+                        </span>
+                        <span class="byline">
+                            <i class="fa-solid fa-pen"></i>
+                            admin
+                        </span>
+                    </div>
+                </div>
+                <div class="entry-content">
+                    @Html.Raw(Model.Article.Content)
+                </div>
+
+            </div>
+        </article>
+
+        <div class="blog-pagination">
+            <div class="row">
+                <div class="col-md-6 prev-link">
+                    @if (after != null)
+                    {
+                        <span class="prev-link-span">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <a href="/@after.MenuAlias/@after.ID/@after.Alias">
+                                previos
+                            </a>
+                        </span>
+                        <h3>
+                            <a href="/@after.MenuAlias/@after.ID/@after.Alias">
+                                @after.Title
+                            </a>
+                        </h3>
+                    }
+
+                </div>
+                <div class="col-md-6 next-link">
+                    @if (next != null)
+                    {
+                        <span class="next-link-span">
+                            <a href="/@next.MenuAlias/@next.ID/@next.Alias">
+                                next
+                            </a>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                        <h3>
+                            <a href="/@next.MenuAlias/@next.ID/@next.Alias">
+                                @next.Title
+                            </a>
+                        </h3>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews">
+            <div class="comment">
+                @if (comments.Any())
+                {
+                    <h2>
+                        @comments.Count() comments
+                    </h2>
+                    <ol class="comment-list">
+                        @foreach (var item in comments.OrderByDescending(a => a.CreateDate).ToList())
+                        {
+                            <li>
+                                <div class="comment-container">
+                                    <img src="~/assets/images/avatar.png" alt="" class="avatar">
+                                    <div class="comment-text">
+                                        <p class="meta">
+                                            <strong class="author">
+                                                @item.Name
+                                            </strong>
+                                            <span class="time">
+                                                @item.CreateDate.ToString("dd/MM/yyyy")
+                                            </span>
+                                        </p>
+                                        <div class="description">
+                                            <p>
+                                                @Html.Raw(item.Comment1)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    </ol>
+                }
+
+            </div>
+            <div class="review-form">
+                <div class="review-form__content">
+                    <h3 class="reply-title">
+                        Leave a reply
+                    </h3>
+                    <form action="/Cment2/Send" method="post" class="comment-form" id="submitform">
+                        <div class="row">
+
+                            <div class="col-md-12 form-group">
+                                <label for="">
+                                    Your comment
+                                </label>
+                                <textarea name="Comment" id="" cols="45" rows="8" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="">name *</label>
+                                <input type="text" name="Name" class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="">email *</label>
+                                <input type="text" name="Email" class="form-control">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="">website</label>
+                                <input type="text" name="Website" class="form-control">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <input type="checkbox" name="check" id="" class="comment-cookies">
+                                <label for="">
+                                    Save my name, email, and website in this browser for the next time I comment.
+                                </label>
+                            </div>
+                            <input type="text" name="ArticleID" hidden value="@Model.Article.ID">
+                            <div class="col-md-12 form-btn">
+                                <button type="submit" class="submid">post comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+@section Scripts{
+    <script type="text/javascript">
+            $(document).ready(function () {
+
+                $('#submitform').validate({ // initialize the plugin
+                    rules: {
+                        Name: {
+                            required: true,
+                        },
+                        Comment: {
+                            required: true,
+                        },
+                        Email: {
+                            required: true,
+                            email: true,
+                        },
+                        Website: {
+                            required: true,
+                        },
+                        check: {
+                            required: true
+                        }
+                    },
+                    submitHandler: function (form) {
+                        $.post($(form).attr("action"), $(form).serialize())
+                            .done(function () {
+                                alert("Post Comment Successed");
+                                $('#submitform')[0].reset();
+                            });
+                    }
+                });
+            });
+    </script>
+}

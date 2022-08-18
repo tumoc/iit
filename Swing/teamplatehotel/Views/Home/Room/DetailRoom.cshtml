@@ -1,0 +1,349 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Models
+@using ProjectLibrary.Database
+@using ProjectLibrary.Utility
+@model TeamplateHotel.Models.DetailRoom
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Room> rooms = CommentController.GetMoreRooms(Model.Room.ID, Request.Cookies["LanguageID"].Value);
+    List<ShowObject> facilities = CommentController.GetRoomBasicFacility(Model.Room.ID);
+    //List<Amenity> amenity = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+    string price = CommentController.PriceNet(Model.Room.ID);
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<FeedBack> feedBacks = CommentController.GetFeedBack(Model.Room.ID);
+    int count = CommentController.CountFeedBack(Model.Room.ID);
+}
+@Html.Partial("Slider/Banner")
+<section class="room-details pd-100">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8">
+                <div class="primary">
+                    <div class="room-gallery">
+                        <div id="thumd1" class="owl-carousel owl-theme">
+                            <div class="item">
+                                <img src="@Model.Room.Image" alt="">
+                            </div>
+                            @foreach (var gallery in Model.RoomGalleries)
+                            {
+                                <div class="item">
+                                    <img src="@gallery.ImageLarge" alt="">
+                                </div>
+                            }
+                        </div>
+
+                        <div id="thumd2" class="owl-carousel owl-theme">
+                            <div class="item">
+                                <img src="@Model.Room.Image" alt="">
+                            </div>
+                            @foreach (var gallery in Model.RoomGalleries)
+                            {
+                                <div class="item">
+                                    <img src="@gallery.ImageLarge" alt="">
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="content-avail-wrap">
+                        <div class="room-desc">
+                            <div class="room-available">
+                                <div class="room-price">
+                                    <div class="price">
+                                        <span class="price-title">
+                                            price
+                                        </span>
+                                        <span class="price-value">
+                                            $@Model.Room.Price
+                                        </span>
+                                        <span class="unit">
+                                            / Night
+                                        </span>
+                                    </div>
+                                </div>
+                                <h2>
+                                    room details
+                                </h2>
+                                <ul class="unique-feature">
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 96"><title>adult</title><path d="M116,92a2,2,0,0,1-2-2c0-9.66-16-17.82-26-17.82a2,2,0,0,1-1.9-1.35L82.1,59a2,2,0,0,1,3.8-1.27l3.56,10.58C101.23,69,118,78.14,118,90.05A2,2,0,0,1,116,92Z" /><path d="M76,60.36a2,2,0,1,1,0-4c19.49,0,27.25-9.62,29.7-13.81-1.78-3-6.72-11.56-7.64-15.43C96.47,20.48,91.12,4.92,76,4.92a2,2,0,1,1,0-4c12.66,0,22.12,9.22,25.94,25.29.79,3.29,5.88,12.14,7.78,15.28a2,2,0,0,1,.07,1.89C107.78,47.4,99.42,60.36,76,60.36Z" /><path d="M44,68.28c-11.75,0-21-12.45-21.92-23.89C17.9,43.78,16,41.17,16,38.58V30.66c0-2.48,2.42-4.26,4-5.17V18.78c0-7.11,2.36-13.69,19.34-13.86A25.64,25.64,0,0,1,54.23,0c7.09,0,13.17,3.18,15.5,8.1,1.73,3.66,1.11,7.67-1.74,11.37v6c1.59.91,4,2.69,4,5.17v7.92c0,2.58-1.9,5.2-6.08,5.81C65,55.83,55.75,68.28,44,68.28ZM54.24,4a21.69,21.69,0,0,0-13,4.53,2,2,0,0,1-1.2.4c-16,0-16,5.49-16,9.9v7.92a2,2,0,0,1-1.18,1.81c-1.42.63-2.74,1.73-2.82,2.16v7.91c0,1.46,2.15,2,4,2a2,2,0,0,1,2,2c0,9.87,8,21.78,18,21.78S62,52.41,62,42.55a2,2,0,0,1,2-2c1.84,0,4-.52,4-2V30.67c-.09-.47-1.54-1.59-2.82-2.16A2,2,0,0,1,64,26.7V18.78a2,2,0,0,1,.46-1.26c2.22-2.64,2.79-5.32,1.65-7.73C64.46,6.3,59.69,4,54.24,4Z" /><path d="M2,96a2,2,0,0,1-2-2v-4c0-11.47,9.25-19.8,22-19.8h4.93l5.73-8.47a2,2,0,0,1,2.78-.55A2,2,0,0,1,36,64l-6.33,9.35a2,2,0,0,1-1.66.87H22c-10.6,0-18,6.52-18,15.84v4A2,2,0,0,1,2,96Z" /><path d="M86,96a2,2,0,0,1-2-2v-4c0-9.33-7.26-15.84-17.67-15.84h-6a2,2,0,0,1-1.65-.86L52.19,64a2,2,0,0,1,.51-2.76,2,2,0,0,1,2.78.52l5.9,8.49h4.95C79.08,70.27,88,78.42,88,90.07v4A2,2,0,0,1,86,96Z" /></svg>
+                                        <span class="feature-label">
+                                            Adults :
+                                        </span>
+                                        <span class="feature-value">
+                                            @Model.Room.MaxPeople
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 97"><title>children</title><path d="M31,82.69c0,3.86,1.65,6,4.9,6.31H36a1,1,0,0,0,.1-2c-1.53-.15-3.1-.78-3.1-4.31V60a1,1,0,0,0-2,0Z" /><path d="M72.49,69.38a7.44,7.44,0,0,0,4.54,2h.46a6.46,6.46,0,0,0,6-9,10.17,10.17,0,0,0-1.23-2c-.71-.88-23.69-24.21-24.84-25.21a9.79,9.79,0,0,0-2.56-1.65,18.06,18.06,0,0,1-2,1.5l.38,0a7.92,7.92,0,0,1,2.85,1.64c1.51,1.31,23.86,24.1,24.59,25a8.61,8.61,0,0,1,1,1.61,4.32,4.32,0,0,1-1.09,5,4.59,4.59,0,0,1-3.38,1.18,5.49,5.49,0,0,1-3.35-1.54c-.48-.42-11.67-11.64-12.16-12.12A2,2,0,0,0,60.29,55C59,55,59,56.51,59,57.07c0,3.41,0,18.38-.07,27.82C58.91,93.25,51.06,95,44.48,95H38.54c-3.86,0-9.09-.63-12.1-3.65a8.7,8.7,0,0,1-2.38-6.45c.05-9.43.09-24.82,0-28.22v0c0-.46.08-1-.33-1.36a.93.93,0,0,0-.94-.07c-.35.14-.54.47-.79.72-2.11,2.14-11.33,11.62-11.43,11.72A5.75,5.75,0,0,1,6.85,69.5a4.47,4.47,0,0,1-3.38-1.18A4.32,4.32,0,0,1,2,65.26V65c0-1.93,1.57-3.5,2.81-4.76l.09-.08c6-6.09,22.35-22.08,23.8-23.34a7.88,7.88,0,0,1,2.93-1.67c.21,0,.76,0,1.57-.05a18.34,18.34,0,0,1-2.31-1.8,9.81,9.81,0,0,0-3.51,2C25.92,36.57,9.5,52.63,3.47,58.73l-.08.08C2,60.25,0,62.22,0,65v.36a6.4,6.4,0,0,0,2.12,4.46A6.34,6.34,0,0,0,7,71.5a7.89,7.89,0,0,0,4.93-2.39c.06-.06,8-8.17,10.16-10.42.07,5.35,0,18,0,26.2a10.6,10.6,0,0,0,3,7.87C27.78,95.53,32.46,97,38.54,97h5.94c10.58,0,16.43-4.3,16.45-12.1,0-8.8.07-22.38.07-27C61.62,58.55,72,69,72.49,69.38Z" /><path d="M43,36A16,16,0,1,0,27,20,16,16,0,0,0,43,36ZM43,6A14,14,0,1,1,29,20,14,14,0,0,1,43,6Z" /><path d="M62.28,31.29c-1.2.78-1.35,1.57-1.25,2.09s.45,1.14,1.7,1.43a7.62,7.62,0,0,0,1.69.19c4.1,0,7.37-3.57,7.44-8.14A14,14,0,0,0,71.45,24,14.25,14.25,0,0,1,71,19.17a3.72,3.72,0,0,1,1-2.2c0,.34,0,.68,0,1,0,9.94,7.17,18,16,18s16-8.06,16-18c0-.35,0-.69-.05-1a3.72,3.72,0,0,1,1,2.2,14.25,14.25,0,0,1-.43,4.83,14,14,0,0,0-.41,2.86c.07,4.57,3.34,8.14,7.43,8.14a7.64,7.64,0,0,0,1.7-.19c1.25-.29,1.62-.94,1.71-1.43s-.06-1.31-1.26-2.09a6.48,6.48,0,0,1-2.33-2.41c-1.31-2.65-.15-5.1,1.2-7.93s2.79-5.87,1.65-9.38c-.94-2.9-3.71-4.57-7.6-4.57a14.82,14.82,0,0,0-5.34,1A15.06,15.06,0,0,0,74.7,8a14.82,14.82,0,0,0-5.34-1c-3.89,0-6.66,1.67-7.6,4.57-1.14,3.51.34,6.63,1.65,9.38s2.51,5.28,1.2,7.93A6.48,6.48,0,0,1,62.28,31.29ZM106.65,9c1.74,0,4.8.41,5.7,3.19s-.3,5.25-1.56,7.9c-1.44,3-2.92,6.16-1.18,9.68a8.4,8.4,0,0,0,2.94,3.14,5.39,5.39,0,0,1-1,.09c-3,0-5.37-2.71-5.43-6.17a12.33,12.33,0,0,1,.37-2.42,15.84,15.84,0,0,0,.44-5.54c-.35-2.29-1.62-3.88-3.23-4.15a19.52,19.52,0,0,0-1.49-4.92A13,13,0,0,1,106.65,9ZM88,2c7.73,0,14,7.18,14,16S95.73,34,88,34,74,26.82,74,18,80.29,2,88,2ZM65.22,20.09c-1.26-2.65-2.45-5.15-1.56-7.9S67.62,9,69.36,9a13,13,0,0,1,4.41.8,19.52,19.52,0,0,0-1.49,4.92c-1.61.27-2.88,1.86-3.23,4.15a15.84,15.84,0,0,0,.44,5.54,12.33,12.33,0,0,1,.37,2.42c-.06,3.82-3,6.68-6.4,6.08a8.47,8.47,0,0,0,2.94-3.14C68.14,26.25,66.66,23.12,65.22,20.09Z" /><path d="M75.13,33.19a9.78,9.78,0,0,0-3.74,2.1c-.54.47-2.75,2.6-5.66,5.43.45.47.92.94,1.4,1.43,2.91-2.83,5.08-4.93,5.57-5.35a7.88,7.88,0,0,1,2.93-1.67c.31,0,1.41-.05,3-.07a18.59,18.59,0,0,1-2.4-2A8,8,0,0,0,75.13,33.19Z" /><path d="M127.44,62.43a10.17,10.17,0,0,0-1.23-2c-.71-.89-22.37-23.93-23.84-25.21a10,10,0,0,0-2.91-1.8,18.16,18.16,0,0,1-2.09,1.64l.84,0a7.84,7.84,0,0,1,2.85,1.64c1.32,1.15,22.68,23.87,23.59,25a8.61,8.61,0,0,1,1,1.61,4.32,4.32,0,0,1-1.09,5,4.56,4.56,0,0,1-3.37,1.18,5.51,5.51,0,0,1-3.36-1.54c-.47-.42-5.81-5.76-9-8.95l-3.17-3.17a2,2,0,0,0-1.36-.74c-1.28,0-1.28,1.49-1.28,2,0,3.41,0,18.38-.07,27.82,0,8.36-7.88,10.11-14.46,10.11H82.54c-3.86,0-9.09-.63-12.09-3.65a8.67,8.67,0,0,1-2.39-6.45c0-5.05,0-11.5,0-17-.58-.58-1.25-1.24-2-2,0,6,0,13.5,0,19a10.64,10.64,0,0,0,3,7.87C71.79,95.53,76.46,97,82.54,97h5.94c10.59,0,16.43-4.3,16.46-12.1,0-8.8.06-22.38.06-27l2.4,2.4c4.69,4.69,8.6,8.61,9.09,9a7.44,7.44,0,0,0,4.54,2h.46a6.46,6.46,0,0,0,6-9Z" /><path d="M77.49,73.57l-.59,0c-.3,0-.6-.06-.9-.11v9.25c0,3.86,1.65,6,4.91,6.31H81a1,1,0,0,0,.09-2c-1.53-.15-3.1-.78-3.1-4.31V73.55Z" /><path d="M193,114" /></svg>
+                                        <span class="feature-label">
+                                            Children :
+                                        </span>
+                                        <span class="feature-value">
+                                            @Model.Room.Child
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <p>
+                                @Html.Raw(Model.Room.Content)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="room-feature">
+                        <h2>
+                            Room Features
+                        </h2>
+                        <ul class="unique-feature">
+                            @foreach(var item in facilities)
+                            {
+                                <li>
+                                    @item.Title
+                                </li>  
+                            }
+                            
+                        </ul>
+                    </div>
+
+                    <div class="single-room__details">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">additional information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">review</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">pricing plans</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="additional">
+                                    @Html.Raw(Model.Room.MoreDetail)
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="reviews">
+                                    <div class="comment">
+                                        <h2>
+                                            @count reviews for @Model.Room.Title
+                                        </h2>
+                                        <ol class="comment-list">
+                                            @foreach (var item in feedBacks.OrderByDescending(a=>a.CreateDate).ToList())
+                                            {
+                                                <li>
+                                                    <div class="comment-container">
+                                                        <img src="~/assets/images/avatar.png" alt="" class="avatar">
+                                                        <div class="comment-text">
+                                                            <p class="meta">
+                                                                <strong class="author">
+                                                                    @item.Name
+                                                                </strong>
+                                                                <span class="time">
+                                                                    @item.CreateDate.GetValueOrDefault().ToString("dd/MM/yyyy")
+                                                                </span>
+                                                            </p>
+                                                            <div>
+                                                                <input type="hidden" readonly name="Star" value="@item.Star" class="rating-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" />
+                                                            </div>
+                                                            <div class="description">
+
+                                                                <p>
+                                                                    @item.Content
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+
+                                        </ol>
+                                    </div>
+                                    <div class="review-form">
+                                        <div class="review-form__content">
+                                            <h3 class="reply-title">
+                                                Add a review
+                                            </h3>
+                                            <form action="/Rating/Send" method="post" id="form" class="comment-form">
+                                                <div class="row">
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="">
+                                                            Your rating
+                                                        </label>
+                                                        <div class="rating-star">
+                                                            <input type="hidden" name="Star" value="5" class="rating-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="">
+                                                            Your review
+                                                        </label>
+                                                        <textarea name="Content" id="" cols="45" rows="8" class="form-control"></textarea>
+                                                    </div>
+                                                    <input type="text" name="RoomID" hidden value="@Model.Room.ID" />
+                                                    <div class="col-md-6 form-group">
+                                                        <label for="">name *</label>
+                                                        <input type="text" name="Name" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6 form-group">
+                                                        <label for="">Phone *</label>
+                                                        <input type="text" name="Tel" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-12 form-group">
+                                                        <label for="">email *</label>
+                                                        <input type="text" name="Email" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-12 form-group">
+                                                        <input type="checkbox" name="check" id="" class="comment-cookies">
+                                                        <label for="">
+                                                            Save my name and email in this browser for the next time I comment.
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-12 form-btn">
+                                                        <button type="submit" class="submid">submid</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                @Html.Raw(Model.Room.PricingPlan)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <aside class="widget widget-search">
+                        <div class="inner">
+                            <h3>Check Availability</h3>
+                            <form action="/booking" class="search-form">
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <label for="">arrival date</label>
+                                        <input type="text" name="checkInDate" id="CheckIn" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="">departure date</label>
+                                        <input type="text" name="checkOutDate" id="CheckOut" value="@DateTime.Now.AddDays(1).ToString("MM/dd/yyyy")">
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="">adults</label>
+                                        <select name="Adult" id="">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="">children</label>
+                                        <select name="Child" id="">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12 form-btn">
+                                        <button type="submit" class="btn-available">
+                                            check availability
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </aside>
+                    <aside class="widget widget-room">
+                        <div class="inner">
+                            <h3>
+                                our room
+                            </h3>
+                            @foreach (var item in rooms)
+                            {
+                                <div class="items">
+                                    <div class="thumd">
+                                        <img src="@item.Image" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <div class="post-title">
+                                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                                @item.Title
+                                            </a>
+                                        </div>
+                                        <div class="post-content">
+                                            @Html.Raw(item.Description)
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('input.rating-loading').rating({
+                size: 'sm',
+                filledStar: '<i class="fa-solid fa-star"></i>',
+                emptyStar: '<i class="fa fa-star"></i>'
+            });
+            $('input.rating1-loading').rating1({
+                size: 'sm',
+                filledStar: '<i class="fa-solid fa-star"></i>',
+                emptyStar: '<i class="fa fa-star"></i>'
+            });
+            $('#form').validate({ // initialize the plugin
+                rules: {
+                    'Name': {
+                        required: true,
+                        minlength: 5
+                    },
+                    'Tel': {
+                        required: true,
+                        minlength: 10,
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'check': {
+                        required: true
+                    }
+                },
+                submitHandler: function (form) {
+                    $.post($(form).attr("action"), $(form).serialize())
+                        .done(function (data) {
+                            if (data.success == true) {
+                                alert("Rating Successed!");
+                                $(form)[0].reset()
+                            } else {
+                                alert(data.Message);
+                            }
+                        })
+                        .fail(function (error) {
+                            alert(error);
+                        });
+                }
+            });
+        });
+    </script>
+}

@@ -3,496 +3,321 @@
 @using TeamplateHotel.Handler
 @using TeamplateHotel.Models
 @using ProjectLibrary.Database
+@using ProjectLibrary.Utility
 @model TeamplateHotel.Models.DetailRoom
 
 @{
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
     Menu menu = ViewBag.Menu ?? new Menu();
     List<Room> rooms = CommentController.GetMoreRooms(Model.Room.ID, Request.Cookies["LanguageID"].Value);
-    List<ShowObject> amenities = CommentController.GetRoomAmetities(Model.Room.ID);
-    List<Amenity> amenity = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
-    List<HotelRule> hotelRules = CommentController.listRule(Request.Cookies["LanguageID"].Value);
-    List<FeedBack> feedBacks = CommentController.GetFeedBack(Model.Room.ID);
-    int countFeedBack = CommentController.CountFeedBack(Model.Room.ID);
-    double rating = CommentController.Rating(Model.Room.ID);
-    string i = "";
-    decimal price;
+    List<ShowObject> basics = CommentController.GetRoomBasicFacility(Model.Room.ID);
+    List<ShowObject> premiums = CommentController.GetRoomPremiumFacility(Model.Room.ID);
+    //List<Amenity> amenity = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+    decimal price, pricepremium;
+    double rating;
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
 }
-<main class="main">
-    <section class="banner">
-        <div class="container">
-            <div class="banner-content">
-                <div class="banner-title">
-                    <h1 class="banner-title">
-                        @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "room details")
-                    </h1>
-                </div>
+<link href="~/assets/css/roomDetail.css" rel="stylesheet" />
+@Html.Partial("header")
+@foreach (var item in sliders.Take(1))
+{
+    <div class="banner__room__detail" style="background-image: url('@item.Image')">
+        <div class="room__detail__content">
+            <div class="path__room__detail">
+                <a href="/">@home.Title<i class="fa-solid fa-chevron-right"></i></a>
+                <p>@Model.Room.Title</p>
             </div>
+            <h3>@Model.Room.Title</h3>
         </div>
-    </section>
+    </div>
+}
+    <!--main room detail-->
+    <div class="room__detail">
+        <div class="main__room__detail">
+            <div class="room__detail__left">
+                <div class="booking__sheet">
+                    <h3>Booking Sheet</h3>
+                    <form action="/booking" class="form-booking-sheet">
+                        <input type="text" name="Id" value="@Model.Room.ID" hidden />
+                        <div class="group__form__booking">
+                            <label for="">Check in</label>
+                            <input type="text" name="checkInDate" id="check-in-booking-sheet">
+                        </div>
+                        <div class="group__form__booking">
+                            <label for="">Check out</label>
+                            <input type="text" name="checkOutDate" id="check-out-booking-sheet">
+                        </div>
+                        <div class="group__form__booking">
+                            <label for="">Numbers of Adults</label>
+                            <div class="drop-down">
+                                <input name="Adult" hidden id="Adult" value="01" />
+                                <div class="selected">
+                                    <a><span>01</span></a>
+                                </div>
+                                <div class="options">
+                                    <ul>
+                                        <li><a>01</a></li>
+                                        <li><a>02</a></li>
+                                        <li><a>03</a></li>
+                                        <li><a>04</a></li>
+                                        <li><a>05</a></li>
+                                        <li><a>06</a></li>
+                                        <li><a>07</a></li>
+                                        <li><a>08</a></li>
+                                        <li><a>09</a></li>
+                                        <li><a>10</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @*<div class="choose__person__number">
 
-    <section class="room-details">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9">
-                    <div class="room-content">
-                        <div class="room-thumd">
-                            <figure class="image">
-                                <img src="@Model.Room.Image" alt="">
-                            </figure>
-                        </div>
-                        <div class="room-name">
-                            <div class="inner">
-                                <h3 class="room-title">@Model.Room.Title</h3>
-                                <div class="room-caption">
-                                    @Html.Raw(Model.Room.Description)
-                                </div>
-                                
-                                <div class="room-price">
-                                    <div class="price-head">
-                                        @if (Model.Room.PriceNet != 0)
-                                        {
-                                            <span class="price-head" style="text-decoration: line-through">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
-                                            <span class="price-value" style="text-decoration: line-through">$@Model.Room.Price/ @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
-                                           <br />
-                                            <span class="price-head">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>                                                                                                                                                              
-                                            
-                                            <span class="price-value">$
-                                            @{
-                                                price= (decimal)Model.Room.Price *(1- (decimal)Model.Room.PriceNet/100);
-                                            }
-                                        
-                                            @price / @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="price-head">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
-                                            <span class="price-value">$@Model.Room.Price/ @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
-                                        }
+                                    <div class="person__number__booking__sheet">
+                                        <p>01</p>
+                                        <i class="fa-solid fa-chevron-down"></i>
                                     </div>
+                                    <ul class="dropdown__person">
+                                        <li>01</li>
+                                        <li>02</li>
+                                        <li>03</li>
+                                        <li>04</li>
+                                        <li>05</li>
+                                    </ul>
+                                </div>*@
+
+                        </div>
+                        <div class="group__form__booking">
+                            <label for="">Numbers of Childs</label>
+                            <div class="drop-down1">
+                                <input name="Child" hidden id="Child" value="00" />
+                                <div class="selected">
+                                    <a><span>00</span></a>
+                                </div>
+                                <div class="options">
+                                    <ul>
+                                        <li><a>00</a></li>
+                                        <li><a>01</a></li>
+                                        <li><a>02</a></li>
+                                        <li><a>03</a></li>
+                                        <li><a>04</a></li>
+                                        <li><a>05</a></li>
+                                        <li><a>06</a></li>
+                                        <li><a>07</a></li>
+                                        <li><a>08</a></li>
+                                        <li><a>09</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="room-service">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <i class="fa-solid fa-bed"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Bed")</h3>
-                                            <span>@Model.Room.Numofbed @Model.Room.Typebed</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <i class="fa-solid fa-users-line"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "max guest")</h3>
-                                            <span>@Model.Room.MaxPeople @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "guests")</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <i class="fa-solid fa-maximize"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "room space")</h3>
-                                            <span>@Model.Room.Roomspace @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "sqm")</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="inner">
-                                        <div class="icon">
-                                            <i class="fa-solid fa-tree"></i>
-                                        </div>
-                                        <div class="content">
-                                            <h3>@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "room view")</h3>
-                                            <span>@Model.Room.Roomview</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="group__form__booking">
+                            <button type="submit">Book Now</button>
                         </div>
-                        <div class="room-desc">
-                            <p>
-                                @Html.Raw(Model.Room.Content)
-                            </p>
-                        </div>
-                        <div class="room-amenities">
-                            <h3 class="title">
-                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "room amenities")
-                            </h3>
-                            <div class="row">
-                                @foreach (var item in amenities)
-                                {
-                                    <div class="col-md-4">
-                                        <div class="inner">
-                                            <div class="icon">
-                                                <img src="@item.Image" />
-                                            </div>
-                                            <div class="icon-wrap">
-                                                <h3>
-                                                    @item.Title
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="room-amenities">
-                            <h3 class="title">
-                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "hotel amenities")
-                            </h3>
-                            <div class="row">
-                                @foreach (var item in amenity)
-                                {
-                                    <div class="col-md-4">
-                                        <div class="inner">
-                                            <div class="icon">
-                                                <img src="@item.Image" />
-                                            </div>
-                                            <div class="icon-wrap">
-                                                <h3>
-                                                    @item.Title
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="room-rules">
-                            <h3>
-                                @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "hotel rules")
-                            </h3>
-                            <ul class="list-rules">
-                                @foreach (var item in hotelRules)
-                                {
-                                    <li>
-                                        @item.Rule
-                                    </li>
-                                }
-                            </ul>
-                        </div>
+                    </form>
+                </div>
+
+                <div class="side__bar__plan">
+                    <div class="basic">
+                        <h3>Basic Plan Facilities</h3>
+                        <ul>
+                            @foreach (var item in basics)
+                            {
+                                <li><a href="">@item.Title</a></li>
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="premium">
+                        <h3>Premium Plan Facilities</h3>
+                        <ul>
+                            @foreach (var item in basics)
+                            {
+                                <li><a href="">@item.Title</a></li>
+                            }
+                            @foreach (var item in premiums)
+                            {
+                                <li><a href="">@item.Title</a></li>
+                            }
+                        </ul>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="sidebar">
-                        <div class="booking-bar">
-                            <div class="list-tab">
-                                <span id="booking-tab1" class="booking-tab active">
-                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Book rooms")
-                                </span>
-                                <span id="booking-tab2" class="booking-tab">
-                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "enquiry")
-                                </span>
-                            </div>
-                            <div class="booking-tab__content">
-                                <div class="booking-content booking-content1 active">
-                                    <div class="form-search__room">
-                                        <form action="/booking" class="search-room">
-                                            <input name="Id" value="@Model.Room.ID" hidden />
-                                            <div class="form-group checkin-form">
-                                                <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "CheckIn")</label>
-                                                <div class="value-space">
-                                                    <input type="text" name="checkInDate" id="date1" class="form-control" value="@DateTime.Now.ToString("d")">
-                                                </div>
-                                            </div>
-                                            <div class="form-group checkout-form">
-                                                <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "CheckOut")</label>
-                                                <div class="value-space">
-                                                    <input type="text" name="checkOutDate" id="date2" class="form-control" value="@DateTime.Now.AddDays(1).ToString("d")">
-                                                </div>
-                                            </div>
-                                            <div class="form-group guests-form">
-                                                <div class="div">
-                                                    <div>
-                                                        <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Adults")</label>
-                                                        <select class="amount2" name="Adult">
-                                                            <option value="1" selected>1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
 
-                                                        </select>
-                                                        <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "child")</label>
-                                                        <select class="amount3" name="Child">
-                                                            <option value="0" selected>0</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group btn-form">
-                                                <button type="submit" class="btn-search1">
-                                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "search rooms") 
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="booking-content booking-content2">
-                                    <form action="/Enquiry/Create" id="form-submid__enquiry" class="form-submid__enquiry">
-                                        <div class="form-group">
-                                            <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "FullName")*</label>
-                                            <input type="text" name="Name" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Email")*</label>
-                                            <input type="text" name="Email" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "your enquiry")*</label>
-                                            <textarea name="Enquiry" id="" cols="30" rows="10" class="form-control"></textarea>
-                                        </div>
-                                        <div class="check-agree">
-                                            <input type="checkbox" name="ckbox" id="" class="check-box" required>
-                                            <label for="">
-                                                * @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "I agree with Terms of Service and Privacy Statement").
-                                            </label>
-                                        </div>
-                                        <div class="form-btn">
-                                            <input type="submit" class="submid-enquiry" value="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "submid enquiry")">
+            </div>
 
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+            <div class="room__detail__right">
+                <div class="image__room__detail owl-carousel owl-theme">
+                    <div class="list__img__room__detail">
+                        <img src="@Model.Room.Image" alt="">
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="gallery-horizontal">
-        <ul class="gallery-horizontal-list owl-carousel owl-theme">
-            @foreach (var item in Model.RoomGalleries)
-            {
-                <li>
-                    <a href="@item.ImageLarge" data-fancybox="group">
-                        <img src="@item.ImageLarge" alt="">
-                    </a>
-                </li>
-            }
-        </ul>
-    </section>
-
-    <section class="more-room">
-        <div class="container">
-            <div class="section-title">
-                <h3 class="subtitle">
-                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "more rooms")
-                </h3>
-            </div>
-            <div class="rooms-slider owl-carousel owl-theme">
-                <div class="rooms-item">
-                    @foreach (var item in rooms)
+                    @foreach (var item in Model.RoomGalleries)
                     {
-                        <div class="inner">
-                            <figure class="image">
-                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
-                                    <img src="@item.Image" alt="">
-                                </a>
-                                <div class="price">
-                                    <span class="price-head">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "From")</span>
-                                    <span class="price-value">$@item.Price</span>
-                                    <span class="price-tail">/ @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Night")</span>
-                                </div>
-                                <div class="room-ribbon">
-                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "sale off") @item.PriceNet%
-                                </div>
-                            </figure>
-                            <div class="content">
-                                <h3 class="room-title">
-                                    <a href="/@item.MenuAlias/@item.ID/@item.Alias">
-                                        @item.Title
-                                    </a>
-                                </h3>
-                                <div class="infor-wrap">
-                                    <div class="infor-item">
-                                        <i class="fa-solid fa-bed"></i>
-                                        <span>
-                                            @item.Numofbed @item.Typebed
-                                        </span>
-                                    </div>
-                                    <div class="infor-item">
-                                        <i class="fa-solid fa-users"></i>
-                                        <span>
-                                            @item.MaxPeople @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "guests")
-                                        </span>
-                                    </div>
-                                </div>
-                                <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="book-now">
-                                    @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "read more") <i class="fa-solid fa-chevron-right"></i>
-                                </a>
-                            </div>
+                        <div class="list__img__room__detail">
+                            <img src="@item.ImageLarge" alt="">
                         </div>
                     }
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="review">
-        <div class="container">
-            <div class="review-head">
-                <div class="review-head__infor">
-                    <div class="room-rating">
-                        <span class="review-rating-text">
-                            @countFeedBack @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Review")
-                        </span>
-                        <span class="review-rating-text">
-                            @Math.Round(rating,1) <i class="fa-solid fa-star"></i>
-                        </span>
+                <div class="room__detail__des">
+                    <div class="heading__detail__content">
+                        <h2>
+                            @Model.Room.Title @if (Model.Room.PriceNet != null)
+                        {<span style="color:red">(-@Model.Room.PriceNet%)</span>}
+                        </h2>
+                        @if (Model.Room.PriceNet != null)
+                        {
+                            {
+                                price = Model.Room.Price * (1 - (decimal)Model.Room.PriceNet / 100);
+                                pricepremium = Model.Room.PricePremium * (1 - (decimal)Model.Room.PriceNet / 100);
+                            }
+                            <ul>
+                                <li><span style="text-decoration: line-through">Basic : $@Model.Room.Price/Night</span> <br /><span style="color:red">Basic : $@price/Night</span></li>
+                                <li><span style="text-decoration: line-through">Premium : $@Model.Room.PricePremium/Night</span> <br /><span style="color:red">Premium : $@pricepremium/Night</span></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul>
+                                <li>Basic : $@Model.Room.Price/Night</li>
+                                <li>Premium : $@Model.Room.PricePremium/Night</li>
+                            </ul>
+                        }
                     </div>
-                    <div class="review-filter">
-                        <div class="review-sort-by">
-                            <span class="span-head">@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Sort By"):</span>
-                            @*<span class="sort-by-field">
-                                Rating <i class="fa-solid fa-caret-down"></i>
-                            </span>*@
-                        <span class="sort-by-field">
-                            @GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Date") <i class="fa-solid fa-caret-down"></i>
-                        </span>
+                    @Html.Raw(Model.Room.Content)
+                    <div class="detail__review">
+                        <h2>Clients Review and Retting's</h2>
+                        <div class="review__rating">
+                            <h3>Your retting:</h3>
                         </div>
+
+                        <form action="/Rating/Send" method="post" id="form" class="form-contact">
+                            <div>
+                                <input type="hidden" name="Star" value="5" class="rating-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" />
+                            </div>
+
+
+                            <div><input type="text" name="RoomID" hidden value="@Model.Room.ID" /></div>
+                            <div>
+                                <input type="text" name="Name" placeholder="FullName*">
+                            </div>
+                            <div>
+                                <input type="text" name="Tel" placeholder="Phone*">
+                            </div>
+
+                            <div style="width:100%">
+                                <input type="email" name="Email" id="" placeholder="Email*">
+                            </div>
+                            <div class="t__area">
+                                <textarea name="Content" id="" cols="30" rows="10" placeholder="Your review"></textarea>
+                            </div>
+                            <div class="accept__contact">
+                                <input type="checkbox" name="check" id="">
+                                <span>Save my name, email, and phone in this browser for the next time I review.</span>
+                            </div>
+                            <div class="btn__contact">
+                                <button id="submit-form" type="submit">Submit Review</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="review-content">
-                @foreach (var item in feedBacks)
-                {
-                    <div class="review-content__item">
-                        <div class="review-user">
-                            <div class="review-avatar">
-                                <img src="@item.Avatar" alt="">
-                            </div>
-                            <h4 class="review-name">
-                                @item.Name
-                            </h4>
-                        </div>
-                        <div class="review-detail">
-                            <div class="detail-desc">
-                                <p>
-                                    @Html.Raw(item.Content)
-                                </p>
-                            </div>
-                            <div class="detail-rating">
-                                @for(var s = 1; s <= item.Star; s++)
-                                {
-                                    <i class="fa-solid fa-star"></i>
-                                }
-                                
-                            </div>
-                            <div class="detail-date">
-                                @if (Request.Cookies["LanguageID"].Value == "vi")
-                                {
-                                    <span class="blog-date">
-                                        @item.CreateDate.GetValueOrDefault().ToString("d")
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span>
-                                        @switch (item.CreateDate.GetValueOrDefault().Month)
-                                        {
-                                            case 1:
-                                                i = "January";
-                                                break;
-                                            case 2:
-                                                i = "February";
-                                                break;
-                                            case 3:
-                                                i = "March";
-                                                break;
-                                            case 4:
-                                                i = "April";
-                                                break;
-                                            case 5:
-                                                i = "May";
-                                                break;
-                                            case 6:
-                                                i = "June";
-                                                break;
-                                            case 7:
-                                                i = "July";
-                                                break;
-                                            case 8:
-                                                i = "August";
-                                                break;
-                                            case 9:
-                                                i = "September";
-                                                break;
-                                            case 10:
-                                                i = "October";
-                                                break;
-                                            case 11:
-                                                i = "November";
-                                                break;
-                                            case 12:
-                                                i = "December";
-                                                break;
-                                        }
-                                        @i @item.CreateDate.GetValueOrDefault().Day.ToString(),
-                                        @item.CreateDate.GetValueOrDefault().Year.ToString()
-                                    </span>
-
-                                }
-                            </div>
-                        </div>
-                    </div>
-                }
-
-            </div>
         </div>
-    </section>
-</main>
-@section Scripts{
-    <script type="text/javascript">
-        $(document).ready(function () {
+    </div>
+    <!--end main room detail-->
+    <!--our offer-->
+    <div class="our__offer">
+        <h2>Our Orther Offer</h2>
+        <div class="main__our__offer">
+            @foreach (var item in rooms.Take(2))
+            {
+                <div class="list__our__offer">
+                    <div class="img__our__offer">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias"><img src="@item.Image" alt=""></a>
 
-            $('#form-submid__enquiry').validate({ // initialize the plugin
-                rules: {
-                    Name: {
-                        required: true,
+                    </div>
+
+                    <div class="offer__content">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="room__offer__name">@item.Title</a>
+                        <div class="rating__offer">
+                            <span>@item.Price / Per Night</span>
+                            @if (CommentController.Rating(item.ID) != 0)
+                            {
+                                { rating = @Math.Round(@CommentController.Rating(item.ID), 1); }
+                                <ul>
+                                    <li>@rating</li>
+                                    <li><input type="hidden" readonly value="@StringHelper.DoubleToString(rating)" class="rating1-loading" step="1" data-size="xs" data-show-clear="false" data-show-caption="false" /></li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <ul>
+                                    <li>No review</li>
+                                </ul>
+                            }
+                        </div>
+                        <p>
+                            @Html.Raw(item.Description)
+                        </p>
+
+                        <ul class="offer__info">
+                            <li><i class="fa-solid fa-user"></i> @item.MaxPeople Person</li>
+                            <li><i class="fa-solid fa-expand"></i> @item.Roomspace m2 / @Math.Round((double)item.Roomspace * 10.76391) ft2 </li>
+                            <li><i class="fa-solid fa-eye"></i> @item.Roomview</li>
+                            <li><i class="fa-solid fa-bed"></i> @item.Numofbed @item.Typebed </li>
+                        </ul>
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn__book__offer">Read more</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!--end our offer-->
+    @section Scripts{
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('input.rating-loading').rating({
+                    size: 'sm',
+                    filledStar: '<i class="fa-solid fa-star"></i>',
+                    emptyStar: '<i class="fa fa-star"></i>'
+                });
+                $('input.rating1-loading').rating1({
+                    size: 'sm',
+                    filledStar: '<i class="fa-solid fa-star"></i>',
+                    emptyStar: '<i class="fa fa-star"></i>'
+                });
+                $('#form').validate({ // initialize the plugin
+                    rules: {
+                        'Name': {
+                            required: true,
+                            minlength: 5
+                        },
+                        'Tel': {
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10
+                        },
+                        'Email': {
+                            required: true,
+                            email: true
+                        },
+                        'check': {
+                            required: true
+                        }
                     },
-                    Enquiry: {
-                        required: true,
-                    },
-                    Email: {
-                        required: true,
-                        email: true,
-                    },
-                },
-                submitHandler: function (form) {
-                    $.post($(form).attr("action"), $(form).serialize())
-                        .done(function () {
-                            alert("Post Enquiry Successed");
-                            $('#form-submid__enquiry')[0].reset();
-                        });
-                }
+                    submitHandler: function (form) {
+                        $.post($(form).attr("action"), $(form).serialize())
+                            .done(function (data) {
+                                if (data.success == true) {
+                                    alert("Rating Successed!");
+                                    $(form)[0].reset()
+                                } else {
+                                    alert(data.Message);
+                                }
+                            })
+                            .fail(function (error) {
+                                alert(error);
+                            });
+                    }
+                });
             });
-        });
-    </script>
-}
+        </script>
+    }

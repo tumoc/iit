@@ -1,0 +1,68 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<Article>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<Article> articles = CommentController.GetArticles(menu.ID);
+}
+<link href="~/assets/lib/css/page.css" rel="stylesheet" />
+@Html.Partial("Slider/Banner")
+<section class="blogs pd-100">
+    <div class="container">
+        @foreach (var item in articles.OrderByDescending(a=>a.Datetime).ToList())
+        {
+            <article class="blogs-item">
+                <figure class="thumd">
+                    <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                        <img src="@item.Image" alt="">
+                    </a>
+                </figure>
+                <div class="desc">
+                    <div class="entry-header">
+                        <h2 class="entry-title">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                @item.Title
+                            </a>
+                        </h2>
+                        <div class="entry-meta">
+                            <span class="post-on">
+                                <i class="fa-regular fa-clock"></i>
+                                <time>@item.Datetime.GetValueOrDefault().ToString("dd/MM/yyyy")</time>
+                            </span>
+                            <span class="byline">
+                                <i class="fa-solid fa-pen"></i>
+                                @item.Authur
+                            </span>
+                        </div>
+                    </div>
+                    <div class="entry-content">
+                        <p>
+                            @Html.Raw(item.Description)
+                        </p>
+                    </div>
+                    <div class="entry-footer">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="btn read-more">
+                            read more
+                        </a>
+                    </div>
+                </div>
+            </article>
+        }
+
+    </div>
+</section>
+<!--page number-->
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions()
+        {
+        LiElementClasses = new List<string> { "page-item pagi-item", "page-link" }
+        })
+</div>
+<!--end page number-->

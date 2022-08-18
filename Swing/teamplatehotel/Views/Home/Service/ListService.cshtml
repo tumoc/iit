@@ -1,0 +1,60 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<Article>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Article article = CommentController.HotArticle(menu.ID);
+}
+@Html.Partial("Slider/Banner")
+<section class="about about1 services-grid pd-100">
+    <div class="container">
+        <div class="about-content">
+            @if(article != null){
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inner">
+                            <h2>
+                                @article.Title
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="inner">
+                            @Html.Raw(article.Description)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="inner">
+                            @Html.Raw(article.Content)
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+        <div class="service-gallery">
+            <div class="row">
+                @foreach(var item in Model)
+                {
+                    <div class="col-md-4 service-item">
+                        <figure class="image">
+                            <div class="overlay"></div>
+                            <img src="@item.Image" alt="">
+                        </figure>
+                        <div class="service-content">
+                            <span class="service-content__title">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">@item.Title</a>
+                            </span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,398 @@
+﻿@using ProjectLibrary.Config
+@using ProjectLibrary.Database
+@using TeamplateHotel.Areas.Administrator.EntityModel
+@using TeamplateHotel.Areas.Administrator.Controllers
+
+@model ERoom
+@{
+    Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+    int flag = 0;
+    //List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+    //List<int> roomAmenities = CommentController.GetListAmenityID(Model.ID);
+    List<Facility> basicFacilities = CommentController.GetBasic(Request.Cookies["LanguageID"].Value);
+    List<int> basics = CommentController.GetListFacilityID(Model.ID);
+
+}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<div class="span12">
+    <div class="widget ">
+        <div class="widget-header">
+            <i class=" icon-plus-sign"></i>
+            <h3>@ViewBag.Title</h3>
+        </div> <!-- /widget-header -->
+
+        <div class="widget-content">
+            @Html.ValidationSummary(true)
+            @using (Html.BeginForm("Update", "Room", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(a => a.ID)
+                <div class="control-group">
+                    <label class="control-label" for="Title">Tên Phòng<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Title, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Title)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    @Html.LabelFor(c => c.Alias, new { @class = "control-label" })
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Alias, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Alias)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Image">Hình đại diện<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Image, new { @class = "span4 inputbox upload" })
+                        @Html.ValidationMessageFor(c => c.Image)
+                        <p class="help-img">Nên chọn ảnh có kích thước @ConfigImage.InfoImageRoom</p>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="MaxPeople">Số người lớn tối đa<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.MaxPeople, new { @class = "span4" }) <span>Người</span>
+                        @Html.ValidationMessageFor(c => c.MaxPeople)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Child">Số trẻ em tối đa<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Child, new { @class = "span4" }) <span>Người</span>
+                        @Html.ValidationMessageFor(c => c.Child)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Roomspace">Diện tích phòng<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Roomspace, new { @class = "span4" }) <span>sqm</span>
+                        @Html.ValidationMessageFor(c => c.Roomspace)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Roomview">Hướng phòng<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextAreaFor(c => c.Roomview, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Roomview)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Typebed">Loại giường<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Typebed, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Typebed)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Numofbed">Số giường<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Numofbed, new { @class = "span4" })
+                        @Html.ValidationMessageFor(c => c.Numofbed)
+                    </div>
+                </div>
+                @*<div class="control-group">
+                <label class="control-label" for="">Tiện ích cơ bản<span class="asterisk">*</span></label>
+                <div class="controls">
+                    <select class="js-example-basic-multiple span4" name="BasicFacilities" id="BasicFacilities" multiple="multiple">
+                        @foreach (var item in basicFacilities)
+                        {
+                            if (basics.Contains(item.ID))
+                            {
+                                <option value="@item.ID" selected>@item.Title</option>
+                            }
+                            else
+                            {
+                                <option value="@item.ID">@item.Title</option>
+                            }
+                        }
+                    </select>
+                    <ul class="allBasic">
+                    </ul>
+                </div>
+
+            </div>*@
+
+                @*<div class="control-group">
+            <label class="control-label" for="">Tiện ích<span class="asterisk">*</span></label>
+            <div class="controls">
+                <select class="js-example-basic-multiple span4" name="Amenities" id="Amenities" multiple="multiple">
+                    @foreach (var item in amenities)
+                    {
+                        if (roomAmenities.Contains(item.ID))
+                        {
+                            <option value="@item.ID" selected>@item.Title</option>
+                        }
+                        else
+                        {
+                            <option value="@item.ID">@item.Title</option>
+                        }
+                    }
+                </select>
+                <ul class="allAmenity">
+                    @if (Model.EAmenityItems != null)
+                {
+                    foreach (EAmenityItem amenity in Model.EAmenityItems)
+                    {
+                        <li>
+                            <input id="EAmenityItems_@(stemp)__Id" name="EAmenityItems[@(stemp)].Id" type="hidden" value="@(amenity.Id)" />
+                        </li>
+                        stemp++;
+                    }
+                }
+                </ul>
+            </div>
+
+                </div>  *@
+
+                <div class="control-group">
+                    <label class="control-label" for="Price">Giá cơ bản<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.Price, new { @class = "span4" }) <span>USD</span>
+                        @Html.ValidationMessageFor(c => c.Price)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="PriceNet">Khuyến mại</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.PriceNet, new { @class = "span4" }) <span>%</span>
+                        @Html.ValidationMessageFor(c => c.PriceNet)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Title">Trạng thái hiển thị</label>
+                    <div class="controls">
+                        <label class="radio-inline"> <input type="radio" name="Status" value="True" checked="checked"> có</label>
+                        <label class="radio-inline"> <input type="radio" name="Status" value="false"> Không</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Hiển thị trang chủ</label>
+                    <div class="controls">
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Home, "true")  Có</label>
+                        <label class="radio-inline">@Html.RadioButtonFor(m => m.Home, "false") Không</label>
+                    </div>
+                </div>
+
+                <div class="control-group" style="margin-top: 40px">
+                    <label class="control-label" for="Content">Mô tả<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.Description)</span>
+                        </p>
+                        @Html.TextAreaFor(c => c.Description, new { @class = "basic-ckeditor" })
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="Content">Mô tả chi tiết<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.Content)</span>
+                        </p>
+                        @Html.TextAreaFor(c => c.Content, new { @class = "full-ckeditor" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Moredetail">Thông tin thêm</label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.MoreDetail)</span>
+                        </p>
+                        @Html.TextAreaFor(c => c.MoreDetail, new { @class = "full-ckeditor" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="PricingPlan">Kế hoạch giá bán</label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.PricingPlan)</span>
+                        </p>
+                        @Html.TextAreaFor(c => c.PricingPlan, new { @class = "full-ckeditor" })
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <h3 class="mg-h">Thêm hình ảnh cho phòng</h3>
+                        <ul class="adminformlist">
+                            <li class="imgthumb">
+                                <label>Hình ảnh </label>
+                                <input type="text" id="img-thumb" style="min-width: 190px" class="upload" />
+                                <button type="button" id="add" class="btn btn-primary">Insert</button>
+                                <p class="help-img">Nên chọn hình ảnh có kích thước lớn hơn 600px</p>
+                            </li>
+                            <li>
+                                <ul style="clear: both; height: auto; width: 100%;" class="allImage" id="">
+                                    @if (Model.EGalleryITems != null)
+                                    {
+                                        foreach (EGalleryITem gallery in Model.EGalleryITems)
+                                        {
+                                            <li>
+                                                <input id="EGalleryITems_@(flag)__Image" name="EGalleryITems[@(flag)].Image" type="hidden" value="@(gallery.Image)" />
+                                                <img src="@(gallery.Image)" width="100" />
+                                            </li>
+                                            flag++;
+                                        }
+                                    }
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="submit" value="Submit" id="submit" class="btn btn-primary" />
+                    <a href="@Url.Action("Index", "Room")" class="btn">Cancel</a>
+                </div>
+                <div class="control-seo">
+                    <h3 class="mg-h">Tôi ưu hoá công cụ tìm kiếm(Seo)</h3>
+                    <div class="control-group">
+                        @Html.LabelFor(c => c.MetaTitle)
+                        @Html.TextBoxFor(c => c.MetaTitle, new { @class = "span4" })
+                        @Html.ValidationMessageFor(p => p.MetaTitle)
+                    </div>
+
+                    <div class="control-group">
+                        @Html.LabelFor(c => c.MetaDescription)
+                        <div class="jtable-input jtable-text-input">
+                            @Html.TextAreaFor(c => c.MetaDescription, new { @class = "span4 meta-seo" })
+                            @Html.ValidationMessageFor(p => p.MetaDescription)
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<ul id='context-menu'>
+    <li>Delete</li>
+</ul>
+
+
+
+<script type="text/javascript">
+    function bindRightClick() {
+        $('.allImage li').unbind();
+        $('.allImage li').bind('contextmenu', function (e) {
+            $('#context-menu').css('left', e.pageX + 'px');
+            $('#context-menu').css('top', e.pageY + 'px');
+            $('#context-menu').show();
+            e.preventDefault();
+            curentImg = $(this);
+            return false;
+        });
+    }
+
+    function sapxep() {
+        var temp = 0;
+        $(".allImage li").each(function () {
+            $(this).find('input').each(function () {
+                var id = $(this).attr("id");
+                var name = $(this).attr("name");
+                var abc = name.substring(name.indexOf('[') + 1, name.indexOf(']'));
+                //console.log('name: ' + name + ' and : ' + abc);
+                var idreplace = id.replace(abc, temp);
+                var namereplace = name.replace(abc, temp);
+                $(this).attr("id", idreplace);
+                $(this).attr("name", namereplace);
+            });
+            temp++;
+        });
+        bindRightClick();
+    }
+
+    function loadHtmlForImage(val) {
+        if ($('#EGalleryITems_' + val + '__Image').length > 0) {
+            return loadHtmlForImage(++val);
+        } else {
+            //console.log(val);
+            var image = '<input id="EGalleryITems_' + val + '__Image" name="EGalleryITems[' + val + '].Image" type="hidden" value="' + $('#img-thumb').val() + '"/>';
+            var img = '<img src="' + $('#img-thumb').val() + '" width="100" height="80" />';
+            return ('<li>' + image + img + '</li>');
+        }
+    }
+    // tien tich
+    //$(document).ready(function () {
+    //    $('#submit').click(function () {
+    //        var data = '';
+    //        var selected = $('#Amenities').val() + "";
+    //        const s = selected.split(",");
+    //        for (var i = 0; i < s.length; i++) {
+    //            var Id = '<input id = "EAmenityItems_' + i + '__Id" name = "EAmenityItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+    //            data = '<li>' + Id + '</li>';
+    //            $('.allAmenity').append(data);
+    //        }
+    //    })
+    //});
+    $(document).ready(function () {
+        $('#submit').click(function () {
+            var data = '';
+            var selected = $('#BasicFacilities').val() + "";
+            const s = selected.split(",");
+            for (var i = 0; i < s.length; i++) {
+                var Id = '<input id = "EBasicItems_' + i + '__Id" name = "EBasicItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+                data = '<li>' + Id + '</li>';
+                $('.allBasic').append(data);
+            }
+        })
+    });
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+    $(document).ready(function () {
+        bindUl();
+        AutoAlias("Title", "Alias");
+        CreateCkEditor();
+
+        bindRightClick();
+        $('html').click(function (e) {
+            $('#context-menu').hide();
+        });
+        $('#context-menu').click(function (e) {
+            e.stopPropagation();
+            $(curentImg).remove();
+            sapxep();
+            $('#context-menu').hide(100);
+        });
+        $(window).resize(function () {
+            $('#context-menu').hide();
+        });
+        //
+        var count = 0;
+        //Thêm ảnh
+        $('#add').click(function () {
+            if ($('#img').val() == "") {
+                alert("Please select image");
+            } else {
+                var data = '';
+                while (true) {
+                    if ($('#EGalleryITems_0__Image').length == 0) {
+                        data = loadHtmlForImage(0);
+                        count = 1;
+                    } else {
+                        data = loadHtmlForImage(count++);
+                    }
+                    break;
+                }
+                $('.allImage').append(data);
+                sapxep();
+                bindRightClick();
+                $('#img-title').val('');
+                $('#img-thumb').val('');
+                $('#img').val('');
+            }
+
+        });
+    });
+
+</script>

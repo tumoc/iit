@@ -1,0 +1,508 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@model ProjectLibrary.Database.BookRoom
+@{
+    ViewBag.Title = "Booking";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Room room = ViewBag.Room ?? new Room();
+    string lan = Request.Cookies["LanguageID"].Value;
+    List<SelectListItem> list = ViewBag.OptionNumber;
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+}
+
+<style>
+    .booking-main {
+        padding-top: 80px;
+    }
+
+    #book_room {
+        font-size: 15px;
+    }
+
+        #book_room .form-control {
+            height: 45px;
+        }
+
+        #book_room [name="Request"] {
+            height: auto;
+        }
+
+    .book-img {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+        .book-img::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.151);
+            z-index: 1;
+        }
+
+    .room-slected {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+        z-index: 5;
+    }
+
+        .room-slected span {
+            display: inline-block;
+            color: #fff;
+            background-color: #1490ac;
+            font-size: 15px;
+            text-transform: uppercase;
+            padding: 5px 15px;
+            border-radius: 3px;
+        }
+
+    .book-img img {
+        height: 246px;
+        border-radius: 5px;
+    }
+
+    .book_info-left {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px 15px;
+        border-radius: 5px;
+        background-color: #14404a;
+        position: relative;
+        z-index: 1;
+    }
+
+    .group-left {
+        width: 48%;
+        text-align: center;
+        background-color: #1490ac;
+        color: #fff;
+        padding: 15px 0px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .b-info-title {
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .b-info-number {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .b-info-number select {
+            background: #1490ac;
+            color: #fff;
+            font-size: 22px;
+            width: 80px;
+            font-weight: 500;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            opacity: 0;
+            transform: translateX(-50%);
+        }
+
+    [name="CheckIn"] {
+        opacity: 0;
+        position: absolute;
+        bottom: 10px;
+    }
+
+    [name="CheckOut"] {
+        opacity: 0;
+        position: absolute;
+        bottom: 10px;
+    }
+
+    .b-number {
+        font-size: 40px;
+        font-weight: 500;
+    }
+
+    .b-date {
+        font-size: 40px;
+        font-weight: 500;
+    }
+
+    .arow-select {
+        font-size: 18px;
+        margin-left: 6px;
+    }
+
+    .hidden-arow {
+        -o-appearance: none;
+        -ms-appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .change-info {
+        text-transform: uppercase;
+        cursor: pointer;
+        display: block;
+        background-color: #1490ac;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: all 0.5s ease;
+    }
+
+        .change-info:hover {
+            color: #fff;
+            background: linear-gradient(#27d7ff, #0bc4ee, #00bae4, #00bae4);
+            transition: all 0.5s ease;
+        }
+
+    .book-right {
+        padding: 0 30px;
+    }
+
+    #book_room label {
+        font-weight: 500;
+    }
+
+    span.required {
+        color: red;
+    }
+
+    .submit-btn {
+        background-color: #1490ac;
+        color: #fff;
+        font-weight: 500;
+    }
+
+        .submit-btn:hover {
+            color: #fff;
+            background-color: #14404a;
+        }
+
+    .change-form_wp {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #1490ac;
+        z-index: 10;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .change-form {
+        position: relative;
+        z-index: 20;
+        display: inline-flex;
+        flex-wrap: wrap;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+        .change-form .form-group {
+            width: 50%;
+            padding: 0 10px;
+        }
+
+        .change-form label {
+            color: #fff;
+            font-weight: 500;
+        }
+
+    .change-btn {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+</style>
+<main class="main">
+    <section>
+        @foreach (var item in sliders.Take(1))
+        {
+            <div class="bg__banner__about" style="background-image: url('@item.Image')">
+                <div class="banner__content">
+                    <h3>Booking Room</h3>
+                </div>
+            </div>
+        }
+    </section>
+    <div class="booking-main box">
+        <div class="container">
+            <form action="/Booking/SendBooking" id="book_room" method="post">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="book-left mb-4">
+                            <div class="book_info-left">
+
+                                <div class=" group-left date_in">
+                                    <div class="b-info-title">@GetLanguage.Language(lan, "CheckIn")</div>
+                                    <input style="text-align:center; border:none;background:#1490AC;color:white" type="text" class="form-control" value="@Model.CheckIn.ToString("MM/dd/yyyy")" id="CheckIn" >
+                                    <input type="text" name="checkIn" hidden id="in" value="@Model.CheckIn.ToString("dd/MM/yyyy")"/>
+                                </div>
+                                <div class=" group-left date_out">
+                                    <div class="b-info-title">@GetLanguage.Language(lan, "CheckOut")</div>
+                                    <input style="text-align:center; border:none;background:#1490AC;color:white" type="text" class="form-control" value="@Model.CheckOut.ToString("MM/dd/yyyy")" id="CheckOut">
+                                    <input type="text" name="checkOut" hidden id="out" value="@Model.CheckOut.ToString("dd/MM/yyyy")"/>
+                                </div>
+                                <div class=" group-left">
+                                    <div class="b-info-title">@GetLanguage.Language(lan, "Adult")</div>
+                                    <select class="form-control" name="Adult">
+                                        @for (int i = 1; i < 11; i++)
+                                        {
+                                            if (i == ViewBag.OptionAdult)
+                                            {
+                                                <option value="@i" selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class=" group-left">
+                                    <div class="b-info-title">@GetLanguage.Language(lan, "child")</div>
+                                    <select class="form-control" name="Child">
+                                        @for (int i = 0; i < 11; i++)
+                                        {
+                                            if (i == ViewBag.OptionChild)
+                                            {
+                                                <option value="@i" selected>@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="book-right mb-4">
+                            <div class="row">
+
+                                <div class="col-md-12" style="margin:20px 0px;">
+                                    <table class="table">
+                                        <tr>
+                                            <td class="td-name"><strong>Name Room</strong></td>
+                                            <td class="td-price"><strong>Price</strong></td>
+                                            <td class="td-max"><strong>MaxPeple</strong></td>
+                                            <td class="td-pricenet"><strong>Sale Off</strong></td>
+                                            <td class="td-select"><strong>Number of Basic</strong></td>
+                                        </tr>
+
+                                        @for (int i = 0; i < Model.ListRoomBookings.Count; i++)
+                                        {
+
+                                            <tr>
+                                                @Html.HiddenFor(a => a.ListRoomBookings[i].RoomId)
+                                                <td class="td-name">
+                                                    <span id="@i"> @Model.ListRoomBookings[i].NameRoom</span>
+                                                    @Html.HiddenFor(a => a.ListRoomBookings[i].NameRoom)
+                                                </td>
+                                                <td class="td-price">
+                                                    @Model.ListRoomBookings[i].Price.GetValueOrDefault().ToString("N0") <span>USD</span>
+                                                    @Html.HiddenFor(a => a.ListRoomBookings[i].Price)
+                                                </td>
+                                                <td class="td-max">
+                                                    @Model.ListRoomBookings[i].MaxPeople
+                                                    @Html.HiddenFor(a => a.ListRoomBookings[i].MaxPeople)
+                                                </td>
+                                                <td>
+                                                    @if (CommentController.PriceNet(Model.ListRoomBookings[i].RoomId) == "")
+                                                    {
+                                                        <span>0 %</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@CommentController.PriceNet(Model.ListRoomBookings[i].RoomId) %</span>
+                                                    }
+                                                </td>
+                                                @if (Model.ListRoomBookings[i].RoomId == ViewBag.RoomId)
+                                                {
+                                                    <td class="td-select">
+                                                        <select name="ListRoomBookings[@i].Number">
+                                                            <option value="0">0</option>
+                                                            <option value="1" selected>1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                        </select>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td class="td-select">
+                                                        @Html.DropDownListFor(a => a.ListRoomBookings[i].Number, new SelectList(ViewBag.OptionNumber, "value", "text"), new { @class = "select-room" })
+                                                    </td>
+                                                }
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">@GetLanguage.Language(lan, "Gender")<span class="required">*</span></label>
+                                        <select class="form-control" name="Gender">
+                                            <option value="Mr">@GetLanguage.Language(lan, "Mr")</option>
+                                            <option value="Mrs">@GetLanguage.Language(lan, "Mrs")</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">
+                                            @GetLanguage.Language(lan, "FullName")<span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <input type="text" name="FullName" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">
+                                            @GetLanguage.Language(lan, "Phone") <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <input type="text" name="Phone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">
+                                            @GetLanguage.Language(lan, "Country")  <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <input type="text" name="Country" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="">
+                                            @GetLanguage.Language(lan, "Email") <span class="required" aria-required="true">*</span>
+                                        </label>
+                                        <input type="email" name="Email" value="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for=""> @GetLanguage.Language(lan, "Messeger")</label>
+                                        <textarea cols="40" rows="5" name="Request" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 agree">
+                                    <input type="checkbox" name="agree" id="agree" /> <span>@Html.Raw(GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Igree")) @hotel.Name</span>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" value="@GetLanguage.Language(lan, "Send")" class="submit-btn btn">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#CheckIn').on("change", function () {
+                var temp1 = new Date($('#CheckIn').val());
+                var temp2 = new Date($('#CheckOut').val());
+                if (temp2 <= temp1) {
+                    var now = new Date();
+                    var dem = Math.ceil((temp1.getTime() - now.getTime()) / 86400000) + 1;
+                    $('#CheckOut').datepicker('setDate','+' + dem);   
+                }
+                const ins = $('#CheckIn').val().split("/");
+                const outs = $('#CheckOut').val().split("/");
+                $('#in').val(ins[1] + "/" + ins[0] + "/" + ins[2]);
+                $('#out').val(outs[1] + '/' + outs[0] + '/' + outs[2]);
+            });
+            $('#CheckOut').on("change", function () {
+                var temp1 = new Date($('#CheckOut').val());
+                var temp2 = new Date($('#CheckIn').val());
+                if (temp2 >= temp1) {
+                    var now = new Date();
+                    var dem = Math.ceil((temp1.getTime() - now.getTime()) / 86400000);
+                    if (dem == 0) {
+                        $('#CheckIn').datepicker('setDate','+0');
+                        $('#CheckOut').datepicker('setDate','+1');
+                    } else {
+                        dem = dem - 1;
+                        $('#CheckIn').datepicker('setDate','+' + dem);
+                    }
+                }
+                const ins = $('#CheckIn').val().split("/");
+                const outs = $('#CheckOut').val().split("/");
+                $('#in').val(ins[1] + "/" + ins[0] + "/" + ins[2]);
+                $('#out').val(outs[1] + '/' + outs[0] + '/' + outs[2]);
+            });
+
+        });
+        $(document).ready(function () {
+
+            $('#book_room').validate({ // initialize the plugin
+                rules: {
+                    'FullName': {
+                        required: true,
+                    },
+                    'Phone': {
+                        required: true,
+                    },
+
+                    'Country': {
+                        required: true,
+                    },
+                    'Email': {
+                        required: true,
+                        email: true,
+                    },
+                    'agree': {
+                        required: true,
+                    },
+
+                },
+                messages: {
+                    'FullName': "Please enter Full Name",
+                    'Phone': "Please enter Phone",
+                    'Country': "Please select country",
+                    'Email': "Please enter email adress",
+                    'agree': "Please agree team conditions",
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                    LoadingSendEmail();
+                    $('#book_room').submit();
+                }
+            });
+        });
+    </script>
+}

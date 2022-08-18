@@ -5,20 +5,69 @@
 @{
     Menu menu = ViewBag.Menu ?? new Menu();
     List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
 }
-<div id="owl-banner" class="owl-carousel owl-theme slideshow owldemo">
-    @foreach (var item in sliders.OrderBy(a => a.Index))
-    {
-        <section class="section-sub-banner" style="background-image: url('@item.Image');">
-           
-        </section>
-    }
-</div>
 <style>
-    .section-sub-banner {
-        height: 350px;
+    .bg__banner__about {
+        /*background-image: url('../img/banner-about.jpg');*/
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        width: 100%;
+        height: 400px;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 2.5%;
+        z-index: 1;
+    }
+
+        .bg__banner__about::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1b2132;
+            opacity: .5;
+            z-index: -1;
+        }
+    .path__about {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+    }
+
+        .path__about a, .path__about p {
+            font-size: 18px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .path__about i {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    .banner__content h3 {
+        font-size: 40px;
+        font-weight: 700;
+        color: #fff;
     }
 </style>
+@foreach(var item in sliders.Take(1))
+    {
+        <div class="bg__banner__about" style="background-image: url('@item.Image')">
+            <div class="banner__content">
+                <div class="path__about">
+                    <a href="/">@home.Title <i class="fa-solid fa-chevron-right"></i></a>
+                    <p>@menu.Title</p>
+                </div>
+                <h3>@menu.Title</h3>
+            </div>
+        </div>
+    }
+

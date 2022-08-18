@@ -1,0 +1,68 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models;
+@using PagedList.Mvc
+@using PagedList
+@model PagedList.IPagedList<Article>
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Article article = CommentController.HotArticle(menu.ID);
+
+}
+@Html.Partial("Slider/Banner")
+<div class="container activities">
+    <div class="about-content">
+        @if (article != null)
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="inner">
+                        <h2>
+                            @article.Title
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="inner">
+                        @Html.Raw(article.Description)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="inner">
+                        @Html.Raw(article.Content)
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div class="row">
+        @foreach (var item in Model.OrderByDescending(a=>a.Datetime).ToList())
+        {
+            <div class="col-md-4">
+                <div class="room-loops">
+                    <figure class="image">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                            <img src="@item.Image" alt="">
+                        </a>
+                    </figure>
+                    <div class="rooms-feature">
+                        <h3 class="room-title">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                @item.Title
+                            </a>
+                        </h3>
+                        <div class="room-content">
+                            @Html.Raw(item.Description)
+                        </div>
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="view-details">
+                            view details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

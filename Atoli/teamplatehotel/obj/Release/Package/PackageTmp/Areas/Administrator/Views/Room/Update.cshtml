@@ -7,8 +7,11 @@
 @{
     Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
     int flag = 0;
-    List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
-    List<int> roomAmenities = CommentController.GetListAmenityID(Model.ID);
+    //List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
+    //List<int> roomAmenities = CommentController.GetListAmenityID(Model.ID);
+    List<Facility> basicFacilities = CommentController.GetBasic(Request.Cookies["LanguageID"].Value);
+    List<Facility> premiumFacilities = CommentController.GetPremium(Request.Cookies["LanguageID"].Value);
+    List<int> basics = CommentController.GetListFacilityID(Model.ID);
 
 }
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -85,18 +88,17 @@
                 <div class="control-group">
                     <label class="control-label" for="Numofbed">Số giường<span class="asterisk">*</span></label>
                     <div class="controls">
-                        @Html.TextBoxFor(c => c.Numofbed, new { @class = "span4" }) <span>Người</span>
+                        @Html.TextBoxFor(c => c.Numofbed, new { @class = "span4" }) 
                         @Html.ValidationMessageFor(c => c.Numofbed)
                     </div>
                 </div>
-
                 <div class="control-group">
-                    <label class="control-label" for="">Tiện ích<span class="asterisk">*</span></label>
+                    <label class="control-label" for="">Tiện ích cơ bản<span class="asterisk">*</span></label>
                     <div class="controls">
-                        <select class="js-example-basic-multiple span4" name="Amenities" id="Amenities" multiple="multiple">
-                            @foreach (var item in amenities)
+                        <select class="js-example-basic-multiple span4" name="BasicFacilities" id="BasicFacilities" multiple="multiple">
+                            @foreach (var item in basicFacilities)
                             {
-                                if (roomAmenities.Contains(item.ID))
+                                if (basics.Contains(item.ID))
                                 {
                                     <option value="@item.ID" selected>@item.Title</option>
                                 }
@@ -106,32 +108,81 @@
                                 }
                             }
                         </select>
-                        <ul class="allAmenity">
-                            @*@if (Model.EAmenityItems != null)
-                                {
-                                    foreach (EAmenityItem amenity in Model.EAmenityItems)
-                                    {
-                                        <li>
-                                            <input id="EAmenityItems_@(stemp)__Id" name="EAmenityItems[@(stemp)].Id" type="hidden" value="@(amenity.Id)" />
-                                        </li>
-                                        stemp++;
-                                    }
-                                }*@
+                        <ul class="allBasic">
                         </ul>
                     </div>
 
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="">Tiện ích cao cấp<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        <select class="js-example-basic-multiple span4" name="PremiumFacilities" id="PremiumFacilities" multiple="multiple" >
+                            @foreach (var item in premiumFacilities)
+                            {
+                                if (basics.Contains(item.ID))
+                                {
+                                    <option value="@item.ID" selected>@item.Title</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID">@item.Title</option>
+                                }
+                            }
+                        </select>
+                        <ul class="allPremium">
+                        </ul>
+                    </div>
+
+                </div>
+                @*<div class="control-group">
+            <label class="control-label" for="">Tiện ích<span class="asterisk">*</span></label>
+            <div class="controls">
+                <select class="js-example-basic-multiple span4" name="Amenities" id="Amenities" multiple="multiple">
+                    @foreach (var item in amenities)
+                    {
+                        if (roomAmenities.Contains(item.ID))
+                        {
+                            <option value="@item.ID" selected>@item.Title</option>
+                        }
+                        else
+                        {
+                            <option value="@item.ID">@item.Title</option>
+                        }
+                    }
+                </select>
+                <ul class="allAmenity">
+                    @if (Model.EAmenityItems != null)
+                {
+                    foreach (EAmenityItem amenity in Model.EAmenityItems)
+                    {
+                        <li>
+                            <input id="EAmenityItems_@(stemp)__Id" name="EAmenityItems[@(stemp)].Id" type="hidden" value="@(amenity.Id)" />
+                        </li>
+                        stemp++;
+                    }
+                }
+                </ul>
+            </div>
+
+                </div>  *@
 
                 <div class="control-group">
-                    <label class="control-label" for="Price">Giá bán<span class="asterisk">*</span></label>
+                    <label class="control-label" for="Price">Giá cơ bản<span class="asterisk">*</span></label>
                     <div class="controls">
                         @Html.TextBoxFor(c => c.Price, new { @class = "span4" }) <span>USD</span>
                         @Html.ValidationMessageFor(c => c.Price)
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="Price">Giá cao cấp<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        @Html.TextBoxFor(c => c.PricePremium, new { @class = "span4" }) <span>USD</span>
+                        @Html.ValidationMessageFor(c => c.PricePremium)
+                    </div>
+                </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="PriceNet">Giá khuyến mại</label>
+                    <label class="control-label" for="PriceNet">Khuyến mại</label>
                     <div class="controls">
                         @Html.TextBoxFor(c => c.PriceNet, new { @class = "span4" }) <span>%</span>
                         @Html.ValidationMessageFor(c => c.PriceNet)
@@ -276,15 +327,39 @@
         }
     }
     // tien tich
+    //$(document).ready(function () {
+    //    $('#submit').click(function () {
+    //        var data = '';
+    //        var selected = $('#Amenities').val() + "";
+    //        const s = selected.split(",");
+    //        for (var i = 0; i < s.length; i++) {
+    //            var Id = '<input id = "EAmenityItems_' + i + '__Id" name = "EAmenityItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+    //            data = '<li>' + Id + '</li>';
+    //            $('.allAmenity').append(data);
+    //        }
+    //    })
+    //});
     $(document).ready(function () {
         $('#submit').click(function () {
             var data = '';
-            var selected = $('#Amenities').val() + "";
+            var selected = $('#PremiumFacilities').val() + "";
             const s = selected.split(",");
             for (var i = 0; i < s.length; i++) {
-                var Id = '<input id = "EAmenityItems_' + i + '__Id" name = "EAmenityItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+                var Id = '<input id = "EPremiumItems_' + i + '__Id" name = "EPremiumItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
                 data = '<li>' + Id + '</li>';
-                $('.allAmenity').append(data);
+                $('.allPremium').append(data);
+            }
+        })
+    });
+    $(document).ready(function () {
+        $('#submit').click(function () {
+            var data = '';
+            var selected = $('#BasicFacilities').val() + "";
+            const s = selected.split(",");
+            for (var i = 0; i < s.length; i++) {
+                var Id = '<input id = "EBasicItems_' + i + '__Id" name = "EBasicItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+                data = '<li>' + Id + '</li>';
+                $('.allBasic').append(data);
             }
         })
     });

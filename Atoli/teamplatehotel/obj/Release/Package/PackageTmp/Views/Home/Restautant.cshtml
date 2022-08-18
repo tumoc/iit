@@ -1,0 +1,45 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<ListMenu> listMenus = CommentController.GetListMenus(Request.Cookies["LanguageID"].Value);
+    //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
+}
+<link href="~/assets/css/restaurant.css" rel="stylesheet" />
+@Html.Partial("header")
+@Html.Partial("Slider/Banner")
+
+<!--breakfast-->
+@foreach(var item in listMenus)
+   {
+        <div class="breakfast">
+            <div class="heading__breakfast">
+                <h2>@item.Title</h2>
+                <p>@item.Time</p>
+            </div>
+            <div class="main__breakfast">
+                @foreach (var item2 in CommentController.GetMenuRestaurants(item.ID))
+                {
+                    <div class="list__breakfast">
+                        <div class="breakfast__image">
+                            <img src="@item2.Image" alt="">
+                        </div>
+                        <div class="breakfast__description">
+                            <a >@item2.Title</a>
+                            <p>
+                                @Html.Raw(item2.Content)
+                            </p>
+                            <h4>$@item2.Price</h4>
+                        </div>
+                    </div>
+                }
+                </div>
+        </div>
+   }
+
+<!--end breakfast-->

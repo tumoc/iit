@@ -1,14 +1,19 @@
 ﻿@model TeamplateHotel.Areas.Administrator.EntityModel.EArticle
+@using TeamplateHotel.Areas.Administrator.Controllers
+@using ProjectLibrary.Database
 @{
     Layout = "~/Areas/Administrator/Views/Templates/_LayoutPage.cshtml";
+    List<Amenity> amenities = CommentController.GetAmetities(Request.Cookies["LanguageID"].Value);
 }
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <div class="span12">
     <div class="widget ">
         <div class="widget-header">
             <i class=" icon-plus-sign"></i>
             <h3>@ViewBag.Title</h3>
-        </div> <!-- /widget-header -->  
-        
+        </div> <!-- /widget-header -->
+
         <div class="widget-content">
             @Html.ValidationSummary(true)
             @using (Html.BeginForm("Create", "Article", FormMethod.Post, new { @class = "form-horizontal" }))
@@ -42,6 +47,28 @@
                         @Html.TextBoxFor(c => c.Image, new { @class = "span4 inputbox upload" })
                         @Html.ValidationMessageFor(c => c.Image)
                     </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Title">Icon</label>
+                    <div class="controls">
+                        <input type="radio" id="html" name="fav_language" class="radio-inline" value="true" onchange="show()">
+                        <label for="html">Có</label>
+                        <input type="radio" id="html" name="fav_language" class="radio-inline" value="true" onchange="hide()" checked>
+                        <label for="html">Không</label>
+                    </div>
+                </div>
+                <div class="control-group" id="listIcon" style="display:none">
+                    <div class="controls">
+                        <select class="js-example-basic-multiple" name="Amenities" id="Amenities" multiple="multiple">
+                            @foreach (var item in amenities)
+                            {
+                                <option value="@item.ID">@item.Title</option>
+                            }
+                        </select>
+                        <ul class="allAmenity">
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="Authur">Tác giả<span class="asterisk">*</span></label>
@@ -105,7 +132,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <input type="submit" value="Submit" class="btn btn-primary" />
+                    <input type="submit" value="Submit" id="submit" class="btn btn-primary" />
                     <a href="@Url.Action("Index", "Article")" class="btn">Cancel</a>
                 </div>
 
@@ -129,13 +156,37 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        bindUl();
-        AutoAlias("Title", "Alias");
-        CreateCkEditor();
-    });
-
+<script>
+    function show() {
+        document.getElementById('listIcon').style.display = "block";
+    }
+    function hide() {
+        document.getElementById('listIcon').style.display = "none";
+    }
 </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bindUl();
+            AutoAlias("Title", "Alias");
+            CreateCkEditor();
+        });
+        //tien ich
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                var data = '';
+                if ($('#Amenities').val() != null) {
+                    var selected = $('#Amenities').val() + "";
+                    const s = selected.split(",");
+                    for (var i = 0; i < s.length; i++) {
+                        var Id = '<input id = "EAmenityItems_' + i + '__Id" name = "EAmenityItems[' + i + '].Id" type = "hidden" value = "' + s[i] + '" />';
+                        data = '<li>' + Id + '</li>';
+                        $('.allAmenity').append(data);
+                    }
+                }
+            })
+        });
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>    
+

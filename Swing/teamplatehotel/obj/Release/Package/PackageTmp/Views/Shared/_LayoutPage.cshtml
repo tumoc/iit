@@ -1,0 +1,255 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Config
+@using TeamplateHotel.Models
+@{
+    Hotel detailHotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    List<Language> languages = CommentController.GetLanguages();
+    List<Menu> menufooter = CommentController.GetSecondMenus(Request.Cookies["LanguageID"].Value);
+    List<Menu> menus = CommentController.GetMainMenus(Request.Cookies["LanguageID"].Value);
+    string alias = "";
+    List<Award> awards = CommentController.GetAwards(Request.Cookies["LanguageID"].Value);
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swing</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="~/assets/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" />
+    <link rel="stylesheet" href="~/assets/lib/mmenu/mmenu.css">
+    <link rel="stylesheet" href="~/assets/lib/css/style.css">
+    <link href="~/assets/lib/css/page.css" rel="stylesheet" />
+    <link href="~/assets/lib/css/star-rating.css" rel="stylesheet" />
+    <link href="~/assets/lib/css/star-rating.min.css" rel="stylesheet" />
+    <link href="~/assets/lib/css/star-rating1.css" rel="stylesheet" />
+    <link href="~/assets/lib/css/star-rating1.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="header-main">
+                <div class="container">
+                    <div class="row">
+                        <a href="/" class="logo">
+                            <img src="@detailHotel.Logo" alt="">
+                        </a>
+                        <nav class="menu">
+                            <ul class="menu-list">
+                                @foreach (var item in menus.Where(a => a.ParentID == 0).OrderBy(a => a.Index).ToList())
+                                {
+                                    var menuChilds = menus.Where(a => a.ParentID == item.ID).OrderBy(a => a.Index).ToList();
+                                    if (menuChilds.Count > 0)
+                                    {
+                                        alias = "javascript:void(0)";
+                                        <li class="menu-item">
+                                            <a href="@alias" class="menu-link">@item.Title<i class="fa-solid fa-chevron-down"></i></a>
+                                            <ul class="submenu">
+                                                @foreach (var itemChild in menuChilds)
+                                                {
+                                                    if (item.Type == SystemMenuType.OutSite)
+                                                    {
+                                                        <li><a href="/@itemChild.Link">@itemChild.Title</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="/@itemChild.Alias">@itemChild.Title</a></li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        if (item.Type == SystemMenuType.OutSite)
+                                        {
+                                            <li class="menu-item"><a href="@item.Link" class="menu-link">@item.Title</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="menu-item"><a href="/@item.Alias" class="menu-link">@item.Title</a></li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </nav>
+                        <div class="link-btn">
+                            <a href="/booking" class="btn1">book now </a>
+                            <div id="header">
+                                <a href="#menu" id="menu-toggle">
+                                    <span>
+                                        <!-- <i class="fa-solid fa-bars"></i> -->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            @RenderBody()
+            <section class="awards">
+                <div class="containe">
+                    <div class="section-title pb-0">
+                        <h2 class="sectitle">
+                            Awards Recognization
+                        </h2>
+                        <div class="subtitle">
+                            All awards by our team overall the world for different categories.
+                        </div>
+                    </div>
+                    <div class="awards-list">
+                        @foreach (var item in awards)
+                        {
+                            <div class="items">
+                                <div class="image">
+                                    <img src="@item.Image" alt="">
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-main pd-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 footer-column">
+                            <div class="inner">
+                                <p>
+                                    <img src="~/assets/images/resort-luxury.png" alt="">
+                                </p>
+                                <p>
+                                    Swing – Make memories at Jungle Resort, where southern charm, magnificent scenery and casually elegant surroundings exemplify the gentle ambience of this barrier island’s luxury beachfront resort.
+                                </p>
+                                <ul class="social-links">
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-brands fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-brands fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-brands fa-linkedin-in"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-column">
+                            <div class="inner">
+                                <h2 class="footer-title">
+                                    contact infor
+                                </h2>
+                                <p>
+                                    <a href="" class="tel">+@detailHotel.Tel</a>
+                                </p>
+                                <p>
+                                    @detailHotel.Address
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 footer-column">
+                            <div class="inner">
+                                <h2 class="footer-title">
+                                    newsletter
+                                </h2>
+                                <p>
+                                    Get Special offers & Discounts
+                                </p>
+
+                                <form method="post" action="/Subscribe/Send" id="subscribe-form" class="form-subscribe">
+                                    <div class="form-group">
+                                        <input type="text" name="Email" class="form-control" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-btn">
+                                        <input type="submit" class="btn-submid" value="subscribe" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+    </div>
+    <a href="" id="backtotop"><i class="fa-solid fa-arrow-up-long"></i></a>
+
+    <script src="~/assets/lib/js/jquery-3.6.0.min.js"></script>
+    <script src="~/assets/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+    <script src="~/assets/lib/mmenu/mmenu.js"></script>
+    <script src="~/assets/lib/js/style.js"></script>
+    <script src="~/Plugins/Validate/jquery-validation-1.13.1/jquery.validate.min.js"></script>
+    <script src="~/assets/lib/js/star-rating.js"></script>
+    <script src="~/assets/lib/js/star-rating.min.js"></script>
+    <script src="~/assets/lib/js/star-rating1.js"></script>
+    <script src="~/assets/lib/js/star-rating1.min.js"></script>
+    <script>
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#subscribe-form').validate({ // initialize the plugin
+                rules: {
+                    'Email': {
+                        required: true,
+                        email: true,
+                    },
+                },
+                messages: {
+                    'Email': "Please enter Email"
+                },
+                submitHandler: function () {
+                    $.post($('#subscribe-form').attr("action"), $('#subscribe-form').serialize())
+                        .done(function (data) {
+                            if (data.success == true) {
+                                alert(data.Message);
+                                $('#subscribe-form')[0].reset();
+                            } else {
+                                alert(data.Message);
+                            }
+                        });
+                }
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

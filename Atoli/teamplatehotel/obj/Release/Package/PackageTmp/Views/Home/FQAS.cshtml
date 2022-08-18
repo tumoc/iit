@@ -1,0 +1,19 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+@{
+    ViewBag.Title = "FQAS";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    List<Question> questions = CommentController.GetQuestions(Request.Cookies["LanguageID"].Value);
+}
+@Html.Partial("header")
+@Html.Partial("Slider/Banner")
+<link href="~/assets/css/about.css" rel="stylesheet" />
+<div>
+    @foreach(var item in questions)
+            {
+                <p><strong>@item.Title</strong></p>
+                <p>@item.Content</p>
+            }
+</div>

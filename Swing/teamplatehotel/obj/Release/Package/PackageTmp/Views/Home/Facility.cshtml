@@ -1,0 +1,39 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models;
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Facility> facilities = CommentController.GetFacility(Request.Cookies["LanguageID"].Value);
+}
+@Html.Partial("Slider/Banner")
+<div class="container facilities pt-100">
+    <div class="section-title section-title1">
+        <h2 class="sectitle">
+            Hotel Facilities
+        </h2>
+        <div class="subtitle">
+            In consectetur velit lectus, sit amet sollicitudin ipsum suscipit sed. Integer ut urna sit amet mi commodo aliquam quis in nisl.
+        </div>
+    </div>
+    <div class="row feature feature2">
+        @foreach (var item in facilities)
+        {
+            <div class="col-lg-4 col-md-6 feature-item">
+                <div class="inner">
+                    <div class="feature-icon">
+                        <img src="@item.Image" alt="">
+                    </div>
+                    <div class="feature-content">
+                        <div class="title">
+                            @item.Title
+                        </div>
+                        <div class="content">
+                            @item.Content
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

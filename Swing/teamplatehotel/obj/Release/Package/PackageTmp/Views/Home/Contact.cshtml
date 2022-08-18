@@ -1,0 +1,156 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using System.Configuration
+@using TeamplateHotel.Models
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Hotel hotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    List<Menu> menufooter = CommentController.GetSecondMenus(Request.Cookies["LanguageID"].Value);
+    //var publicKey = ConfigurationManager.AppSettings["ReCaptcha.PublicKey"].ToString();
+}
+@Html.Partial("Slider/Banner")
+<section class="contact pt-100">
+    <div class="container">
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7447.560473843173!2d105.83751103384812!3d21.041477514048044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aba6a048dfc1%3A0x353a1ec306bb704f!2zUGjhu6cgQ2jhu6cgdOG7i2No!5e0!3m2!1svi!2s!4v1655707865691!5m2!1svi!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="contact-panel">
+            <div class="contact-title">
+                <h2>
+                    Will Get You
+                </h2>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="inner">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <a href="tel:+@hotel.Tel">
+                            <span>call us at</span> @hotel.Tel
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="inner">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <a href="#">
+                            @hotel.Address
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="inner">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:@hotel.Email">
+                            <span>
+                                email us at
+                            </span> @hotel.Email
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="contact-form">
+        <div class="container">
+            <div class="contact-form__title">
+                <h1>
+                    contact form
+                </h1>
+                <p>
+                    You can still contact us, right here - right now. Use this contact form to send an e-mail. Usually we respond in 1 bussiness day.
+                </p>
+            </div>
+            <form action="Contact/SubmitContact" method="post" id="form" class="form-contact">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="Gender" placeholder="@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mr")/@GetLanguage.Language(Request.Cookies["LanguageID"].Value, "Mrs")*">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="FullName" class="form-control" placeholder="*your name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Email" class="form-control" placeholder="*your email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Tel" class="form-control" placeholder="*your phone">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="Country" class="form-control" placeholder="*your country">
+                        </div>
+                        <div class="form-group">
+                            <span class="note">
+                                * Please Complete All Fields Correctly.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <textarea name="Request" id="" cols="40" rows="10" class="form-control" placeholder="your message"></textarea>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="check" id="">
+                            @foreach (var item in menufooter.OrderBy(a => a.Index).Skip(2).Take(1))
+                            {
+                                <span>Accept <a href="/@item.Alias">Terms & Conditions</a></span>
+                            }
+                            @foreach (var item in menufooter.OrderBy(a => a.Index).Skip(3).Take(1))
+                            {
+                                <span> And <a href="/@item.Alias">Privacy Policy.</a></span>
+                            }
+                        </div>
+                        <div class="form-btn">
+                            <button type="submit" class="btn-contact">
+                                send message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#form').validate({ // initialize the plugin
+                rules: {
+                    'Gender': {
+                        required: true
+                    },
+                    'FullName': {
+                        required: true,
+                        minlength: 5
+                    },
+                    'Tel': {
+                        required: true,
+                        minlength: 10
+                    },
+                    'Email': {
+                        required: true,
+                        email: true
+                    },
+                    'Country': {
+                        required: true
+                    },
+                    'check': {
+                        required: true
+                    }
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+}
+

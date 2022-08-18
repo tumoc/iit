@@ -1,0 +1,54 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Handler
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models
+@model TeamplateHotel.Models.DetailService
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+    Menu menu = ViewBag.Menu ?? new Menu();
+}
+<section class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-nav">
+            <ul class="trail-list">
+                <li class="trail-item">
+                    <a href="/">
+                        <span>home</span>
+                    </a>
+                </li>
+                <li class="trail-item">
+                    <a href="/@menu.Alias">
+                        <span>@menu.Title</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="breadcrumb-title">
+            <h1 class="page-title">
+                @Model.Service.Title
+            </h1>
+
+        </div>
+    </div>
+</section>
+<section class="blogs blog-details pd-100">
+    <div class="container">
+        <article class="blogs-item">
+            <figure class="thumd">
+                <img src="@Model.Service.Image" alt="">
+            </figure>
+            <div class="desc">
+                <div class="entry-header">
+                    <h2 class="entry-title">
+                        @Model.Service.Title
+                    </h2>
+                </div>
+                <div class="entry-content">
+                    @Html.Raw(Model.Service.Content)
+                </div>
+
+            </div>
+        </article>
+    </div>
+</section>

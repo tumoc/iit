@@ -1,0 +1,124 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models;
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    Article article = CommentController.HotArticle(menu.ID);
+    List<Article> activities = CommentController.HomeActivityArticles(Request.Cookies["LanguageID"].Value);
+    List<Gallery> galleries = CommentController.Gallery(menu.ID);
+    List<Facility> facilities = CommentController.GetHotFacility();
+
+}
+@Html.Partial("Slider/Banner")
+<section class="about about1 pd-100">
+    <div class="container">
+        <div class="about-content">
+            @if (article != null)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="inner">
+                            <h2>
+                                @article.Title
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="inner">
+                            @Html.Raw(article.Description)
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="inner">
+                            @Html.Raw(article.Content)
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="about-gallery">
+            <div class="row">
+                @foreach(var item in galleries.Take(3))
+                {
+                    <div class="col-md-4">
+                        <figure class="image">
+                            <img src="@item.LargeImage" alt="">
+                        </figure>
+                    </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container activities">
+    <div class="section-title section-title1">
+        <h2 class="sectitle">
+            Hotel Activities
+        </h2>
+        <div class="subtitle">
+            In consectetur velit lectus, sit amet sollicitudin ipsum suscipit sed. Integer ut urna sit amet mi commodo aliquam quis in nisl.
+        </div>
+    </div>
+    <div class="row">
+        @foreach(var item in activities.Take(3))
+            {
+                <div class="col-md-4">
+                    <div class="room-loops">
+                        <figure class="image">
+                            <a href="">
+                                <img src="@item.Image" alt="">
+                            </a>
+                        </figure>
+                        <div class="rooms-feature">
+                            <h3 class="room-title">
+                                <a href="">
+                                    @item.Title
+                                </a>
+                            </h3>
+                            <div class="room-content">
+                                @Html.Raw(item.Description)
+                            </div>
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias" class="view-details">
+                                view details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+    </div>
+</div>
+<div class="container facilities">
+    <div class="section-title section-title1">
+            <h2 class="sectitle">
+                Hotel Facilities
+            </h2>
+            <div class="subtitle">
+                In consectetur velit lectus, sit amet sollicitudin ipsum suscipit sed. Integer ut urna sit amet mi commodo aliquam quis in nisl.
+            </div>
+        </div>
+    <div class="row feature feature2">
+        @foreach(var item in facilities.Take(6))
+            {
+                <div class="col-lg-4 col-md-6 feature-item">
+                    <div class="inner">
+                        <div class="feature-icon">
+                            <img src="@item.Image" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <div class="title">
+                                @item.Title
+                            </div>
+                            <div class="content">
+                                @item.Content
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        
+    </div>
+</div>

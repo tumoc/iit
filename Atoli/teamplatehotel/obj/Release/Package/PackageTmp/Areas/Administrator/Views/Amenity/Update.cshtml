@@ -16,7 +16,7 @@
             @Html.ValidationSummary(true)
             @using (Html.BeginForm("Update", "Amenity", FormMethod.Post, new { @class = "form-horizontal" }))
             {
-                @Html.HiddenFor(a=>a.ID)
+                @Html.HiddenFor(a => a.ID)
                 <div class="control-group">
                     <label class="control-label" for="Title">Tên Phòng<span class="asterisk">*</span></label>
                     <div class="controls">
@@ -48,7 +48,15 @@
                         <label class="radio-inline">@Html.RadioButtonFor(m => m.Home, "false") Không</label>
                     </div>
                 </div>
-
+                <div class="control-group">
+                    <label class="control-label" for="Content">Mô tả chi tiết<span class="asterisk">*</span></label>
+                    <div class="controls">
+                        <p>
+                            <span class="error-login">@Html.ValidationMessageFor(a => a.Content)</span>
+                        </p>
+                        @Html.TextAreaFor(c => c.Content, new { @class = "full-ckeditor" })
+                    </div>
+                </div>
                 <div class="form-actions">
                     <input type="submit" value="Submit" class="btn btn-primary" />
                     <a href="@Url.Action("Index", "Amenity")" class="btn">Cancel</a>

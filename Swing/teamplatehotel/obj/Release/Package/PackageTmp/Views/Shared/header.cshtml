@@ -1,0 +1,139 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Config
+@using TeamplateHotel.Models
+@{
+    Hotel detailHotel = CommentController.DetailHotel(Request.Cookies["LanguageID"].Value);
+    List<Language> languages = CommentController.GetLanguages();
+    Plugin plugin = CommentController.GetPluigPlugin();
+    List<Menu> menus = CommentController.GetMainMenus(Request.Cookies["LanguageID"].Value);
+    string alias = "";
+
+}
+<header>
+    <div class="header">
+        <div class="language">
+            <div class="choose__language">
+                Language<i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="list__language">
+                @foreach (var language in languages)
+                {
+                    <li><a href="/SelectLanguge/@language.ID">@language.Name</a></li>
+                }
+            </ul>
+        </div>
+
+        <div class="location__header">
+            <ul>
+                <li><i class="fa-solid fa-house"></i><a href="">@detailHotel.Address</a></li>
+                <li><i class="fa-solid fa-phone"></i><a href="">@detailHotel.Tel</a></li>
+                <li><i class="fa-solid fa-envelope"></i><a href="">@detailHotel.Email</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!--navbar-->
+<div class="navbar">
+    <div class="navbar__header">
+        <div class="logo">
+            <a href="/"><img src="@detailHotel.Logo" alt=""></a>
+        </div>
+
+        <div class="menu">
+            <ul class="list__menu">
+                @foreach (var item in menus.Where(a => a.ParentID == 0).OrderBy(a => a.Index).ToList())
+                {
+                    var menuChilds = menus.Where(a => a.ParentID == item.ID).OrderBy(a => a.Index).ToList();
+                    if (menuChilds.Count > 0)
+                    {
+                        alias = "javascript:void(0)";
+                        <li class="sub__menu">
+                            <a href="@alias" class="sub__menu__title">@item.Title<i class="fa-solid fa-chevron-down"></i></a>
+                            <ul class="dropdown__menu">
+                                @foreach (var itemChild in menuChilds)
+                                {
+                                        if (item.Type == SystemMenuType.OutSite)
+                                        {
+                                            <li><a href="/@itemChild.Link">@itemChild.Title</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/@itemChild.Alias">@itemChild.Title</a></li>
+                                        }
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        if (item.Type == SystemMenuType.OutSite)
+                        {
+                            <li class="sub__menu"><a href="@item.Link" class="sub__menu__title">@item.Title</a></li>
+                        }
+                        else
+                        {
+                            <li class="sub__menu"><a href="/@item.Alias" class="sub__menu__title">@item.Title</a></li>
+                        }
+                    }
+                }
+
+            </ul>
+        </div>
+
+        <div class="book__now__header">
+            <a href="/booking">Book Now</a>
+        </div>
+
+        <div class="menu__bars">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="menu__mobile">
+            <ul class="main__menu__mobile">
+                @foreach (var item in menus.Where(a => a.ParentID == 0).OrderBy(a => a.Index).ToList())
+                {
+                    var menuChilds = menus.Where(a => a.ParentID == item.ID).OrderBy(a => a.Index).ToList();
+                    if (menuChilds.Count > 0)
+                    {
+                        alias = "javascript:void(0)";
+                        <li class="sub__menu__mobile">
+                            <a href="@alias" class="menu__mobile__title">@item.Title</a>
+                            <ul class="dropdown__mobile">
+                                @foreach (var itemChild in menuChilds)
+                                {
+                                        if (item.Type == SystemMenuType.OutSite)
+                                        {
+                                            <li><a href="/@itemChild.Link">@itemChild.Title</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="/@itemChild.Alias">@itemChild.Title</a></li>
+                                        }
+                                }
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        if (item.Type == SystemMenuType.OutSite)
+                        {
+                            <li class="sub__menu__mobile"><a href="@item.Link" class="menu__mobile__title">@item.Title</a></li>
+                        }
+                        else
+                        {
+                            <li class="sub__menu__mobile"><a href="/@item.Alias" class="menu__mobile__title">@item.Title</a></li>
+                        }
+                    }
+                }
+                <li class="sub__menu__mobile book__now__header__mobile">
+                    <a href="/booking">Book Now</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<!--end navbar-->

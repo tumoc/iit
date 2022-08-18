@@ -370,5 +370,16 @@ namespace ProjectLibrary.Properties {
                 return ((string)(this["AtoliConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=103.226.248.52;Initial Catalog=atoli_;User ID=atoli_;Password=So35dq8" +
+            "6*")]
+        public string atoli_ConnectionString {
+            get {
+                return ((string)(this["atoli_ConnectionString"]));
+            }
+        }
     }
 }

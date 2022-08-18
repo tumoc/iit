@@ -6,8 +6,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\Mr.Tu\publish</_PublishTargetUrl>
-    <History>True|2022-07-18T02:39:52.9920747Z;True|2022-07-18T09:06:37.6850310+07:00;True|2022-07-18T08:11:38.1163822+07:00;False|2022-07-16T17:30:43.4163872+07:00;False|2022-07-16T17:27:00.1384134+07:00;False|2022-07-16T17:26:44.6914277+07:00;False|2022-07-16T17:22:05.3471392+07:00;False|2022-07-16T17:15:28.0919125+07:00;</History>
+    <_PublishTargetUrl>C:\Users\Mr.Tu\OneDrive\Máy tính\publish</_PublishTargetUrl>
+    <History>True|2022-08-13T09:43:40.1833243Z;True|2022-07-18T09:39:52.9920747+07:00;True|2022-07-18T09:06:37.6850310+07:00;True|2022-07-18T08:11:38.1163822+07:00;False|2022-07-16T17:30:43.4163872+07:00;False|2022-07-16T17:27:00.1384134+07:00;False|2022-07-16T17:26:44.6914277+07:00;False|2022-07-16T17:22:05.3471392+07:00;False|2022-07-16T17:15:28.0919125+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_GlobalResources/Resource.en.resx">
@@ -785,22 +785,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2015 11:18:40</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Amenity/Create.cshtml">
-      <publishTime>07/08/2022 09:40:38</publishTime>
+      <publishTime>08/08/2022 16:41:50</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Amenity/Index.cshtml">
       <publishTime>07/08/2022 09:20:40</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Amenity/Update.cshtml">
-      <publishTime>07/08/2022 09:42:38</publishTime>
+      <publishTime>08/08/2022 16:41:56</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Article/Create.cshtml">
-      <publishTime>07/09/2022 13:23:10</publishTime>
+      <publishTime>08/09/2022 11:22:47</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Article/Index.cshtml">
-      <publishTime>06/30/2022 11:46:20</publishTime>
+      <publishTime>08/05/2022 08:15:30</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Article/Update.cshtml">
-      <publishTime>07/09/2022 13:23:24</publishTime>
+      <publishTime>08/09/2022 11:24:54</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/BookRoom/Detail.cshtml">
       <publishTime>12/20/2016 07:54:48</publishTime>
@@ -850,6 +850,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Administrator/Views/Discount/Update.cshtml">
       <publishTime>05/15/2015 09:03:39</publishTime>
     </File>
+    <File Include="Areas/Administrator/Views/Employee/Create.cshtml">
+      <publishTime>08/03/2022 11:28:36</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Employee/Index.cshtml">
+      <publishTime>08/02/2022 15:15:50</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Employee/Update.cshtml">
+      <publishTime>08/03/2022 11:28:38</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Facility/Create.cshtml">
+      <publishTime>08/08/2022 11:19:22</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Facility/Index.cshtml">
+      <publishTime>08/08/2022 10:03:00</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Facility/Update.cshtml">
+      <publishTime>08/08/2022 11:19:18</publishTime>
+    </File>
     <File Include="Areas/Administrator/Views/FeedBack/Create.cshtml">
       <publishTime>07/15/2022 11:44:21</publishTime>
     </File>
@@ -859,8 +877,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Administrator/Views/FeedBack/Update.cshtml">
       <publishTime>07/15/2022 11:44:40</publishTime>
     </File>
+    <File Include="Areas/Administrator/Views/Gallery/Create.cshtml">
+      <publishTime>08/02/2022 08:59:46</publishTime>
+    </File>
     <File Include="Areas/Administrator/Views/Gallery/Index.cshtml">
-      <publishTime>11/23/2016 05:19:34</publishTime>
+      <publishTime>08/02/2022 10:00:48</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Gallery/Update.cshtml">
+      <publishTime>08/02/2022 09:02:17</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Hotel/Create.cshtml">
       <publishTime>12/20/2016 07:47:22</publishTime>
@@ -886,6 +910,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Administrator/Views/Language/Index.cshtml">
       <publishTime>11/20/2016 06:53:32</publishTime>
     </File>
+    <File Include="Areas/Administrator/Views/ListMenu/Create.cshtml">
+      <publishTime>08/01/2022 15:46:33</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/ListMenu/Index.cshtml">
+      <publishTime>08/05/2022 08:15:53</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/ListMenu/Update.cshtml">
+      <publishTime>08/01/2022 15:55:53</publishTime>
+    </File>
     <File Include="Areas/Administrator/Views/Login/GetPassWord.cshtml">
       <publishTime>11/15/2016 23:12:26</publishTime>
     </File>
@@ -904,6 +937,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Administrator/Views/Menu/Update.cshtml">
       <publishTime>08/30/2019 09:28:06</publishTime>
     </File>
+    <File Include="Areas/Administrator/Views/MenuRestaurant/Create.cshtml">
+      <publishTime>08/01/2022 16:44:51</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/MenuRestaurant/Index.cshtml">
+      <publishTime>08/01/2022 16:42:52</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/MenuRestaurant/Update.cshtml">
+      <publishTime>08/01/2022 16:44:43</publishTime>
+    </File>
     <File Include="Areas/Administrator/Views/MenuSystem/Index.cshtml">
       <publishTime>05/12/2015 18:10:16</publishTime>
     </File>
@@ -916,14 +958,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/Administrator/Views/PlugIn/SideBar.cshtml">
       <publishTime>12/10/2016 07:40:18</publishTime>
     </File>
+    <File Include="Areas/Administrator/Views/Question/Create.cshtml">
+      <publishTime>08/08/2022 09:06:05</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Question/Index.cshtml">
+      <publishTime>08/08/2022 08:35:12</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Question/Update.cshtml">
+      <publishTime>08/08/2022 08:39:03</publishTime>
+    </File>
     <File Include="Areas/Administrator/Views/Room/Create.cshtml">
-      <publishTime>07/11/2022 15:29:06</publishTime>
+      <publishTime>08/08/2022 11:34:38</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Room/Index.cshtml">
       <publishTime>11/23/2016 09:10:20</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Room/Update.cshtml">
-      <publishTime>07/19/2022 08:42:47</publishTime>
+      <publishTime>08/08/2022 11:41:03</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/RoomInfo/Create.cshtml">
       <publishTime>05/15/2015 09:00:13</publishTime>
@@ -944,13 +995,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2016 06:11:12</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Service/Create.cshtml">
-      <publishTime>07/06/2022 16:35:06</publishTime>
+      <publishTime>08/11/2022 15:25:59</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Service/Index.cshtml">
-      <publishTime>07/05/2022 15:52:13</publishTime>
+      <publishTime>08/03/2022 11:41:20</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Service/Update.cshtml">
-      <publishTime>07/06/2022 16:37:54</publishTime>
+      <publishTime>08/11/2022 15:29:59</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/ServiceInfo/Create.cshtml">
       <publishTime>05/13/2015 10:06:04</publishTime>
@@ -995,7 +1046,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/15/2015 09:01:06</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Templates/_LayoutPage.cshtml">
-      <publishTime>07/15/2022 11:37:16</publishTime>
+      <publishTime>08/13/2022 11:02:23</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/Tour/Create.cshtml">
       <publishTime>11/28/2016 12:06:48</publishTime>
@@ -1008,6 +1059,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Areas/Administrator/Views/Tripadvisor/Index.cshtml">
       <publishTime>05/15/2015 09:01:06</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Usefullink/Create.cshtml">
+      <publishTime>08/11/2022 11:34:10</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Usefullink/Index.cshtml">
+      <publishTime>08/11/2022 11:30:47</publishTime>
+    </File>
+    <File Include="Areas/Administrator/Views/Usefullink/Update.cshtml">
+      <publishTime>08/11/2022 11:28:16</publishTime>
     </File>
     <File Include="Areas/Administrator/Views/User/Create.cshtml">
       <publishTime>05/13/2015 08:19:02</publishTime>
@@ -1318,6 +1378,357 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Asset/lib/js/style.js">
       <publishTime>07/06/2022 17:26:05</publishTime>
     </File>
+    <File Include="assets/carousel/owl.carousel.css">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/carousel/owl.carousel.js">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/carousel/owl.carousel.min.css">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/carousel/owl.carousel.min.js">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/carousel/owl.theme.default.min.css">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/css/about.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/blogDetail.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/booking.css">
+      <publishTime>07/29/2022 08:40:17</publishTime>
+    </File>
+    <File Include="assets/css/contact.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/detailServices.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/gallery.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/index.css">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/css/listBlog.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/listRoom.css">
+      <publishTime>07/30/2022 08:30:23</publishTime>
+    </File>
+    <File Include="assets/css/page.css">
+      <publishTime>12/23/2021 16:20:49</publishTime>
+    </File>
+    <File Include="assets/css/restaurant.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/roomDetail.css">
+      <publishTime>07/30/2022 08:28:10</publishTime>
+    </File>
+    <File Include="assets/css/services.css">
+      <publishTime>07/26/2022 09:36:38</publishTime>
+    </File>
+    <File Include="assets/css/star-rating.css">
+      <publishTime>07/29/2022 16:54:43</publishTime>
+    </File>
+    <File Include="assets/css/star-rating.min.css">
+      <publishTime>07/29/2022 17:18:01</publishTime>
+    </File>
+    <File Include="assets/css/star-rating1.css">
+      <publishTime>07/29/2022 17:07:00</publishTime>
+    </File>
+    <File Include="assets/css/star-rating1.min.css">
+      <publishTime>07/29/2022 17:17:48</publishTime>
+    </File>
+    <File Include="assets/img/ability-img-home.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/ability-img.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/avatar.png">
+      <publishTime>08/01/2022 09:47:40</publishTime>
+    </File>
+    <File Include="assets/img/banner-about.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-blog.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-contact.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-detail-services.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-gallery.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-home.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-restaurant.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-room-detail.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-room.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/banner-services.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-details-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-details-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-item-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-item-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-item-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-item-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-item-img5.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/blog-item-img6.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/booking-img.png">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/border-color.png">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/border-left-gray.png">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/breakfast-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/breakfast-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/breakfast-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/breakfast-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/breakfast-img5.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/breakfast-img6.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/contact-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/contact-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/dinner-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/dinner-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/dinner-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/dinner-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/dinner-img5.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/dinner-img6.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/drink-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/drink-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/drink-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/drink-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/drink-img5.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/drink-img6.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/footer-logo.png">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img5.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img6.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img7.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img8.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/gallery-img9.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/home-heading-img.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/home-two-bg.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/img-heading-about.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/img-heading-intro.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/latest-blog-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/latest-blog-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/list-img-detail-services.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/loading.gif">
+      <publishTime>07/29/2022 13:44:07</publishTime>
+    </File>
+    <File Include="assets/img/logo.png">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/lunch-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/lunch-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/lunch-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/lunch-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/lunch-img5.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/lunch-img6.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/our-offer-1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/our-offer-2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/quick-booking-img.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/review-1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/review-2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/review-3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/review-4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-details-img1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-details-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-details-img3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-img2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-img4.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-img7.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/room-img8.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/specialty-img.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/support-img.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/team-member-1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/team-member-2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/team-member-3.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/testimonials-style1.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/img/testimonials-style2.jpg">
+      <publishTime>07/25/2022 13:53:12</publishTime>
+    </File>
+    <File Include="assets/js/main.js">
+      <publishTime>08/11/2022 19:48:59</publishTime>
+    </File>
+    <File Include="assets/js/star-rating.js">
+      <publishTime>07/29/2022 13:44:37</publishTime>
+    </File>
+    <File Include="assets/js/star-rating.min.js">
+      <publishTime>07/29/2022 16:18:19</publishTime>
+    </File>
+    <File Include="assets/js/star-rating1.js">
+      <publishTime>07/29/2022 16:56:36</publishTime>
+    </File>
+    <File Include="assets/js/star-rating1.min.js">
+      <publishTime>07/29/2022 17:08:05</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/22/2013 15:43:40</publishTime>
     </File>
@@ -1432,14 +1843,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Org.Mentalis.Security.Cryptography.dll">
       <publishTime>11/28/2012 10:03:36</publishTime>
     </File>
+    <File Include="bin/PagedList.dll">
+      <publishTime>10/01/2013 00:36:38</publishTime>
+    </File>
+    <File Include="bin/PagedList.Mvc.dll">
+      <publishTime>10/01/2013 01:15:20</publishTime>
+    </File>
     <File Include="bin/ProjectLibrary.dll">
-      <publishTime>07/20/2022 08:08:12</publishTime>
+      <publishTime>08/13/2022 16:43:18</publishTime>
     </File>
     <File Include="bin/ProjectLibrary.dll.config">
-      <publishTime>07/16/2022 17:14:19</publishTime>
+      <publishTime>08/13/2022 16:42:01</publishTime>
     </File>
     <File Include="bin/ProjectLibrary.pdb">
-      <publishTime>07/20/2022 08:08:12</publishTime>
+      <publishTime>08/13/2022 16:43:18</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
       <publishTime>12/12/2012 18:01:22</publishTime>
@@ -1487,10 +1904,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/09/2012 00:58:20</publishTime>
     </File>
     <File Include="bin/TeamplateHotel.dll">
-      <publishTime>07/20/2022 08:08:14</publishTime>
+      <publishTime>08/13/2022 16:43:21</publishTime>
     </File>
     <File Include="bin/TeamplateHotel.pdb">
-      <publishTime>07/20/2022 08:08:14</publishTime>
+      <publishTime>08/13/2022 16:43:21</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>07/18/2013 00:03:52</publishTime>
@@ -3688,6 +4105,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/js/layout_page.js">
       <publishTime>04/28/2020 09:21:00</publishTime>
     </File>
+    <File Include="Content/PagedList.css">
+      <publishTime>07/30/2022 09:10:11</publishTime>
+    </File>
     <File Include="Content/plugin/bootstrap/config.json">
       <publishTime>09/29/2015 20:35:36</publishTime>
     </File>
@@ -4219,6 +4639,273 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Files/images/icon/ico_booking.png">
       <publishTime>07/16/2022 04:47:54</publishTime>
     </File>
+    <File Include="Files/images/img/ability-img-home.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/ability-img.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-about.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-blog.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-contact.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-detail-services.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-gallery.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-home.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-restaurant.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-room-detail.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-room.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/banner-services.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-details-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-details-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-item-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-item-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-item-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-item-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-item-img5.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/blog-item-img6.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/booking-img.png">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/border-color.png">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/border-left-gray.png">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/breakfast-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/breakfast-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/breakfast-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/breakfast-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/breakfast-img5.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/breakfast-img6.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/contact-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/contact-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/dinner-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/dinner-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/dinner-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/dinner-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/dinner-img5.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/dinner-img6.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/drink-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/drink-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/drink-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/drink-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/drink-img5.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/drink-img6.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/footer-logo.png">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img5.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img6.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img7.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img8.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/gallery-img9.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/home-heading-img.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/home-two-bg.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/img-heading-about.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/img-heading-intro.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/latest-blog-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/latest-blog-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/list-img-detail-services.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/loading.gif">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/logo.png">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/lunch-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/lunch-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/lunch-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/lunch-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/lunch-img5.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/lunch-img6.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/our-offer-1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/our-offer-2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/quick-booking-img.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/review-1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/review-2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/review-3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/review-4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-details-img1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-details-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-details-img3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-img2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-img4.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-img7.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/room-img8.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/specialty-img.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/support-img.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/team-member-1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/team-member-2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/team-member-3.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/testimonials-style1.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
+    <File Include="Files/images/img/testimonials-style2.jpg">
+      <publishTime>08/01/2022 08:53:29</publishTime>
+    </File>
     <File Include="Files/images/insta1.jpg">
       <publishTime>07/06/2022 17:26:05</publishTime>
     </File>
@@ -4316,7 +5003,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/11/2014 00:40:44</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/08/2022 10:59:06</publishTime>
+      <publishTime>07/30/2022 09:10:11</publishTime>
     </File>
     <File Include="Plugins/booking/booking.css">
       <publishTime>09/30/2015 16:01:32</publishTime>
@@ -7028,10 +7715,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2015 11:12:58</publishTime>
     </File>
     <File Include="Views/Booking/MakeReservation.cshtml">
-      <publishTime>07/16/2022 14:07:53</publishTime>
+      <publishTime>08/12/2022 15:34:21</publishTime>
     </File>
     <File Include="Views/Booking/Messages.cshtml">
-      <publishTime>07/03/2022 23:06:32</publishTime>
+      <publishTime>08/12/2022 15:09:42</publishTime>
     </File>
     <File Include="Views/Booking/SelectDate.cshtml">
       <publishTime>09/30/2015 16:02:18</publishTime>
@@ -7058,25 +7745,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2014 08:38:25</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>07/16/2022 11:51:02</publishTime>
+      <publishTime>08/11/2022 14:50:48</publishTime>
     </File>
     <File Include="Views/Home/Article/DetailArticle.cshtml">
-      <publishTime>07/16/2022 14:46:59</publishTime>
+      <publishTime>08/12/2022 15:11:30</publishTime>
     </File>
     <File Include="Views/Home/Article/ListArticle.cshtml">
-      <publishTime>07/18/2022 09:02:30</publishTime>
+      <publishTime>08/12/2022 15:10:45</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>07/16/2022 15:04:49</publishTime>
+      <publishTime>08/13/2022 11:18:22</publishTime>
     </File>
     <File Include="Views/Home/Error.cshtml">
       <publishTime>04/28/2020 09:21:00</publishTime>
     </File>
+    <File Include="Views/Home/FQAS.cshtml">
+      <publishTime>08/11/2022 15:41:17</publishTime>
+    </File>
     <File Include="Views/Home/Gallery.cshtml">
-      <publishTime>07/16/2022 12:05:45</publishTime>
+      <publishTime>08/11/2022 14:48:53</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/16/2022 11:15:05</publishTime>
+      <publishTime>08/11/2022 14:49:52</publishTime>
     </File>
     <File Include="Views/Home/ListHotel.cshtml">
       <publishTime>09/30/2015 08:56:21</publishTime>
@@ -7085,22 +7775,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/06/2016 18:50:36</publishTime>
     </File>
     <File Include="Views/Home/Messages.cshtml">
-      <publishTime>04/28/2020 09:21:00</publishTime>
+      <publishTime>07/26/2022 10:39:18</publishTime>
+    </File>
+    <File Include="Views/Home/Orther.cshtml">
+      <publishTime>08/11/2022 16:39:16</publishTime>
+    </File>
+    <File Include="Views/Home/Restautant.cshtml">
+      <publishTime>08/12/2022 15:00:35</publishTime>
     </File>
     <File Include="Views/Home/Room/DetailRoom.cshtml">
-      <publishTime>07/18/2022 09:37:51</publishTime>
+      <publishTime>08/12/2022 15:07:06</publishTime>
     </File>
     <File Include="Views/Home/Room/ListRoom.cshtml">
-      <publishTime>07/16/2022 13:53:25</publishTime>
+      <publishTime>08/12/2022 15:05:41</publishTime>
     </File>
     <File Include="Views/Home/RoomSearch.cshtml">
       <publishTime>07/16/2022 14:20:23</publishTime>
     </File>
     <File Include="Views/Home/Service/DetailService.cshtml">
-      <publishTime>07/16/2022 15:07:42</publishTime>
+      <publishTime>08/12/2022 15:04:31</publishTime>
     </File>
     <File Include="Views/Home/Service/ListService.cshtml">
-      <publishTime>01/11/2018 15:15:05</publishTime>
+      <publishTime>08/12/2022 15:02:53</publishTime>
     </File>
     <File Include="Views/Home/Tour/Booktour.cshtml">
       <publishTime>09/30/2015 15:39:45</publishTime>
@@ -7118,7 +7814,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2014 16:09:57</publishTime>
     </File>
     <File Include="Views/SendContact/Messages.cshtml">
-      <publishTime>07/09/2022 19:22:26</publishTime>
+      <publishTime>07/26/2022 11:15:58</publishTime>
     </File>
     <File Include="Views/Shared/404.cshtml">
       <publishTime>04/28/2020 09:21:00</publishTime>
@@ -7147,6 +7843,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Shared/Footer/Footer.cshtml">
       <publishTime>07/24/2015 11:12:54</publishTime>
     </File>
+    <File Include="Views/Shared/header.cshtml">
+      <publishTime>08/11/2022 15:44:40</publishTime>
+    </File>
+    <File Include="Views/Shared/headerHome.cshtml">
+      <publishTime>07/28/2022 16:01:08</publishTime>
+    </File>
     <File Include="Views/Shared/Menu/MainMenus.cshtml">
       <publishTime>04/28/2020 09:21:00</publishTime>
     </File>
@@ -7160,19 +7862,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/28/2020 09:21:00</publishTime>
     </File>
     <File Include="Views/Shared/Slider/Banner.cshtml">
-      <publishTime>04/28/2020 09:21:00</publishTime>
+      <publishTime>08/12/2022 15:30:53</publishTime>
     </File>
     <File Include="Views/Shared/Slider/Slider.cshtml">
       <publishTime>06/27/2022 16:22:25</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutPage.cshtml">
-      <publishTime>07/16/2022 11:31:09</publishTime>
+      <publishTime>08/13/2022 11:42:13</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>04/28/2020 09:21:00</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/20/2022 08:08:15</publishTime>
+      <publishTime>08/13/2022 16:43:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

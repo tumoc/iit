@@ -1,0 +1,388 @@
+﻿@using ProjectLibrary.Database
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Models;
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    Menu menu = ViewBag.Menu ?? new Menu();
+    ShowObject article = CommentController.HomeHotArticle(Request.Cookies["LanguageID"].Value);
+    List<ShowObject> rooms = CommentController.RoomShowHome(Request.Cookies["LanguageID"].Value);
+    List<Service> services = CommentController.HomeServices(Request.Cookies["LanguageID"].Value);
+    List<Article> articleServices = CommentController.HomeServiceArticles(Request.Cookies["LanguageID"].Value);
+    List<Article> articleActivities = CommentController.HomeActivityArticles(Request.Cookies["LanguageID"].Value);
+    List<Article> articleRooms = CommentController.HomeRoomArticles(Request.Cookies["LanguageID"].Value);
+    List<Facility> facilities = CommentController.GetHotFacility();
+    List<ShowObject> blogs = CommentController.ArticleShowHome(Request.Cookies["LanguageID"].Value);
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    Menu contact = CommentController.Contact(Request.Cookies["LanguageID"].Value);
+
+}
+<section class="banner">
+    <div class="banner-main">
+        <div class="banner-slide owl-carousel owl-theme">
+            @foreach (var item in sliders)
+            {
+                <div class="banner-item">
+                    <img src="@item.Image" alt="">
+                    <div class="banner-content">
+                        @Html.Raw(item.Content)
+                        <div class="link">
+                            <a href="/@contact.Alias" class="primary-btn">
+                                get in touch
+                            </a>
+                            <a href="/booking" class="secondary-btn">book now</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="about pd-100">
+    <div class="container">
+        @if (article != null)
+        {
+            <div class="about-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="inner">
+                            <h2>
+                                @article.Title
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="inner">
+                            @Html.Raw(article.Description)
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="inner">
+                            @Html.Raw(article.Content)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="about-gallery">
+            <div class="about-left__wrap">
+                @foreach (var item in services.Take(2))
+                {
+                    <div class="about-feature">
+                        <img src="@item.Image" alt="">
+                        <div class="overlay">
+                            <div class="about-feature__content">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                    <span class="inner-title">@item.Title</span>
+                                    <span class="inner-arrow">
+                                        <i class="fa-solid fa-arrow-right-long"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="about-center__wrap">
+                @foreach (var item in services.Skip(2).Take(1))
+                {
+                    <div class="about-feature">
+                        <img src="@item.Image" alt="">
+                        <div class="overlay">
+                            <div class="about-feature__content">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                    <span class="inner-title">@item.Title</span>
+                                    <span class="inner-arrow">
+                                        <i class="fa-solid fa-arrow-right-long"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="about-right__wrap">
+                @foreach (var item in services.Skip(3).Take(2))
+                {
+                    <div class="about-feature">
+                        <img src="@item.Image" alt="">
+                        <div class="overlay">
+                            <div class="about-feature__content">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                    <span class="inner-title">@item.Title</span>
+                                    <span class="inner-arrow">
+                                        <i class="fa-solid fa-arrow-right-long"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="service pd-100">
+    <div class="container">
+        <div class="row">
+            @foreach(var item in articleServices.Take(1))
+            {
+                <div class="col-lg-4 service-title">
+                    <h2 class="sectitle">
+                        @item.Title
+                    </h2>
+                    <div class="subtitle">
+                       @Html.Raw(item .Content)
+                    </div>
+                </div>
+            }
+            
+            <div class="col-lg-8 service-list">
+                <ul>
+                    @foreach(var item in services)
+                    {
+                        <li>
+                            <h4>
+                                <span>
+                                    @item.Title
+                                </span>
+                                <span>$@item.Price</span>
+                            </h4>
+                            <p>
+                                @Html.Raw(item.Description)
+                            </p>
+                        </li>
+                    }
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="rooms">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="sectitle">
+                Villas for Discerning Traveler
+            </h2>
+            <div class="subtitle">
+                If you are looking for a quite villa accommodation with beautiful nature, Swing Jungle Resort is the perfect choice.
+            </div>
+        </div>
+    </div>
+    <div class="room-slide owl-carousel owl-theme">
+        @foreach (var item in rooms)
+        {
+            <div class="room-item">
+                <div class="inner">
+                    <div class="image">
+                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                            <img src="@item.Image" alt="">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <h4 class="title">
+                            <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                @item.Title
+                            </a>
+                        </h4>
+                        <div class="price">
+                            <span class="price-value">
+                                $@item.Price
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+<section class="feature pt-100">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="sectitle">
+                Experience & Indulge in Activities
+            </h2>
+            <div class="subtitle">
+                Our blissful atmosphere, attentive service, facilities and the combination of tradition, hospitality and the elegance of simplicity is the answer to your dream holidas
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in facilities.Take(6))
+            {
+                <div class="col-lg-4 col-md-6 feature-item">
+                    <div class="inner">
+                        <div class="feature-icon">
+                            <img src="@item.Image" alt="">
+                        </div>
+                        <div class="feature-content">
+                            <div class="title">
+                                @item.Title
+                            </div>
+                            <div class="content">
+                                @item.Content
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@foreach (var item in articleRooms.Take(1))
+{
+    <section class="check-available pd-100" style="background: url(@item.Image) center center scroll">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="check-title">
+                        <h2>
+                            @item.Title
+                        </h2>
+                        @Html.Raw(item.Content)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hotel-booking__search">
+                        <form action="/booking" class="search-form">
+                            <div class="row">
+                                <div class="col-md-6 form-group form-input-date">
+                                    <label>Check In</label>
+                                    <input type="text" class="form-control" name="checkInDate" id="CheckIn" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+                                </div>
+                                <div class="col-md-6 form-group form-input-date">
+                                    <label>Check Out</label>
+                                    <input type="text" class="form-control" name="checkOutDate" id="CheckOut" value="@DateTime.Now.AddDays(1).ToString("MM/dd/yyyy")">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Audults</label>
+                                    <select name="Adult" id="" class="form-control">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Childs</label>
+                                    <select name="Child" id="" class="form-control">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-btn">
+                                    <button type="submit" class="btn-submid">check availability</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+    <section class="special pd-100">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="sectitle">
+                    Swing Jungle Adventure Experiences
+                </h2>
+                <div class="subtitle">
+                    Snorkelling and surfing are among the best in the region, with spots nearby to suit abilities. Farther out to sea, blue whales can be sighted on their migration
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in articleActivities.Take(3))
+                {
+                    <div class="col-md-4 special-offer">
+                        <div class="inner">
+                            <div class="special-offer__image">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                    <img src="@item.Image" alt="">
+                                </a>
+                            </div>
+                            <div class="special-offer__content">
+                                <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                    <span class="special-title">
+                                        @item.Title
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="service-wrapper">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="subtitle">
+                    Enjoy The Truly Luxury Within The nature
+                </div>
+                <h2 class="sectitle">
+                    The ambience and the style of interior of our wildlife resort
+                </h2>
+                <a href="/@contact.Alias" class="button-links">
+                    get in touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="blogs pd-100">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="sectitle">
+                    Latest News & Offers
+                </h2>
+                <div class="subtitle">
+                    Duis metus sem, aliquet vitae mi eget, vehicula vehicula enim. Maecenas sed diam eget risus varius blandit sit amet non magna.
+                </div>
+            </div>
+            <div class="blogs-list">
+                <div class="row">
+                    @foreach (var item in blogs.Take(3))
+                    {
+                        <div class="col-md-4 blogs-list__item">
+
+                            <figure class="image">
+                                <img src="@item.Image" alt="">
+                            </figure>
+                            <div class="content">
+                                <div class="meta-title">
+                                    <span class="category">
+                                        News & Offers
+                                    </span>
+                                    <h3 class="blogs-title">
+                                        <a href="/@item.MenuAlias/@item.ID/@item.Alias">
+                                            @item.Title
+                                        </a>
+                                    </h3>
+                                    <div class="author-date">
+                                        <span class="pub-date">
+                                            @item.Datetime.ToString("dd/MM/yyyy")
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="blogs-excerpt">
+                                    <p>
+                                        @Html.Raw(item.Description)
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>

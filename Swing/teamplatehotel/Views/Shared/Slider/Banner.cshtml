@@ -1,0 +1,36 @@
+﻿@using ProjectLibrary.Config
+@using TeamplateHotel.Controllers
+@using TeamplateHotel.Handler
+@using ProjectLibrary.Database
+@{
+    Menu menu = ViewBag.Menu ?? new Menu();
+    List<Slider> sliders = CommentController.GetListSlider(Request.Cookies["LanguageID"].Value, menu.ID);
+    Menu home = CommentController.menu1(Request.Cookies["LanguageID"].Value);
+}
+@foreach(var item in sliders.Take(1))
+    {
+        <section class="breadcrumb">
+            <div class="container">
+                <div class="breadcrumb-nav">
+                    <ul class="trail-list">
+                        <li class="trail-item">
+                            <a href="/">
+                                <span>home</span>
+                            </a>
+                        </li>
+                        <li class="trail-item">
+                            <a href="/@menu.Alias">
+                                <span>@menu.Title</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="breadcrumb-title">
+                    <h1 class="page-title">
+                        @menu.Title
+                    </h1>
+                </div>
+            </div>
+        </section>
+    }
+
